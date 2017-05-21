@@ -16,6 +16,7 @@ public class IleInterdite {
      */
     public static void main(String[] args) {
         System.out.println("Hello");
+        System.out.println("test d'ajout de ligne par envoi via NetB");
     }
     
 }
