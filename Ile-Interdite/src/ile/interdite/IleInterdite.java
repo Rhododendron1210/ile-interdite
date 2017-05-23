@@ -18,6 +18,7 @@ public class IleInterdite {
         System.out.println("Hello");
         System.out.println("test d'ajout de ligne par envoi via NetB");
         System.out.println("Test devant tout le monde");
+        System.out.println("moi aussi");
     }
     
 }
