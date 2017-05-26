@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ile.interdite;
+package Main;
 
 /**
  *
  * @author Nakim
  */
-public class IleInterdite {
+public class Main {
 
     /**
      * @param args the command line arguments
