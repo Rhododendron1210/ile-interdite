@@ -4,15 +4,17 @@
  * and open the template in the editor.
  */
 package model.aventuriers;
-
+import Tuile.Tuile;
 /**
  *
  * @author Yannis
  */
-public class Aventurier {
+public abstract class Aventurier {
     
     private String nom;
     private String role;
+    
+    private Tuile tuile;
     
     Aventurier(String nom, String role){
         nom = this.nom;
@@ -26,4 +28,13 @@ public class Aventurier {
     public String getNom() {
         return nom;
     }
+
+    public Tuile getTuile() {
+        return tuile;
+    }
+
+    public void setTuile(Tuile tuile) {
+        this.tuile = tuile;
+    }
+        
 }
