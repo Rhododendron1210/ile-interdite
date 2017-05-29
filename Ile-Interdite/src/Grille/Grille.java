@@ -15,10 +15,19 @@ import java.util.HashMap;
  */
 public class Grille {
     
-    private ArrayList<Tuile> collecTuile = new ArrayList();
+    private HashMap<int[][], Tuile> collecTuile = new HashMap();    
     
-    Grille(ArrayList<Tuile> collecTuile) {
+    Grille(HashMap<int [][], Tuile> collecTuile) {
         this.collecTuile = collecTuile;
     }
+
+    public HashMap<int[][], Tuile> getCollecTuile() {
+        return collecTuile;
+    }
+
+    public void setCollecTuile(HashMap<int[][], Tuile> collecTuile) {
+        this.collecTuile = collecTuile;
+    }
+    
     
 }
