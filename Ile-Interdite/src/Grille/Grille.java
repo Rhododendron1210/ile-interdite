@@ -15,11 +15,10 @@ import java.util.HashMap;
  */
 public class Grille {
     
-       
+    
     private Tuile[][] grille;
     
-    Grille(HashMap<int [][], Tuile> collecTuile) {
-        
+    Grille() {
         grille =new Tuile[6][6];
     }
 
@@ -27,9 +26,15 @@ public class Grille {
         return grille;
     }
     
+    public Tuile getTuile(int ligne,int colonne){
+        return grille[ligne][colonne];
+    }
+    public void creeTuiles(){
+        Tuile 
+    }
+    
     
 
-    
     
     
 }
