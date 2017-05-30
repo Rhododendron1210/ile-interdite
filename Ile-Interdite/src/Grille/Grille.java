@@ -78,7 +78,7 @@ public class Grille {
         tuile= new Tuile("La Tour de Guet",5,2,false,false,this);
         addTuile(5,2,tuile);
         tuile= new Tuile("Le Jardin des Murmures",5,3,true,true,this);
-        addTuile(5,3,tuile);   
+        addTuile(5,3,tuile);
         
     }
     

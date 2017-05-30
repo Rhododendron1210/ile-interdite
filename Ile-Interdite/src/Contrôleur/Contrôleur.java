@@ -21,10 +21,8 @@ public class Contrôleur implements Observateur{
     private HashMap<String,Aventurier> joueurs;
     private Grille grille;
     private VueAventurier vueAventurier;
-    Contrôleur(Grille grille,VueAventurier vueAventurier){
-        joueurs=new HashMap<>();
-        this.grille=grille;
-        this.vueAventurier=vueAventurier;     
+    Contrôleur(){     
+        initialisationPartie();
         vueAventurier.setObservateur(this);
     }
 
@@ -63,7 +61,11 @@ public class Contrôleur implements Observateur{
     
     public void effectuerAction(){
     }
-
+    
+    public void initialisationPartie(){
+        
+    }
+    
     @Override
     public void traiterMessage(Message msg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
