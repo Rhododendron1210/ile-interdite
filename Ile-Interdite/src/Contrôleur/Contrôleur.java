@@ -23,6 +23,7 @@ public class Contrôleur implements Observateur{
     private VueAventurier vueAventurier;
     Contrôleur(){     
         initialisationPartie();
+        
         vueAventurier.setObservateur(this);
     }
 
@@ -63,7 +64,9 @@ public class Contrôleur implements Observateur{
     }
     
     public void initialisationPartie(){
-        
+        grille=new Grille();
+        grille.creeTuiles();
+        //initialiser joueur
     }
     
     @Override

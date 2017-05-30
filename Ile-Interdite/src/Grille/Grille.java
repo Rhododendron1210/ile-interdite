@@ -18,7 +18,7 @@ public class Grille {
     
     private Tuile[][] grille;
     
-    Grille() {
+    public Grille() {
         grille =new Tuile[6][6];
     }
 
