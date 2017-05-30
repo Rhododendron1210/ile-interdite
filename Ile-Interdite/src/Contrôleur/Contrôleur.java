@@ -16,7 +16,7 @@ import view.VueAventurier;
  *
  * @author Yannis
  */
-public class Contrôleur {
+public class Contrôleur implements Observateur{
     
     private HashMap<String,Aventurier> joueurs;
     private Grille grille;
@@ -24,7 +24,8 @@ public class Contrôleur {
     Contrôleur(Grille grille,VueAventurier vueAventurier){
         joueurs=new HashMap<>();
         this.grille=grille;
-        this.vueAventurier=vueAventurier;        
+        this.vueAventurier=vueAventurier;     
+        vueAventurier.setObservateur(this);
     }
 
     public HashMap<String, Aventurier> getJoueurs() {
@@ -61,6 +62,11 @@ public class Contrôleur {
     }
     
     public void effectuerAction(){
+    }
+
+    @Override
+    public void traiterMessage(Message msg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
    

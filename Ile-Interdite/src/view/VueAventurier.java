@@ -1,5 +1,6 @@
 package view;
 
+import Contrôleur.Observateur;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -29,6 +30,8 @@ public class VueAventurier  {
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
     private final JTextField position;
+    
+    private Observateur observateur;
     
     public VueAventurier (String nomJoueur, String nomAventurier, Color couleur){
 
@@ -102,8 +105,10 @@ public class VueAventurier  {
     public JButton getBtnTerminerTour() {
         return btnTerminerTour;
     }
- 
-
+    
+    public void setObservateur(Observateur observateur){
+        this.observateur= observateur;
+    }
     
      public static void main(String [] args) {
         // Instanciation de la fenêtre 
