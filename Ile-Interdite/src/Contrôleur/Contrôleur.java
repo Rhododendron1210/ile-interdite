@@ -74,7 +74,7 @@ public class Contrôleur implements Observateur{
     }
     
     public void effectuerAction(){
-        
+        //A faire
     }
     
     public void initialisationPartie(){
