@@ -29,17 +29,18 @@ public class Contrôleur implements Observateur{
     
     private HashMap<String,Aventurier> joueurs;
     private Grille grille;
-    private ArrayList<VueAventurier> vueAventuriers;
+    private VueAventurier vueAventurier;
     public Contrôleur(){
         VueAventurier vue;
         joueurs= new HashMap<>();
         initialisationPartie();
         for(String e:joueurs.keySet()){
-            vue=new VueAventurier(joueurs.get(e).getNom(),joueurs.get(e).getRole(),black);
-            vue.setObservateur(this);
-        }
+            System.out.println(joueurs.get(e).getRole()+"  "+joueurs.get(e).getTuile().getNom());            
+        }     
         
     }
+    
+    
 
     public HashMap<String, Aventurier> getJoueurs() {
         return joueurs;
@@ -49,8 +50,8 @@ public class Contrôleur implements Observateur{
         return grille;
     }
 
-    public ArrayList getVueAventurier() {
-        return vueAventuriers;
+    public VueAventurier getVueAventurier() {
+        return vueAventurier;
     }
 
     public void setJoueurs(HashMap<String, Aventurier> joueurs) {
@@ -73,18 +74,31 @@ public class Contrôleur implements Observateur{
     }
     
     public void effectuerAction(){
+        
     }
     
     public void initialisationPartie(){
         grille=new Grille();
         grille.creeTuiles();
-        joueurs.put("Explo", new Explorateur("explorateur","Explorateur",grille.getTuile(2, 4)));
+        joueurs.put("Explo", new Explorateur("explorateur","Explorateur",grille.getTuile(2, 4)));        
         joueurs.put("Mess", new Messager("messager","Messager",grille.getTuile(2, 1)));
         joueurs.put("Ingé", new Ingenieur("ingénieur","Ingénieur",grille.getTuile(0, 3)));
         joueurs.put("Pilote", new Pilote("pilote","Pilote",grille.getTuile(2, 3)));
         joueurs.put("Plong", new Plongeur("plongeur","Plongeur",grille.getTuile(1, 2)));
         joueurs.put("Nav", new Navigateur("navigateur","Navigateur",grille.getTuile(1, 3)));
         
+    }
+    
+    public void tourDeJeu(){
+        int i;
+        for(String e:joueurs.keySet()){
+            i=0;
+            while (i<3){
+                joueurs.get(e).effectuerAction();
+                i=i+1;
+            }
+            
+        }
     }
     
     @Override
