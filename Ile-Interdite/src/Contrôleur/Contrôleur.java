@@ -1,8 +1,17 @@
 package Contrôleur;
 
 import Grille.Grille;
+import static java.awt.Color.black;
+import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.text.html.HTMLDocument.Iterator;
 import model.aventuriers.Aventurier;
+import model.aventuriers.Explorateur;
+import model.aventuriers.Ingenieur;
+import model.aventuriers.Messager;
+import model.aventuriers.Navigateur;
+import model.aventuriers.Pilote;
+import model.aventuriers.Plongeur;
 import view.VueAventurier;
 
 /*
@@ -20,11 +29,16 @@ public class Contrôleur implements Observateur{
     
     private HashMap<String,Aventurier> joueurs;
     private Grille grille;
-    private VueAventurier vueAventurier;
-    Contrôleur(){     
+    private ArrayList<VueAventurier> vueAventuriers;
+    public Contrôleur(){
+        VueAventurier vue;
+        joueurs= new HashMap<>();
         initialisationPartie();
+        for(String e:joueurs.keySet()){
+            vue=new VueAventurier(joueurs.get(e).getNom(),joueurs.get(e).getRole(),black);
+            vue.setObservateur(this);
+        }
         
-        vueAventurier.setObservateur(this);
     }
 
     public HashMap<String, Aventurier> getJoueurs() {
@@ -35,8 +49,8 @@ public class Contrôleur implements Observateur{
         return grille;
     }
 
-    public VueAventurier getVueAventurier() {
-        return vueAventurier;
+    public ArrayList getVueAventurier() {
+        return vueAventuriers;
     }
 
     public void setJoueurs(HashMap<String, Aventurier> joueurs) {
@@ -47,9 +61,7 @@ public class Contrôleur implements Observateur{
         this.grille = grille;
     }
 
-    public void setVueAventurier(VueAventurier vueAventurier) {
-        this.vueAventurier = vueAventurier;
-    }
+    
     
     public void tour(Aventurier a){
         
@@ -66,7 +78,13 @@ public class Contrôleur implements Observateur{
     public void initialisationPartie(){
         grille=new Grille();
         grille.creeTuiles();
-        //initialiser joueur
+        joueurs.put("Explo", new Explorateur("explorateur","Explorateur",grille.getTuile(2, 4)));
+        joueurs.put("Mess", new Messager("messager","Messager",grille.getTuile(2, 1)));
+        joueurs.put("Ingé", new Ingenieur("ingénieur","Ingénieur",grille.getTuile(0, 3)));
+        joueurs.put("Pilote", new Pilote("pilote","Pilote",grille.getTuile(2, 3)));
+        joueurs.put("Plong", new Plongeur("plongeur","Plongeur",grille.getTuile(1, 2)));
+        joueurs.put("Nav", new Navigateur("navigateur","Navigateur",grille.getTuile(1, 3)));
+        
     }
     
     @Override
