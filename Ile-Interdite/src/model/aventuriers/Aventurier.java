@@ -5,6 +5,7 @@
  */
 package model.aventuriers;
 import Tuile.Tuile;
+import java.util.ArrayList;
 /**
  *
  * @author Yannis
@@ -13,28 +14,34 @@ public abstract class Aventurier {
     
     private String nom;
     private String role;
+    private ArrayList<Tuile> colTuilePossible;
+    private Tuile position;
     
-    private Tuile tuile;
-    
-    Aventurier(String nom, String role){
-        nom = this.nom;
-        role = this.role;
+    Aventurier(String nom, String role,Tuile position){
+        this.nom=nom;
+        this.role=role;
+        colTuilePossible = new ArrayList<>();
+        this.setPosition(position);
     }
     
     public String getRole() {
-        return role;
+        return this.role;
     }
     
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     public Tuile getTuile() {
-        return tuile;
+        return position;
     }
 
-    public void setTuile(Tuile tuile) {
-        this.tuile = tuile;
+    public void setPosition(Tuile tuile) {
+        this.position = tuile;
+    }
+
+    public void effectuerAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
 }
