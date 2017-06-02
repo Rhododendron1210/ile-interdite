@@ -5,6 +5,8 @@
  */
 package Main;
 
+import Contrôleur.Contrôleur;
+
 /**
  *
  * @author Nakim
@@ -15,11 +17,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello");
-        System.out.println("test d'ajout de ligne par envoi via NetB");
-        System.out.println("Test devant tout le monde");
-        System.out.print("moi aussi123");
-        System.out.println("c'est easy à utiliser en fait");
+        Contrôleur controleur=new Contrôleur();
+        
     }
     
 }
