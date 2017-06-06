@@ -34,9 +34,10 @@ public class Contrôleur implements Observateur{
         VueAventurier vue;
         joueurs= new HashMap<>();
         initialisationPartie();
-        for(String e:joueurs.keySet()){
-            System.out.println(joueurs.get(e).getRole()+"  "+joueurs.get(e).getTuile().getNom());            
-        }     
+        /*for(String e:joueurs.keySet()){
+            System.out.println(joueurs.get(e).getRole()+"  "+joueurs.get(e).getTuile().getNom()+joueurs.get(e).getTuile().getEtatTuile());            
+        }   */
+        grille.afficheGrille();
         
     }
     
@@ -106,5 +107,5 @@ public class Contrôleur implements Observateur{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-   
+    
 }
