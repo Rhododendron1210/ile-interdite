@@ -8,6 +8,10 @@ package Tuile;
 import model.aventuriers.Aventurier;
 import java.util.*;
 import Grille.Grille;
+import util.Utils.EtatTuile;
+import static util.Utils.EtatTuile.ASSECHEE;
+import static util.Utils.EtatTuile.COULEE;
+import static util.Utils.EtatTuile.INONDEE;
 
 /**
  *
@@ -16,8 +20,7 @@ import Grille.Grille;
 public class Tuile {
 
     private String nom;
-    private boolean inondée = false;
-    private boolean coulee = false;
+    private EtatTuile etatTuile;
     private int ligne;
     private int colonne;
 
@@ -32,13 +35,16 @@ public class Tuile {
         this.grille = g;
     }
 
-    public Tuile(String nom, int ligne, int colonne, boolean inondée, boolean coulee, Grille g) {
+    public Tuile(String nom, int ligne, int colonne, EtatTuile etatTuile, Grille g) {
         this.nom = nom;
         this.ligne = ligne;
         this.colonne = colonne;
-        this.inondée = inondée;
-        this.coulee = coulee;
+        this.etatTuile= etatTuile;
         this.grille = g;
+    }
+
+    public Tuile(String le_Palais_des_Marées, int i, int i0, boolean b, boolean b0, Grille aThis) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getNomTuile() {
@@ -54,11 +60,8 @@ public class Tuile {
     }
 
     public boolean tuileSeche() {
-        if (inondée || coulee) {
-            return false;
-        } else {
-            return true;
-        }
+        return etatTuile==ASSECHEE;
+        
     }
 
     public String getNom() {
@@ -70,19 +73,19 @@ public class Tuile {
     }
 
     public boolean isSubmergee() {
-        return inondée;
+        return etatTuile==INONDEE;
     }
 
     public void setSubmergee(boolean submergee) {
-        this.inondée = submergee;
+        this.etatTuile = INONDEE;
     }
 
     public boolean isCoulee() {
-        return coulee;
+        return etatTuile==COULEE;
     }
 
     public void setCoulee(boolean coulee) {
-        this.coulee = coulee;
+        this.etatTuile = COULEE;
     }
 
     public Grille getGrille() {
@@ -100,5 +103,10 @@ public class Tuile {
     public void setAventurierPresent(HashMap<String, Aventurier> aventurierPresent) {
         this.aventurierPresent = aventurierPresent;
     }
+
+    public EtatTuile getEtatTuile() {
+        return etatTuile;
+    }
+    
 
 }
