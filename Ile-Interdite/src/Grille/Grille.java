@@ -131,7 +131,7 @@ public class Grille {
 
        /*grille[i][w]; w<=5; w++;*/
     }   
-    public ArrayList<Tuile> getTuilesAssechee(){
+    public ArrayList<Tuile> getTuilesAssechee(){//definit dans le diagramme de sequence de deplacementPossiblePilote
         ArrayList<Tuile> liste = new ArrayList<>();
         for(Tuile[] tuile : grille){
             for (Tuile t:tuile){
@@ -143,18 +143,18 @@ public class Grille {
         return liste;
     }
    
-    public ArrayList<Tuile> getTuilesInnodée(){
+    public ArrayList<Tuile> getTuilesInondée(){//définit dans le diagramme de sequences assechementPossible
         ArrayList<Tuile> liste = new ArrayList<>();
         for(Tuile[] tuile : grille){
             for (Tuile t:tuile){
-                if (t.isSubmergee()){
+                if (t.isInondée()){
                     liste.add(t);
                 }
             }
         }
         return liste;
     }
-    public boolean tuileExiste(int ligne,int colonne){
+    private boolean tuileExiste(int ligne,int colonne){
         Boolean b=false;
         for(Tuile[] tuile : grille){
             for (Tuile t:tuile){
@@ -165,7 +165,7 @@ public class Grille {
         }
         return b;
     }
-    public  ArrayList<Tuile> getTuilesAdjacentes(int ligne,int colonne){
+    public  ArrayList<Tuile> getTuilesAdjacentes(int ligne,int colonne){//définit dans le diagramme de sequences deplacementPlongeur
         ArrayList<Tuile> liste = new ArrayList<>();
         if (tuileExiste(ligne-1,colonne)){
             liste.add(getTuile(ligne-1,colonne));

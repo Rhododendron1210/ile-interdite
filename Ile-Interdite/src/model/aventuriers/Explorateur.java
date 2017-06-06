@@ -39,4 +39,23 @@ public class Explorateur extends Aventurier{
         super.setColTuilePossible(liste);
         return liste;
     }
+    
+    @Override
+    public ArrayList<Tuile> assechementPossible(){
+        ArrayList<Tuile> liste = super.tuilesPossibles();
+        Tuile t = super.getPosition();
+        int ligne = t.getLigne();
+        int colonne = t.getColonne();
+        Grille grille = t.getGrille();
+        ArrayList<Tuile> tuiles = grille.getTuilesInondée();
+        for (Tuile tuile: tuiles){
+            int ligneT = tuile.getLigne();
+            int colonneT = tuile.getColonne();
+            if ((colonneT==colonne-1 || colonneT==colonne+1)&&(ligneT==ligne-1 || ligneT == ligne+1)){
+                liste.add(tuile);
+            }
+        }
+        super.setColTuilePossible(liste);
+        return liste;
+    }
 }

@@ -36,6 +36,7 @@ public class Plongeur extends Aventurier{
                 liste.addAll(tuilesPossibles(tuile.getColonne(),tuile.getLigne()));
             }
         }
+        super.setColTuilePossible(liste);
         return liste;
     }
     //ATTENTION possible erreurs car ces deux méthodes sont récursives 

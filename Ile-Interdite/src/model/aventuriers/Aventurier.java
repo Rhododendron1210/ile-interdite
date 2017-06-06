@@ -78,7 +78,7 @@ public abstract class Aventurier {
         int ligne = t.getLigne();
         int colonne = t.getColonne();
         Grille grille = t.getGrille();
-        ArrayList<Tuile> tuiles = grille.getTuilesInnodée();
+        ArrayList<Tuile> tuiles = grille.getTuilesInondée();
         for (Tuile tuile: tuiles){
             int ligneT = tuile.getLigne();
             int colonneT = tuile.getColonne();

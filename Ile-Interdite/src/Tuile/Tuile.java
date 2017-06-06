@@ -72,11 +72,11 @@ public class Tuile {
         this.nom = nom;
     }
 
-    public boolean isSubmergee() {
+    public boolean isInondée() {
         return etatTuile==INONDEE;
     }
 
-    public void setSubmergee(boolean submergee) {
+    public void setInondée(boolean submergee) {
         this.etatTuile = INONDEE;
     }
 

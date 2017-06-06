@@ -5,7 +5,9 @@
  */
 package model.aventuriers;
 
+import Grille.Grille;
 import Tuile.Tuile;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,4 +19,14 @@ public class Pilote extends Aventurier{
         super(nom, role,position);
     }
     
+    @Override
+    public ArrayList<Tuile> tuilesPossibles(){
+        Tuile t = getPosition();
+        int ligne = t.getLigne();
+        int colonne = t.getColonne();
+        Grille grille = t.getGrille();
+        ArrayList<Tuile> liste = new ArrayList<>();
+        liste= grille.getTuilesAssechee();
+        return liste;
+    }
 }
