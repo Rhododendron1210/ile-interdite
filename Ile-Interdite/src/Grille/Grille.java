@@ -89,6 +89,21 @@ public class Grille {
         grille[ligne][colonne]=tuile;
     }
     
+    public void afficheGrille(){
+        int w;
+        int i;
+        for(w=0; w<=5;w++){
+         System.out.println("______________________________________________________________________________________________________________________________");
+         
+         for(i=0; i<=5;i++){
+             System.out.print("|   "+grille[w][i].getNomTuile()+"    |");
+            
+             System.out.println(" ");
+         }
+         
+    }
+       /*grille[i][w]; w<=5; w++;*/
+    }
     
 
     
