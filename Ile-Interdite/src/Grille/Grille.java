@@ -131,7 +131,30 @@ public class Grille {
 
        /*grille[i][w]; w<=5; w++;*/
     }   
-    
+    public ArrayList<Tuile> getTuilesAssechee(){
+        ArrayList<Tuile> liste = new ArrayList<>();
+        for(Tuile[] tuile : grille){
+            for (Tuile t:tuile){
+                if (t.tuileSeche()){
+                    liste.add(t);
+                }
+            }
+        }
+        return liste;
+    }
+   
+    public ArrayList<Tuile> getTuilesInnodée(){
+        ArrayList<Tuile> liste = new ArrayList<>();
+        for(Tuile[] tuile : grille){
+            for (Tuile t:tuile){
+                if (t.isSubmergee()){
+                    liste.add(t);
+                }
+            }
+        }
+        return liste;
+    }
+
 
     
     

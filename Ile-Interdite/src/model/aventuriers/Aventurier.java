@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package model.aventuriers;
+import Grille.Grille;
 import Tuile.Tuile;
 import java.util.ArrayList;
 /**
@@ -39,9 +40,52 @@ public abstract class Aventurier {
     public void setPosition(Tuile tuile) {
         this.position = tuile;
     }
-
+    
+    public Tuile getPosition(){
+        return position;
+    }
+    
     public void effectuerAction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-        
+    
+    public ArrayList<Tuile> tuilesPossibles(){
+        colTuilePossible.clear();
+        Tuile t = getPosition();
+        int ligne = t.getLigne();
+        int colonne = t.getColonne();
+        Grille grille = t.getGrille();
+        ArrayList<Tuile> tuiles = grille.getTuilesAssechee();
+        for (Tuile tuile: tuiles){
+            int ligneT = tuile.getLigne();
+            int colonneT = tuile.getColonne();
+            if (ligneT == ligne+1 && colonneT == colonne&&colonneT == colonne+1 && ligneT == ligne&&ligneT == ligne-1 && colonneT == colonne&&colonneT == colonne-1 && ligne == ligneT){
+                if (tuile.tuileSeche()){
+                   colTuilePossible.add(tuile);
+                }
+            }
+        }
+        return colTuilePossible;
+    }
+
+    public void setColTuilePossible(ArrayList<Tuile> colTuilePossible) {
+        this.colTuilePossible = colTuilePossible;
+    }
+   
+    public ArrayList<Tuile> assechementPossible(){
+        colTuilePossible.clear();
+        Tuile t = getPosition();
+        int ligne = t.getLigne();
+        int colonne = t.getColonne();
+        Grille grille = t.getGrille();
+        ArrayList<Tuile> tuiles = grille.getTuilesInnodée();
+        for (Tuile tuile: tuiles){
+            int ligneT = tuile.getLigne();
+            int colonneT = tuile.getColonne();
+            if (ligneT == ligne+1 && colonneT == colonne&&colonneT == colonne+1 && ligneT == ligne&&ligneT == ligne-1 && colonneT == colonne&&colonneT == colonne-1 && ligne == ligneT){
+                colTuilePossible.add(tuile);
+            }
+        }
+        return colTuilePossible;
+    }
 }
