@@ -34,6 +34,30 @@ public class Grille {
     }
     public void creeTuiles(){
         Tuile tuile;
+        tuile= new Tuile(null,0,0,COULEE,this);
+        addTuile(0,0,tuile); 
+        tuile= new Tuile(null,0,1,COULEE,this);
+        addTuile(0,1,tuile); 
+        tuile= new Tuile(null,1,0,COULEE,this);
+        addTuile(1,0,tuile);
+        tuile= new Tuile(null,0,5,COULEE,this);
+        addTuile(0,5,tuile);         
+        tuile= new Tuile(null,0,4,COULEE,this);
+        addTuile(0,4,tuile);
+        tuile= new Tuile(null,1,5,COULEE,this);
+        addTuile(1,5,tuile);
+        tuile= new Tuile(null,4,0,COULEE,this);
+        addTuile(4,0,tuile);
+        tuile= new Tuile(null,5,0,COULEE,this);
+        addTuile(5,0,tuile); 
+        tuile= new Tuile(null,5,1,COULEE,this);
+        addTuile(5,1,tuile);
+        tuile= new Tuile(null,4,5,COULEE,this);
+        addTuile(4,5,tuile);
+        tuile= new Tuile(null,5,4,COULEE,this);
+        addTuile(5,4,tuile);
+        tuile= new Tuile(null,5,5,COULEE,this);
+        addTuile(5,5,tuile); 
         tuile= new Tuile("Le Pond des Abimes",0,2,ASSECHEE,this);
         addTuile(0,2,tuile);
         tuile= new Tuile("La Porte de Bronze",0,3,INONDEE,this);
@@ -93,17 +117,20 @@ public class Grille {
         int w;
         int i;
         for(w=0; w<=5;w++){
-         System.out.println("______________________________________________________________________________________________________________________________");
-         
-         for(i=0; i<=5;i++){
-             System.out.print("|   "+grille[w][i].getNomTuile()+"    |");
-            
-             System.out.println(" ");
-         }
-         
-    }
+            System.out.println("______________________________________________________________________________________________________________________________");
+
+            for(i=0; i<=5; i++){
+                System.out.print("|   "+grille[w][i].getNomTuile()+"   ");
+                if(grille[w][i].getAventurierPresent().isEmpty()){
+                    System.out.print("");
+                }
+            }         
+            System.out.println("|");
+        }
+        System.out.println("______________________________________________________________________________________________________________________________");
+
        /*grille[i][w]; w<=5; w++;*/
-    }
+    }   
     
 
     
