@@ -154,7 +154,33 @@ public class Grille {
         }
         return liste;
     }
-
+    public boolean tuileExiste(int ligne,int colonne){
+        Boolean b=false;
+        for(Tuile[] tuile : grille){
+            for (Tuile t:tuile){
+                if (t.getColonne()==colonne&&t.getLigne()==ligne){
+                    b=true;
+                }
+            }
+        }
+        return b;
+    }
+    public  ArrayList<Tuile> getTuilesAdjacentes(int ligne,int colonne){
+        ArrayList<Tuile> liste = new ArrayList<>();
+        if (tuileExiste(ligne-1,colonne)){
+            liste.add(getTuile(ligne-1,colonne));
+        }
+        if (tuileExiste(ligne+1,colonne)){
+            liste.add(getTuile(ligne+1,colonne));
+        }
+        if (tuileExiste(ligne,colonne-1)){
+            liste.add(getTuile(ligne,colonne-1));
+        }
+        if (tuileExiste(ligne,colonne+1)){
+            liste.add(getTuile(ligne,colonne+1));
+        }
+        return liste;
+    }
 
     
     
