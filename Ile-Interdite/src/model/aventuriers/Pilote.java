@@ -8,6 +8,7 @@ package model.aventuriers;
 import Grille.Grille;
 import Tuile.Tuile;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -20,12 +21,12 @@ public class Pilote extends Aventurier{
     }
     
     @Override
-    public ArrayList<Tuile> tuilesPossibles(){
+    public HashSet<Tuile> tuilesPossibles(){
         Tuile t = getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
         Grille grille = t.getGrille();
-        ArrayList<Tuile> liste = new ArrayList<>();
+        HashSet<Tuile> liste = new HashSet<>();
         liste= grille.getTuilesAssechee();
         return liste;
     }

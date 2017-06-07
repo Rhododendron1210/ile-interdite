@@ -8,6 +8,7 @@ package model.aventuriers;
 import Grille.Grille;
 import Tuile.Tuile;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -22,17 +23,17 @@ public class Explorateur extends Aventurier{
     }
     
     @Override
-    public ArrayList<Tuile> tuilesPossibles(){
-        ArrayList<Tuile> liste = super.tuilesPossibles();
+    public HashSet<Tuile> tuilesPossibles(){
+        HashSet<Tuile> liste = super.tuilesPossibles();
         Tuile t = super.getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
         Grille grille = t.getGrille();
-        ArrayList<Tuile> tuiles = grille.getTuilesAssechee();
+        HashSet<Tuile> tuiles = grille.getTuilesAdjacentesDiagonale(ligne, colonne);
         for (Tuile tuile: tuiles){
             int ligneT = tuile.getLigne();
             int colonneT = tuile.getColonne();
-            if ((colonneT==colonne-1 || colonneT==colonne+1)&&(ligneT==ligne-1 || ligneT == ligne+1)){
+            if (tuile.tuileSeche()){
                 liste.add(tuile);
             }
         }
@@ -41,17 +42,17 @@ public class Explorateur extends Aventurier{
     }
     
     @Override
-    public ArrayList<Tuile> assechementPossible(){
-        ArrayList<Tuile> liste = super.tuilesPossibles();
+    public HashSet<Tuile> assechementPossible(){
+        HashSet<Tuile> liste = super.tuilesPossibles();
         Tuile t = super.getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
         Grille grille = t.getGrille();
-        ArrayList<Tuile> tuiles = grille.getTuilesInondée();
+        HashSet<Tuile> tuiles = grille.getTuilesAdjacentesDiagonale(ligne, colonne);
         for (Tuile tuile: tuiles){
             int ligneT = tuile.getLigne();
             int colonneT = tuile.getColonne();
-            if ((colonneT==colonne-1 || colonneT==colonne+1)&&(ligneT==ligne-1 || ligneT == ligne+1)){
+            if (tuile.isInondée()){
                 liste.add(tuile);
             }
         }

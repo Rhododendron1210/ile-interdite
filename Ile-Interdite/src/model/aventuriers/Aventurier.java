@@ -7,6 +7,7 @@ package model.aventuriers;
 import Grille.Grille;
 import Tuile.Tuile;
 import java.util.ArrayList;
+import java.util.HashSet;
 /**
  *
  * @author Yannis
@@ -15,13 +16,13 @@ public abstract class Aventurier {
     
     private String nom;
     private String role;
-    private ArrayList<Tuile> colTuilePossible;
+    private HashSet<Tuile> colTuilePossible;
     private Tuile position;
     
     Aventurier(String nom, String role,Tuile position){
         this.nom=nom;
         this.role=role;
-        colTuilePossible = new ArrayList<>();
+        colTuilePossible = new HashSet<>();
         this.setPosition(position);
     }
     
@@ -45,44 +46,40 @@ public abstract class Aventurier {
         return position;
     }
     
-    public void effectuerAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
-    public ArrayList<Tuile> tuilesPossibles(){
+    
+    public HashSet<Tuile> tuilesPossibles(){
         colTuilePossible.clear();
         Tuile t = getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
         Grille grille = t.getGrille();
-        ArrayList<Tuile> tuiles = grille.getTuilesAssechee();
+        ArrayList<Tuile> tuiles = grille.getTuilesAdjacentes(ligne, colonne);
         for (Tuile tuile: tuiles){
             int ligneT = tuile.getLigne();
             int colonneT = tuile.getColonne();
-            if (ligneT == ligne+1 && colonneT == colonne&&colonneT == colonne+1 && ligneT == ligne&&ligneT == ligne-1 && colonneT == colonne&&colonneT == colonne-1 && ligne == ligneT){
-                if (tuile.tuileSeche()){
+            if (tuile.tuileSeche()){
                    colTuilePossible.add(tuile);
-                }
             }
         }
         return colTuilePossible;
     }
 
-    public void setColTuilePossible(ArrayList<Tuile> colTuilePossible) {
+    public void setColTuilePossible(HashSet<Tuile> colTuilePossible) {
         this.colTuilePossible = colTuilePossible;
     }
    
-    public ArrayList<Tuile> assechementPossible(){
+    public HashSet<Tuile> assechementPossible(){
         colTuilePossible.clear();
         Tuile t = getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
         Grille grille = t.getGrille();
-        ArrayList<Tuile> tuiles = grille.getTuilesInondée();
+        ArrayList<Tuile> tuiles = grille.getTuilesAdjacentes(ligne, colonne);
         for (Tuile tuile: tuiles){
             int ligneT = tuile.getLigne();
             int colonneT = tuile.getColonne();
-            if (ligneT == ligne+1 && colonneT == colonne&&colonneT == colonne+1 && ligneT == ligne&&ligneT == ligne-1 && colonneT == colonne&&colonneT == colonne-1 && ligne == ligneT){
+            if (tuile.isInondée()){
                 colTuilePossible.add(tuile);
             }
         }

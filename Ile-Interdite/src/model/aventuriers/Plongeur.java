@@ -8,6 +8,7 @@ package model.aventuriers;
 import Grille.Grille;
 import Tuile.Tuile;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -20,9 +21,9 @@ public class Plongeur extends Aventurier{
     }
     
     @Override
-    public ArrayList<Tuile> tuilesPossibles(){
+    public HashSet<Tuile> tuilesPossibles(){
         ArrayList<Tuile> tuilesDejaVu = new ArrayList<>();
-        ArrayList<Tuile> liste = new ArrayList<>();
+        HashSet<Tuile> liste = new HashSet<>();
         Tuile t = getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
@@ -33,7 +34,7 @@ public class Plongeur extends Aventurier{
                 liste.add(tuile);
             } else if(tuilesDejaVu.contains(tuile)==false){
                 tuilesDejaVu.add(tuile);
-                liste.addAll(tuilesPossibles(tuile.getColonne(),tuile.getLigne()));
+                liste.addAll(tuilesPossibles(tuile.getColonne(),tuile.getLigne(),tuilesDejaVu));
             }
         }
         super.setColTuilePossible(liste);
@@ -41,9 +42,9 @@ public class Plongeur extends Aventurier{
     }
     //ATTENTION possible erreurs car ces deux méthodes sont récursives 
     //donc possibilité de boucle infinie
-    public ArrayList<Tuile> tuilesPossibles(int colonne,int ligne){
-        ArrayList<Tuile> tuilesDejaVu = new ArrayList<>();
-        ArrayList<Tuile> liste = new ArrayList<>();
+    public HashSet<Tuile> tuilesPossibles(int colonne,int ligne,ArrayList<Tuile> tuilesVu){
+        ArrayList<Tuile> tuilesDejaVu = tuilesVu;
+        HashSet<Tuile> liste = new HashSet<>();
         Tuile t = getPosition();
         Grille grille = t.getGrille();
         ArrayList<Tuile> tu = grille.getTuilesAdjacentes(ligne, colonne);
@@ -52,7 +53,7 @@ public class Plongeur extends Aventurier{
                 liste.add(tuile);
             } else if(tuilesDejaVu.contains(tuile)==false){
                 tuilesDejaVu.add(tuile);
-                liste.addAll(tuilesPossibles(tuile.getColonne(),tuile.getLigne()));
+                liste.addAll(tuilesPossibles(tuile.getColonne(),tuile.getLigne(),tuilesDejaVu));
             }
         }
         return liste;

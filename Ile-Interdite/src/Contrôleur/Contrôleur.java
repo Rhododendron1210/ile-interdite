@@ -1,9 +1,12 @@
 package Contrôleur;
 
 import Grille.Grille;
+import Tuile.Tuile;
 import static java.awt.Color.black;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Scanner;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import model.aventuriers.Aventurier;
 import model.aventuriers.Explorateur;
@@ -31,6 +34,7 @@ public class Contrôleur implements Observateur{
     private Grille grille;
     private VueAventurier vueAventurier;
     public Contrôleur(){
+        grille=new Grille();
         VueAventurier vue;
         joueurs= new HashMap<>();
         initialisationPartie();
@@ -38,7 +42,10 @@ public class Contrôleur implements Observateur{
             System.out.println(joueurs.get(e).getRole()+"  "+joueurs.get(e).getTuile().getNom()+joueurs.get(e).getTuile().getEtatTuile());            
         }   */
         grille.afficheGrille();
-        
+        /*for(String e :joueurs.keySet()){
+            System.out.println(joueurs.get(e).getNom());
+        }*/
+        faireAction();
     }
     
     
@@ -79,14 +86,38 @@ public class Contrôleur implements Observateur{
     }
     
     public void initialisationPartie(){
-        grille=new Grille();
+        
         grille.creeTuiles();
-        joueurs.put("Explo", new Explorateur("explorateur","Explorateur",grille.getTuile(2, 4)));        
-        joueurs.put("Mess", new Messager("messager","Messager",grille.getTuile(2, 1)));
-        joueurs.put("Ingé", new Ingenieur("ingénieur","Ingénieur",grille.getTuile(0, 3)));
-        joueurs.put("Pilote", new Pilote("pilote","Pilote",grille.getTuile(2, 3)));
-        joueurs.put("Plong", new Plongeur("plongeur","Plongeur",grille.getTuile(1, 2)));
-        joueurs.put("Nav", new Navigateur("navigateur","Navigateur",grille.getTuile(1, 3)));
+        Aventurier a;
+        a = new Explorateur("explorateur              ","Explorateur",grille.getTuile(2, 4));
+        joueurs.put("Explo", a);
+        grille.getTuile(2, 4).aventurierPresent.put(a.getNom(),a);
+        
+        
+        a= new Messager(    "messager                 ","Messager",grille.getTuile(2, 1));
+        joueurs.put("Mess", a);
+        grille.getTuile(2, 1).aventurierPresent.put(a.getNom(),a);
+        //grille.getTuile(2, 1).addAventurier(a);
+         
+        a=new Ingenieur(   "ingénieur                ","Ingénieur",grille.getTuile(0, 3));
+        joueurs.put("Ingé", a);
+        grille.getTuile(0, 3).aventurierPresent.put(a.getNom(),a);
+        //grille.getTuile(0, 3).addAventurier(a);
+        
+        a=new Pilote(     "pilote                   ","Pilote",grille.getTuile(2, 3));
+        joueurs.put("Pilote", a);
+        grille.getTuile(2, 3).aventurierPresent.put(a.getNom(),a);
+        //grille.getTuile(2, 3).addAventurier(a);
+        
+        a=new Plongeur(   "plongeur                 ","Plongeur",grille.getTuile(1, 2));
+        joueurs.put("Plong", a);
+        grille.getTuile(1, 2).aventurierPresent.put(a.getNom(),a);
+        //grille.getTuile(1, 2).addAventurier(a);
+        
+        a=new Navigateur( "navigateur               ","Navigateur",grille.getTuile(1, 3));
+        joueurs.put("Nav", a);
+        grille.getTuile(1, 3).aventurierPresent.put(a.getNom(),a);
+        //grille.getTuile(1, 3).addAventurier(a);
         
     }
     
@@ -95,7 +126,7 @@ public class Contrôleur implements Observateur{
         for(String e:joueurs.keySet()){
             i=0;
             while (i<3){
-                joueurs.get(e).effectuerAction();
+                this.tour(joueurs.get(e));
                 i=i+1;
             }
             
@@ -107,5 +138,76 @@ public class Contrôleur implements Observateur{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void deplacement(Aventurier a){
+        int ligne=0;
+        int colonne=0;
+        boolean end ;
+        HashSet<Tuile> tuiles =new HashSet<>();
+        tuiles=a.tuilesPossibles();
+        if (tuiles.isEmpty()){
+            System.out.println("ne peut pas se deplacer");
+        }
+        else{
+            System.out.println("Tuiles Possibles : ");
+            for(Tuile tuile :tuiles){
+                tuile.afficheTuile();
+            }
+            Scanner sc = new Scanner(System.in);
+            end =true;
+            while(end ){
+                System.out.println("Ligne");
+                ligne = sc.nextInt();
+                System.out.println("colonne");
+                colonne= sc.nextInt();
+                end=!(tuiles.contains(grille.getTuile(ligne,colonne)));
+            }
+            
+            a.getPosition().supprAventurier(a);
+            Tuile tuile=grille.getTuile(ligne, colonne);
+            tuile.addAventurier(a);
+            a.setPosition(tuile);
+            grille.afficheGrille();
+            faireAction();
+            
+        }
+    }
+    
+    public void faireAction(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Choisir un joueur :");
+        System.out.println("1.Ingénieur");
+        System.out.println("2.Navigateur");
+        System.out.println("3.Plongeur");
+        System.out.println("4.Pilote");
+        System.out.println("5.Explorateur");
+        System.out.println("6.Messager");
+        Aventurier av;
+        int i = sc.nextInt();
+        if (i==1){
+            av=joueurs.get("Ingé");
+        } else if(i==2){
+            av=joueurs.get("Nav");
+        }else if(i==3){
+            av=joueurs.get("Plong");
+        }else if(i==4){
+            av=joueurs.get("Pilote");
+        }else if(i==5){
+            av=joueurs.get("Explo");
+        }else{
+            av=joueurs.get("Mess");
+        }
+        
+        System.out.println("Choisir une action :");
+        System.out.println("1. Déplacement");
+        System.out.println("2. Assechement");
+        System.out.println("3. Arret");
+        i = sc.nextInt();
+        if (i==1){
+            deplacement(av);
+        } else if(i==2){
+            //assechement(av);
+        } 
+        
+    }
     
 }

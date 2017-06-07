@@ -26,9 +26,10 @@ public class Tuile {
 
     private Grille grille;
 
-    private HashMap<String, Aventurier> aventurierPresent;
+    public HashMap<String, Aventurier> aventurierPresent;
 
     public Tuile(String nom, int ligne, int colonne, Grille g) {
+        aventurierPresent=new HashMap<>();
         this.nom = nom;
         this.ligne = ligne;
         this.colonne = colonne;
@@ -36,6 +37,7 @@ public class Tuile {
     }
 
     public Tuile(String nom, int ligne, int colonne, EtatTuile etatTuile, Grille g) {
+        aventurierPresent=new HashMap<>();
         this.nom = nom;
         this.ligne = ligne;
         this.colonne = colonne;
@@ -106,6 +108,22 @@ public class Tuile {
 
     public EtatTuile getEtatTuile() {
         return etatTuile;
+    }
+
+    public void afficheTuile() {
+        System.out.println(nom+" - ligne :"+ligne+", colonne:"+colonne);
+    }
+
+    public void supprAventurier(Aventurier a) {
+        for (String e :aventurierPresent.keySet()){
+            if (aventurierPresent.get(e)==a){
+                aventurierPresent.remove(e);
+            }
+        }
+    }
+
+    public void addAventurier(Aventurier a) {
+        aventurierPresent.put(a.getNom(),a);
     }
     
 
