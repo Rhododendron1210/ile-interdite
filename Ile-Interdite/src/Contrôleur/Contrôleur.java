@@ -210,4 +210,32 @@ public class Contrôleur implements Observateur{
         
     }
     
+    public void assecherTuile(Aventurier a){
+        HashSet<Tuile> tuiles = a.assechementPossible();
+        int ligne=0;
+        int colonne=0;
+        boolean end ;
+        tuiles=a.tuilesPossibles();
+        if (tuiles.isEmpty()){
+            System.out.println("ne peut pas assecher");
+        }
+        else{
+            System.out.println("Tuiles Possibles : ");
+            for(Tuile tuile :tuiles){
+                tuile.afficheTuile();
+            }
+            Scanner sc = new Scanner(System.in);
+            end =true;
+            while(end ){
+                System.out.println("Ligne");
+                ligne = sc.nextInt();
+                System.out.println("colonne");
+                colonne= sc.nextInt();
+                end=!(tuiles.contains(grille.getTuile(ligne,colonne)));
+            }
+        }
+        Tuile tuile=grille.getTuile(ligne, colonne);
+        tuile.setAssechee();
+        
+    }
 }

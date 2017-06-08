@@ -65,7 +65,9 @@ public class Tuile {
         return etatTuile==ASSECHEE;
         
     }
-
+    public void setAssechee(){
+        this.etatTuile = ASSECHEE;
+    }
     public String getNom() {
         return nom;
     }
