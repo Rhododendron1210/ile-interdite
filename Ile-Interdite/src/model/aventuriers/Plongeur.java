@@ -49,9 +49,9 @@ public class Plongeur extends Aventurier{
         Grille grille = t.getGrille();
         ArrayList<Tuile> tu = grille.getTuilesAdjacentes(ligne, colonne);
         for (Tuile tuile : tu){
-            if (tuile.tuileSeche()){
+            if (tuile.tuileSeche() && t!=tuile){
                 liste.add(tuile);
-            } else if(tuilesDejaVu.contains(tuile)==false){
+            } else if(tuilesDejaVu.contains(tuile)==false ){
                 tuilesDejaVu.add(tuile);
                 liste.addAll(tuilesPossibles(tuile.getColonne(),tuile.getLigne(),tuilesDejaVu));
             }

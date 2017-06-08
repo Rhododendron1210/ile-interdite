@@ -132,7 +132,6 @@ public class Grille {
             for (i = 0; i <= 5; i++) {
                 if (!(grille[w][i].getAventurierPresent().isEmpty())) {
                     for (String e : grille[w][i].getAventurierPresent().keySet()) {
-
                         System.out.print("|   " + grille[w][i].getAventurierPresent().get(e).getNom() + "  ");
 
                     }

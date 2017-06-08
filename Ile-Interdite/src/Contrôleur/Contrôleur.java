@@ -45,10 +45,14 @@ public class Contrôleur implements Observateur{
         /*for(String e :joueurs.keySet()){
             System.out.println(joueurs.get(e).getNom());
         }*/
-        faireAction();
+        tourDeJeu();
     }
     
-    
+    public void afficherJoueurs(){
+        for(String e:joueurs.keySet()){
+            System.out.println(joueurs.get(e).getRole()+"  "+joueurs.get(e).getTuile().getNom()+joueurs.get(e).getTuile().getEtatTuile());            
+        }
+    }
 
     public HashMap<String, Aventurier> getJoueurs() {
         return joueurs;
@@ -72,18 +76,6 @@ public class Contrôleur implements Observateur{
 
     
     
-    public void tour(Aventurier a){
-        
-        int nbAction = 3;
-        
-        while (nbAction > 0) {
-            
-        }
-    }
-    
-    public void effectuerAction(){
-        //A faire
-    }
     
     public void initialisationPartie(){
         
@@ -126,6 +118,7 @@ public class Contrôleur implements Observateur{
         for(String e:joueurs.keySet()){
             i=0;
             while (i<3){
+                System.out.println("Action :"+String.valueOf(i+1)+" du "+joueurs.get(e).getNom());
                 this.tour(joueurs.get(e));
                 i=i+1;
             }
@@ -146,6 +139,7 @@ public class Contrôleur implements Observateur{
         tuiles=a.tuilesPossibles();
         if (tuiles.isEmpty()){
             System.out.println("ne peut pas se deplacer");
+            tour(a);
         }
         else{
             System.out.println("Tuiles Possibles : ");
@@ -154,12 +148,27 @@ public class Contrôleur implements Observateur{
             }
             Scanner sc = new Scanner(System.in);
             end =true;
+            System.out.println("Taper ligne=0 et colonne=0 pour annuler le coix d'action.");
             while(end ){
+                
                 System.out.println("Ligne");
                 ligne = sc.nextInt();
                 System.out.println("colonne");
                 colonne= sc.nextInt();
-                end=!(tuiles.contains(grille.getTuile(ligne,colonne)));
+                if(ligne==0&&colonne==0){
+                    end=false;
+                    tour(a);
+                } else if (ligne<6&&ligne>=0&&colonne<6&&colonne>=0){
+                    if (tuiles.contains(grille.getTuile(ligne,colonne))){
+                      end=false;  
+                    } else {
+                        System.out.print("Case avec déplacement non possible");
+                    }
+                    
+                } else {
+                    System.out.println("Case en dehors du plateau");
+                }
+                
             }
             
             a.getPosition().supprAventurier(a);
@@ -167,12 +176,13 @@ public class Contrôleur implements Observateur{
             tuile.addAventurier(a);
             a.setPosition(tuile);
             grille.afficheGrille();
-            faireAction();
+            
+            //tour(a);
             
         }
     }
     
-    public void faireAction(){
+    /*public void faireAction(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Choisir un joueur :");
         System.out.println("1.Ingénieur");
@@ -205,19 +215,41 @@ public class Contrôleur implements Observateur{
         if (i==1){
             deplacement(av);
         } else if(i==2){
-            //assechement(av);
+            assecherTuile(av);
         } 
         
+    }*/
+    
+    public void tour(Aventurier a){
+        Scanner sc = new Scanner(System.in);
+        int i;
+        System.out.println("Choisir une action :");
+        System.out.println("1. Déplacement");
+        System.out.println("2. Assechement");
+        System.out.println("3. Passer Action");
+        i = sc.nextInt();
+        if (i==1){
+            deplacement(a);
+        } else if(i==2){
+            assecherTuile(a);
+        } else if (i==4){
+            afficherJoueurs();
+            tour(a);
+        }
+        
+        //grille.afficheGrille();
     }
+    
     
     public void assecherTuile(Aventurier a){
         HashSet<Tuile> tuiles = a.assechementPossible();
         int ligne=0;
         int colonne=0;
         boolean end ;
-        tuiles=a.tuilesPossibles();
+        
         if (tuiles.isEmpty()){
             System.out.println("ne peut pas assecher");
+            tour(a);
         }
         else{
             System.out.println("Tuiles Possibles : ");
@@ -225,17 +257,31 @@ public class Contrôleur implements Observateur{
                 tuile.afficheTuile();
             }
             Scanner sc = new Scanner(System.in);
+            System.out.println("Taper ligne=0 et colonne=0 pour annuler le coix d'action.");
             end =true;
             while(end ){
                 System.out.println("Ligne");
                 ligne = sc.nextInt();
                 System.out.println("colonne");
                 colonne= sc.nextInt();
-                end=!(tuiles.contains(grille.getTuile(ligne,colonne)));
+                if(ligne==0&&colonne==0){
+                    end=false;
+                    tour(a);
+                } else if (ligne<6&&ligne>=0&&colonne<6&&colonne>=0){
+                    if (tuiles.contains(grille.getTuile(ligne,colonne))){
+                      end=false;  
+                    } else {
+                        System.out.print("Case avec assechement non possible");
+                    }
+                    
+                } else {
+                    System.out.println("Case en dehors du plateau");
+                }
             }
         }
         Tuile tuile=grille.getTuile(ligne, colonne);
         tuile.setAssechee();
-        
+        grille.afficheGrille();
+        //tour(a);
     }
 }

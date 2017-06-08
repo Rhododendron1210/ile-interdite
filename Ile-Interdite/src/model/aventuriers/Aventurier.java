@@ -77,8 +77,6 @@ public abstract class Aventurier {
         Grille grille = t.getGrille();
         ArrayList<Tuile> tuiles = grille.getTuilesAdjacentes(ligne, colonne);
         for (Tuile tuile: tuiles){
-            int ligneT = tuile.getLigne();
-            int colonneT = tuile.getColonne();
             if (tuile.isInondée()){
                 colTuilePossible.add(tuile);
             }

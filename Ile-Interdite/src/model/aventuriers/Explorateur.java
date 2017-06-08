@@ -43,7 +43,7 @@ public class Explorateur extends Aventurier{
     
     @Override
     public HashSet<Tuile> assechementPossible(){
-        HashSet<Tuile> liste = super.tuilesPossibles();
+        HashSet<Tuile> liste = super.assechementPossible();
         Tuile t = super.getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();

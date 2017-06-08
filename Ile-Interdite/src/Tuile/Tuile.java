@@ -117,11 +117,7 @@ public class Tuile {
     }
 
     public void supprAventurier(Aventurier a) {
-        for (String e :aventurierPresent.keySet()){
-            if (aventurierPresent.get(e)==a){
-                aventurierPresent.remove(e);
-            }
-        }
+        aventurierPresent.remove(a);
     }
 
     public void addAventurier(Aventurier a) {
