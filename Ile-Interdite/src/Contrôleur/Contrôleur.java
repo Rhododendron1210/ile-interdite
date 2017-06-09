@@ -162,7 +162,7 @@ public class Contrôleur implements Observateur{
                     if (tuiles.contains(grille.getTuile(ligne,colonne))){
                       end=false;  
                     } else {
-                        System.out.print("Case avec déplacement non possible");
+                        System.out.println("Case avec déplacement non possible");
                     }
                     
                 } else {
@@ -270,7 +270,7 @@ public class Contrôleur implements Observateur{
                     if (tuiles.contains(grille.getTuile(ligne,colonne))){
                       end=false;  
                     } else {
-                        System.out.print("Case avec assechement non possible");
+                        System.out.println("Case avec assechement non possible");
                     }
                     
                 } else {
