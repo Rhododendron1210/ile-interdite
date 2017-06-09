@@ -170,11 +170,14 @@ public class Contrôleur implements Observateur{
                 }
                 
             }
-            a.getPosition().supprAventurier(a);
-            Tuile tuile=grille.getTuile(ligne, colonne);
-            tuile.addAventurier(a);
-            a.setPosition(tuile);
-            grille.afficheGrille();
+            if(ligne!=0&&colonne!=0){
+                a.getPosition().supprAventurier(a);
+                Tuile tuile=grille.getTuile(ligne, colonne);
+                tuile.addAventurier(a);
+                a.setPosition(tuile);
+                grille.afficheGrille();
+            }
+            
             
             //tour(a);
             
@@ -278,9 +281,11 @@ public class Contrôleur implements Observateur{
                 }
             }
         }
-        Tuile tuile=grille.getTuile(ligne, colonne);
-        tuile.setAssechee();
-        grille.afficheGrille();
+        if(ligne!=0&&colonne!=0){
+            Tuile tuile=grille.getTuile(ligne, colonne);
+            tuile.setAssechee();
+            grille.afficheGrille();
+        }
         //tour(a);
     }
 }

@@ -28,6 +28,7 @@ public class Pilote extends Aventurier{
         Grille grille = t.getGrille();
         HashSet<Tuile> liste = new HashSet<>();
         liste= grille.getTuilesAssechee();
+        super.setColTuilePossible(liste);
         return liste;
     }
 }

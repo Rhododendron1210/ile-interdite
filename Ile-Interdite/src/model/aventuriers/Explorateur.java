@@ -31,8 +31,6 @@ public class Explorateur extends Aventurier{
         Grille grille = t.getGrille();
         HashSet<Tuile> tuiles = grille.getTuilesAdjacentesDiagonale(ligne, colonne);
         for (Tuile tuile: tuiles){
-            int ligneT = tuile.getLigne();
-            int colonneT = tuile.getColonne();
             if (tuile.tuileSeche()){
                 liste.add(tuile);
             }
@@ -50,8 +48,6 @@ public class Explorateur extends Aventurier{
         Grille grille = t.getGrille();
         HashSet<Tuile> tuiles = grille.getTuilesAdjacentesDiagonale(ligne, colonne);
         for (Tuile tuile: tuiles){
-            int ligneT = tuile.getLigne();
-            int colonneT = tuile.getColonne();
             if (tuile.isInondée()){
                 liste.add(tuile);
             }
