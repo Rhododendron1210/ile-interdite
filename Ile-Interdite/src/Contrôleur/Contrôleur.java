@@ -170,7 +170,6 @@ public class Contrôleur implements Observateur{
                 }
                 
             }
-            
             a.getPosition().supprAventurier(a);
             Tuile tuile=grille.getTuile(ligne, colonne);
             tuile.addAventurier(a);

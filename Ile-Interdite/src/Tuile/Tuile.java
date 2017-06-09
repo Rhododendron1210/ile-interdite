@@ -117,7 +117,7 @@ public class Tuile {
     }
 
     public void supprAventurier(Aventurier a) {
-        aventurierPresent.remove(a);
+        aventurierPresent.remove(a.getNom());
     }
 
     public void addAventurier(Aventurier a) {
