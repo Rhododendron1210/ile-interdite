@@ -14,37 +14,61 @@ import javax.swing.JPanel;
  * @author louesdol
  */
 public class Grille extends JPanel{
-    
-    
+    //Atributs
+    private JButton x3y1;
+    private JButton x4y1;
+    private JButton x2y2;
+    private JButton x3y2;
+    private JButton x4y2;
+    private JButton x5y2;
+    private JButton x1y3;
+    private JButton x2y3;
+    private JButton x3y3;
+    private JButton x4y3;
+    private JButton x5y3;
+    private JButton x6y3;
+    private JButton x1y4;
+    private JButton x2y4;
+    private JButton x3y4;
+    private JButton x4y4;
+    private JButton x5y4;
+    private JButton x6y4;
+    private JButton x2y5;
+    private JButton x3y5;
+    private JButton x4y5;
+    private JButton x5y5;
+    private JButton x3y6;
+    private JButton x4y6;
+    //Constructeur
     @Override
     public void paintComponent(Graphics g){
         
         this.setLayout( new GridLayout(6,6));
         
-        JButton x3y1 = new JButton();
-        JButton x4y1 = new JButton();
-        JButton x2y2 = new JButton();
-        JButton x3y2 = new JButton();
-        JButton x4y2 = new JButton();
-        JButton x5y2 = new JButton();
-        JButton x1y3 = new JButton();
-        JButton x2y3 = new JButton();
-        JButton x3y3 = new JButton();
-        JButton x4y3 = new JButton();
-        JButton x5y3 = new JButton();
-        JButton x6y3 = new JButton();
-        JButton x1y4 = new JButton();
-        JButton x2y4 = new JButton();
-        JButton x3y4 = new JButton();
-        JButton x4y4 = new JButton();
-        JButton x5y4 = new JButton();
-        JButton x6y4 = new JButton();
-        JButton x2y5 = new JButton();
-        JButton x3y5 = new JButton();
-        JButton x4y5 = new JButton();
-        JButton x5y5 = new JButton();
-        JButton x3y6 = new JButton();
-        JButton x4y6 = new JButton();
+        x3y1 = new JButton();
+        x4y1 = new JButton();
+        x2y2 = new JButton();
+        x3y2 = new JButton();
+        x4y2 = new JButton();
+        x5y2 = new JButton();
+        x1y3 = new JButton();
+        x2y3 = new JButton();
+        x3y3 = new JButton();
+        x4y3 = new JButton();
+        x5y3 = new JButton();
+        x6y3 = new JButton();
+        x1y4 = new JButton();
+        x2y4 = new JButton();
+        x3y4 = new JButton();
+        x4y4 = new JButton();
+        x5y4 = new JButton();
+        x6y4 = new JButton();
+        x2y5 = new JButton();
+        x3y5 = new JButton();
+        x4y5 = new JButton();
+        x5y5 = new JButton();
+        x3y6 = new JButton();
+        x4y6 = new JButton();
         
         this.add(x3y1);
         this.add(x4y1);
