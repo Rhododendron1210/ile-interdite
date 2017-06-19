@@ -5,8 +5,8 @@
  */
 package model.aventuriers;
 
-import Grille.Grille;
-import Tuile.Tuile;
+import model.Grille;
+import model.Tuile;
 import java.util.ArrayList;
 import java.util.HashSet;
 

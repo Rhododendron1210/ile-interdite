@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tuile;
+package model;
 
 import model.aventuriers.Aventurier;
 import java.util.*;
-import Grille.Grille;
+
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.COULEE;

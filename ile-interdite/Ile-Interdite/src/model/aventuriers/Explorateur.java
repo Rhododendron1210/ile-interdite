@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 package model.aventuriers;
+import model.Tuile;
 
-import Grille.Grille;
-import Tuile.Tuile;
 import java.util.ArrayList;
 import java.util.HashSet;
+import model.Grille;
 
 /**
  *

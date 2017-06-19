@@ -1,8 +1,6 @@
 package model;
 
 import util.Observateur;
-import Grille.Grille;
-import Tuile.Tuile;
 import static java.awt.Color.black;
 import java.util.ArrayList;
 import java.util.HashMap;

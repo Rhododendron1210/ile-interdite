@@ -5,7 +5,7 @@
  */
 package model.aventuriers;
 
-import Tuile.Tuile;
+import model.Tuile;
 
 /**
  *
