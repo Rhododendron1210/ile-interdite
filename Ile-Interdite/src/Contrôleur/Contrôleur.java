@@ -16,7 +16,6 @@ import model.aventuriers.Navigateur;
 import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import view.VueAventurier;
-import view.VueGeneral;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,15 +33,11 @@ public class Contrôleur implements Observateur{
     private HashMap<String,Aventurier> joueurs;
     private Grille grille;
     private VueAventurier vueAventurier;
-    private VueGeneral vueGeneral;
-    
     public Contrôleur(){
         grille=new Grille();
         VueAventurier vue;
         joueurs= new HashMap<>();
         initialisationPartie();
-        vueAventurier.setObservateur(this);
-        vueGeneral.setObservateur(this);
         grille.afficheGrille();
         tourDeJeu();
     }
@@ -81,33 +76,58 @@ public class Contrôleur implements Observateur{
         grille.creeTuiles();
         Aventurier a;
         a = new Explorateur("explorateur              ","Explorateur",grille.getTuile(2, 4));
-        joueurs.put("Explo", a);
-        grille.getTuile(2, 4).aventurierPresent.put(a.getNom(),a);
+        for (Tuile t :grille.getTuiles()){
+            if (t.getNom()=="La Porte de Cuivre      "){
+                joueurs.put("Pilote", a);
+                t.aventurierPresent.put(a.getNom(),a);
+            } 
+        }
         
         
         a= new Messager(    "messager                 ","Messager",grille.getTuile(2, 1));
-        joueurs.put("Mess", a);
-        grille.getTuile(2, 1).aventurierPresent.put(a.getNom(),a);
+        for (Tuile t :grille.getTuiles()){
+            if (t.getNom()=="La Porte d'Argent       "){
+                joueurs.put("Pilote", a);
+                t.aventurierPresent.put(a.getNom(),a);
+            } 
+        }
         //grille.getTuile(2, 1).addAventurier(a);
          
         a=new Ingenieur(   "ingénieur                ","Ingénieur",grille.getTuile(0, 3));
-        joueurs.put("Ingé", a);
-        grille.getTuile(0, 3).aventurierPresent.put(a.getNom(),a);
+        for (Tuile t :grille.getTuiles()){
+            if (t.getNom()=="La Porte de Bronze      "){
+                joueurs.put("Pilote", a);
+                t.aventurierPresent.put(a.getNom(),a);
+            } 
+        }
         //grille.getTuile(0, 3).addAventurier(a);
         
         a=new Pilote(     "pilote                   ","Pilote",grille.getTuile(2, 3));
-        joueurs.put("Pilote", a);
-        grille.getTuile(2, 3).aventurierPresent.put(a.getNom(),a);
+        for (Tuile t :grille.getTuiles()){
+            if (t.getNom()=="Heliport                "){
+                joueurs.put("Pilote", a);
+                t.aventurierPresent.put(a.getNom(),a);
+            } 
+        }
+        
         //grille.getTuile(2, 3).addAventurier(a);
         
         a=new Plongeur(   "plongeur                 ","Plongeur",grille.getTuile(1, 2));
-        joueurs.put("Plong", a);
-        grille.getTuile(1, 2).aventurierPresent.put(a.getNom(),a);
+        for (Tuile t :grille.getTuiles()){
+            if (t.getNom()=="La Porte de Fer         "){
+                joueurs.put("Pilote", a);
+                t.aventurierPresent.put(a.getNom(),a);
+            } 
+        }
         //grille.getTuile(1, 2).addAventurier(a);
         
         a=new Navigateur( "navigateur               ","Navigateur",grille.getTuile(1, 3));
-        joueurs.put("Nav", a);
-        grille.getTuile(1, 3).aventurierPresent.put(a.getNom(),a);
+        for (Tuile t :grille.getTuiles()){
+            if (t.getNom()=="La Porte d'or           "){
+                joueurs.put("Pilote", a);
+                t.aventurierPresent.put(a.getNom(),a);
+            } 
+        }
         //grille.getTuile(1, 3).addAventurier(a);
         
     }
@@ -169,7 +189,7 @@ public class Contrôleur implements Observateur{
                 }
                 
             }
-            if(ligne!=0||colonne!=0){
+            if(ligne!=0&&colonne!=0){
                 a.getPosition().supprAventurier(a);
                 Tuile tuile=grille.getTuile(ligne, colonne);
                 tuile.addAventurier(a);
@@ -280,7 +300,7 @@ public class Contrôleur implements Observateur{
                 }
             }
         }
-        if(ligne!=0||colonne!=0){
+        if(ligne!=0&&colonne!=0){
             Tuile tuile=grille.getTuile(ligne, colonne);
             tuile.setAssechee();
             grille.afficheGrille();
@@ -288,3 +308,4 @@ public class Contrôleur implements Observateur{
         //tour(a);
     }
 }
+

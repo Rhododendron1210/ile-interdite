@@ -5,6 +5,7 @@
  */
 package util;
 
+import Tuile.Tuile;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,22 @@ public class Utils {
         String libelle ;
         
         EtatTuile(String libelle) {
+            this.libelle = libelle ;
+        }
+
+        @Override
+        public String toString() {
+            return this.libelle ;
+        }
+    }
+    public static enum TypeTuile {
+        TRESOR("Tresor"), 
+        MONTEDESEAUX( "MonteDesEaux"),
+        ACTIONSPECIAL(  "ActionSpecial");
+
+        String libelle ;
+        
+        TypeTuile(String libelle) {
             this.libelle = libelle ;
         }
 
@@ -78,6 +95,8 @@ public class Utils {
         }
         return arrayList ;
     }
+    
+    
     
     /**
      * Permet de poser une question à laquelle l'utilisateur répond par oui ou non
