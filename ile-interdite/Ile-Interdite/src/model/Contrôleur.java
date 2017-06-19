@@ -155,7 +155,7 @@ public class Contrôleur implements Observateur{
         int colonne=0;
         boolean end ;
         HashSet<Tuile> tuiles =new HashSet<>();
-        tuiles=a.tuilesPossibles();
+        tuiles=a.tuilesPossibles(this.getGrille());
         if (tuiles.isEmpty()){
             System.out.println("ne peut pas se deplacer");
             tour(a);
@@ -263,7 +263,7 @@ public class Contrôleur implements Observateur{
     
     
     public void assecherTuile(Aventurier a){
-        HashSet<Tuile> tuiles = a.assechementPossible();
+        HashSet<Tuile> tuiles = a.assechementPossible(this.getGrille());
         int ligne=0;
         int colonne=0;
         boolean end ;

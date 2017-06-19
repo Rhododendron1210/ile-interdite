@@ -23,12 +23,12 @@ public class Explorateur extends Aventurier{
     }
     
     @Override
-    public HashSet<Tuile> tuilesPossibles(){
-        HashSet<Tuile> liste = super.tuilesPossibles();
+    public HashSet<Tuile> tuilesPossibles(Grille grille){
+        HashSet<Tuile> liste = super.tuilesPossibles(grille);
         Tuile t = super.getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
-        Grille grille = t.getGrille();
+        
         HashSet<Tuile> tuiles = grille.getTuilesAdjacentesDiagonale(ligne, colonne);
         for (Tuile tuile: tuiles){
             if (tuile.tuileSeche()){
@@ -40,12 +40,12 @@ public class Explorateur extends Aventurier{
     }
     
     @Override
-    public HashSet<Tuile> assechementPossible(){
-        HashSet<Tuile> liste = super.assechementPossible();
+    public HashSet<Tuile> assechementPossible(Grille grille){
+        HashSet<Tuile> liste = super.assechementPossible(grille);
         Tuile t = super.getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
-        Grille grille = t.getGrille();
+       
         HashSet<Tuile> tuiles = grille.getTuilesAdjacentesDiagonale(ligne, colonne);
         for (Tuile tuile: tuiles){
             if (tuile.isInondée()){

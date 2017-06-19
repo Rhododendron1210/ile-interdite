@@ -5,6 +5,8 @@
  */
 package Tresor;
 
+import util.Utils;
+
 /**
  *
  * @author pestree
@@ -16,6 +18,10 @@ public class CarteTirage {
     public CarteTirage(String nom, String description) {
         this.nom = nom;
         this.description = description;
+    }
+
+    public Utils.Tresor getNom() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
