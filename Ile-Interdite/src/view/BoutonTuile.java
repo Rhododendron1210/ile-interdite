@@ -5,6 +5,7 @@
  */
 package view;
 
+import Tuile.Tuile;
 import javax.swing.JButton;
 
 /**
@@ -14,5 +15,9 @@ import javax.swing.JButton;
 public class BoutonTuile extends JButton{
     int colonne;
     int ligne;
-    
+    BoutonTuile(Tuile tuile){
+        this.colonne=tuile.getColonne();
+        this.ligne=tuile.getLigne();
+        
+    }
 }
