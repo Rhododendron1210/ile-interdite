@@ -16,6 +16,7 @@ import model.aventuriers.Navigateur;
 import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import view.VueAventurier;
+import view.VueGeneral;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,18 +34,16 @@ public class Contrôleur implements Observateur{
     private HashMap<String,Aventurier> joueurs;
     private Grille grille;
     private VueAventurier vueAventurier;
+    private VueGeneral vueGeneral;
+    
     public Contrôleur(){
         grille=new Grille();
         VueAventurier vue;
         joueurs= new HashMap<>();
         initialisationPartie();
-        /*for(String e:joueurs.keySet()){
-            System.out.println(joueurs.get(e).getRole()+"  "+joueurs.get(e).getTuile().getNom()+joueurs.get(e).getTuile().getEtatTuile());            
-        }   */
+        vueAventurier.setObservateur(this);
+        vueGeneral.setObservateur(this);
         grille.afficheGrille();
-        /*for(String e :joueurs.keySet()){
-            System.out.println(joueurs.get(e).getNom());
-        }*/
         tourDeJeu();
     }
     
@@ -170,7 +169,7 @@ public class Contrôleur implements Observateur{
                 }
                 
             }
-            if(ligne!=0&&colonne!=0){
+            if(ligne!=0||colonne!=0){
                 a.getPosition().supprAventurier(a);
                 Tuile tuile=grille.getTuile(ligne, colonne);
                 tuile.addAventurier(a);
@@ -281,7 +280,7 @@ public class Contrôleur implements Observateur{
                 }
             }
         }
-        if(ligne!=0&&colonne!=0){
+        if(ligne!=0||colonne!=0){
             Tuile tuile=grille.getTuile(ligne, colonne);
             tuile.setAssechee();
             grille.afficheGrille();

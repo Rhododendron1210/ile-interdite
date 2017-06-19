@@ -10,5 +10,7 @@ package Contrôleur;
  * @author louesdol
  */
 public class Message {
-    
+    public int action;
+    public int colonne;
+    public int ligne;
 }
