@@ -21,11 +21,11 @@ public class Pilote extends Aventurier{
     }
     
     @Override
-    public HashSet<Tuile> tuilesPossibles(Grille grille){
+    public HashSet<Tuile> tuilesPossibles(){
         Tuile t = getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
-        
+        Grille grille = t.getGrille();
         HashSet<Tuile> liste = new HashSet<>();
         liste= grille.getTuilesAssechee();
         super.setColTuilePossible(liste);

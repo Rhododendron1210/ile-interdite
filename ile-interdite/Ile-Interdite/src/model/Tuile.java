@@ -12,7 +12,6 @@ import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.COULEE;
 import static util.Utils.EtatTuile.INONDEE;
-import util.Utils.Tresor;
 
 /**
  *
@@ -25,19 +24,16 @@ public class Tuile {
     private int ligne;
     private int colonne;
 
-
-    private Tresor tresor;
-    
+    private Grille grille;
 
     public HashMap<String, Aventurier> aventurierPresent;
 
-    public Tuile(String nom, int ligne, int colonne, Grille g,Tresor tresor) {
+    public Tuile(String nom, int ligne, int colonne, Grille g) {
         aventurierPresent=new HashMap<>();
         this.nom = nom;
         this.ligne = ligne;
         this.colonne = colonne;
-        
-        this.tresor=tresor;
+        this.grille = g;
     }
 
     public Tuile(String nom, int ligne, int colonne, EtatTuile etatTuile, Grille g) {
@@ -46,7 +42,7 @@ public class Tuile {
         this.ligne = ligne;
         this.colonne = colonne;
         this.etatTuile= etatTuile;
-        
+        this.grille = g;
     }
 
     public Tuile(String le_Palais_des_Marées, int i, int i0, boolean b, boolean b0, Grille aThis) {
@@ -96,7 +92,13 @@ public class Tuile {
         this.etatTuile = COULEE;
     }
 
-    
+    public Grille getGrille() {
+        return grille;
+    }
+
+    public void setGrille(Grille grille) {
+        this.grille = grille;
+    }
 
     public HashMap<String, Aventurier> getAventurierPresent() {
         return aventurierPresent;
@@ -121,11 +123,6 @@ public class Tuile {
     public void addAventurier(Aventurier a) {
         aventurierPresent.put(a.getNom(),a);
     }
-
-    public Tresor getTresor() {
-        return tresor;
-    }
-    
     
 
 }

@@ -4,16 +4,11 @@
  * and open the template in the editor.
  */
 package model.aventuriers;
-
-import Tresor.CarteTirage;
-import Tresor.CarteTresor;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import model.Grille;
 import model.Tuile;
 import model.ObjetIdentifie;
-import util.Utils.Tresor;
 /**
  *
  * @author Yannis
@@ -24,14 +19,12 @@ public abstract class Aventurier extends ObjetIdentifie{
     private String role;
     private HashSet<Tuile> colTuilePossible;
     private Tuile position;
-    private ArrayList<CarteTirage> possede;
     
     Aventurier(String nom, String role,Tuile position){
         this.nom=nom;
         this.role=role;
         colTuilePossible = new HashSet<>();
         this.setPosition(position);
-        possede= new ArrayList<>();
     }
     
     public String getRole() {
@@ -56,12 +49,12 @@ public abstract class Aventurier extends ObjetIdentifie{
     
     
     
-    public HashSet<Tuile> tuilesPossibles(Grille grille){
+    public HashSet<Tuile> tuilesPossibles(){
         colTuilePossible.clear();
         Tuile t = getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
-        
+        Grille grille = t.getGrille();
         ArrayList<Tuile> tuiles = grille.getTuilesAdjacentes(ligne, colonne);
         for (Tuile tuile: tuiles){
             int ligneT = tuile.getLigne();
@@ -77,12 +70,12 @@ public abstract class Aventurier extends ObjetIdentifie{
         this.colTuilePossible = colTuilePossible;
     }
    
-    public HashSet<Tuile> assechementPossible(Grille grille){
+    public HashSet<Tuile> assechementPossible(){
         colTuilePossible.clear();
         Tuile t = getPosition();
         int ligne = t.getLigne();
         int colonne = t.getColonne();
-        
+        Grille grille = t.getGrille();
         ArrayList<Tuile> tuiles = grille.getTuilesAdjacentes(ligne, colonne);
         for (Tuile tuile: tuiles){
             if (tuile.isInondée()){
@@ -90,37 +83,5 @@ public abstract class Aventurier extends ObjetIdentifie{
             }
         }
         return colTuilePossible;
-    }
-    
-    public void recuperationTresorTuile(Tresor tresor){
-        boolean t;
-        t=recuperationTresorPossible(tresor);
-        Tuile tuile;
-        tuile= getPosition();
-        Tresor tuileTresor=tuile.getTresor();
-        if(t && tuileTresor==tresor){
-            this.addTresor(tresor);
-        }
-        
-        
-    }
-
-    private boolean recuperationTresorPossible(Tresor tresor) {
-        int i=0;
-        for (CarteTirage carte:possede){
-            if (carte.getNom()==tresor){
-                i=i+1;
-            }
-        }
-        if(i>=4){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    private void addTresor(Tresor tresor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
