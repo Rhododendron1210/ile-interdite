@@ -35,22 +35,7 @@ public class Utils {
             return this.libelle ;
         }
     }
-    public static enum TypeTuile {
-        TRESOR("Tresor"), 
-        MONTEDESEAUX( "MonteDesEaux"),
-        ACTIONSPECIAL(  "ActionSpecial");
-
-        String libelle ;
-        
-        TypeTuile(String libelle) {
-            this.libelle = libelle ;
-        }
-
-        @Override
-        public String toString() {
-            return this.libelle ;
-        }
-    }
+   
 
     public static enum Pion {
         ROUGE("Rouge", new Color(255, 0, 0)),
