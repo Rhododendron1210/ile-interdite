@@ -60,7 +60,8 @@ public class Contrôleur implements Observateur{
         initialisationPartie();
         afficher();
         grille.afficheGrille();
-        tourDeJeu();
+        //tourDeJeu();
+        lancerJeu();
         this.setPiocheInondation(new Stack());
         this.setDefausseInondation(new Stack());
         ArrayList<Tuile> tuiles;
@@ -190,6 +191,7 @@ public class Contrôleur implements Observateur{
         
     }
     public void lancerJeu(){
+        vueAventurier2=new VueAventurier2(aventurierCourant);
         
     }
     
@@ -212,9 +214,22 @@ public class Contrôleur implements Observateur{
     @Override
     public void traiterMessage(Message msg) {
         if (msg.getCommande()==BOUGER){
-            HashSet<Tuile> tuiles =new HashSet<>();
-            tuiles=aventurierCourant.tuilesPossibles(this.getGrille());
-        }
+            if (msg.getIdTuile()==null){
+                HashSet<Tuile> tuiles =new HashSet<>();
+                tuiles=aventurierCourant.tuilesPossibles(this.getGrille());
+                //vuePlateau.tuilespossibles...
+            } else {
+                aventurierCourant.getPosition().supprAventurier(aventurierCourant);
+                String placement=String.valueOf(msg.getIdTuile());
+                Tuile tuile=grille.getTuile(Integer.valueOf(placement.charAt(0)), Integer.valueOf(placement.charAt(1)));
+                tuile.addAventurier(aventurierCourant);
+                aventurierCourant.setPosition(tuile);
+                Tuile [][] tuiles = grille.getGrille();
+                vuePlateau=new VuePlateau(tuiles);
+            }
+            
+            
+        } 
     }
     
     public void deplacement(Aventurier a){

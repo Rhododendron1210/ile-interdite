@@ -20,7 +20,7 @@ public class Utils {
         DONNER("Donner une carte à un autre joueur"),
         RECUPERER_TRESOR("Récupérer le trésor de la tuile"),
         TERMINER("Terminer son tour"),
-        RECEVOIR("Recevoir la carte donnée par un autre joueur"), 
+        RECEVOIR("Recevoir la carte donnée par un autre joueur"),
         CHOISIR_CARTE("Utiliser une carte trésor"),
         CHOISIR_TUILE("Sélectionner une tuile"), 
         DEPLACER("Déplacer un autre joueur"),
