@@ -9,7 +9,7 @@ import model.Tuile;
  
 public class VueGrille extends JPanel {
     private Tuile[][] tuiles;
-    
+    private VueTuile[][] affichTuile;
     VueGrille(Tuile[][] tuiles){
         this.setLayout(new GridLayout(6,6));
         this.tuiles=tuiles;
@@ -20,6 +20,7 @@ public class VueGrille extends JPanel {
         for(Tuile[] t : tuiles){
             for (Tuile tuile : t){
                 VueTuile vue = new VueTuile(tuile);
+                
                 this.add(vue);
             }
         }

@@ -19,6 +19,7 @@ import model.aventuriers.Navigateur;
 import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import util.Message;
+import static util.Utils.Commandes.BOUGER;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
@@ -50,7 +51,7 @@ public class Contrôleur implements Observateur{
     private Stack<CarteInondation> defausseInondation;
     private VueNiveau vueNiveau;
     private boolean finJeu = false;
-   
+    private Aventurier aventurierCourant;
     
     public Contrôleur(){
         grille=new Grille();
@@ -137,7 +138,7 @@ public class Contrôleur implements Observateur{
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
-        
+        aventurierCourant= a;
         
         a= new Messager(    "messager                 ","Messager",grille.getTuile(2, 1));
         for (Tuile t :grille.getTuiles()){
@@ -187,23 +188,32 @@ public class Contrôleur implements Observateur{
         
         
     }
+    public void lancerJeu(){
+        
+    }
+    
     
     public void tourDeJeu(){
         int i;
         for(String e:joueurs.keySet()){
+            //afficher vueAventurier
             i=0;
             while (i<3){
+                //afficher nb commandes
                 System.out.println("Action :"+String.valueOf(i+1)+" du "+joueurs.get(e).getNom());
+                aventurierCourant=joueurs.get(e);
                 this.tour(joueurs.get(e));
                 i=i+1;
             }
-            
         }
     }
     
     @Override
     public void traiterMessage(Message msg) {
-        
+        if (msg.getCommande()==BOUGER){
+            HashSet<Tuile> tuiles =new HashSet<>();
+            tuiles=aventurierCourant.tuilesPossibles(this.getGrille());
+        }
     }
     
     public void deplacement(Aventurier a){
