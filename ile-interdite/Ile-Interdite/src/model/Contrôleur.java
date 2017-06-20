@@ -23,6 +23,7 @@ import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
 import view.VueAventurier;
+import view.VueNiveau;
 import view.VuePlateau;
 
 /*
@@ -46,15 +47,15 @@ public class Contrôleur implements Observateur{
     private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
     private Stack<CarteInondation> defausseInondation;
-    //private VueNiveau
+    private VueNiveau vueNiveau;
     private boolean finJeu = false;
     
     public Contrôleur(){
         grille=new Grille();
         //vueAventurier = new VueAventurier();
         joueurs= new HashMap<>();
-        //demarerPartie();
         initialisationPartie();
+        afficher();
         grille.afficheGrille();
         tourDeJeu();
         this.setPiocheInondation(new Stack());
@@ -74,6 +75,11 @@ public class Contrôleur implements Observateur{
         for(String e:joueurs.keySet()){
             System.out.println(joueurs.get(e).getRole()+"  "+joueurs.get(e).getTuile().getNom()+joueurs.get(e).getTuile().getEtatTuile());            
         }
+    }
+    public void afficher(){
+        Tuile [][] tuiles = grille.getGrille();
+        vuePlateau= new VuePlateau(tuiles);
+        vueNiveau=new VueNiveau(1);
     }
 
     public HashMap<String, Aventurier> getJoueurs() {
@@ -128,12 +134,7 @@ public class Contrôleur implements Observateur{
         this.finJeu = finJeu;
     }
     
-    public void demarerPartie(){//methode avec ihm
-        grille.creeTuiles();
-        Tuile [][] tuiles = grille.getGrille();
-        vuePlateau= new VuePlateau(tuiles);
-        
-    }
+    
     
     public void initialisationPartie(){//Methode sans ihm
         

@@ -6,7 +6,6 @@ import java.awt.Color;
 
 import java.awt.GridLayout;
 import java.util.Observable;
-//bleu
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;

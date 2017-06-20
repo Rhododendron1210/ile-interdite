@@ -26,6 +26,22 @@ public class VuePlateau {
         frame.setLocation(180, Parameters.TOP_AUTRES_VUES);
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        plateauCentre(tuiles);
+        frame.setVisible(true);
+        
+    }
+    
+    private void plateauDroit(){
+        JPanel droite = new JPanel(new BorderLayout());
+        JPanel cartes = new JPanel(new GridLayout(1,2));
+        JButton tirage = new JButton("Pioche carte pouvoir");
+        cartes.add(tirage);
+        JButton innon = new JButton("Pioche carte pouvoir");
+        cartes.add(innon);
+        droite.add(cartes,BorderLayout.NORTH);
+        
+    }
+    private void plateauCentre(Tuile[][] tuiles){
         JPanel panel = new JPanel(new GridLayout(1,3));
         deplacer=new JButton("Déplacer");
         assecher=new JButton("assecher");
@@ -37,6 +53,5 @@ public class VuePlateau {
         grille = new VueGrille(tuiles);
         frame.setSize(1200, 1000);
         frame.add(grille,BorderLayout.CENTER);
-        frame.setVisible(true);
     }
 }
