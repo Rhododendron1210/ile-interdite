@@ -24,7 +24,7 @@ public class Tuile {
     private EtatTuile etatTuile;
     private int ligne;
     private int colonne;
-
+    private boolean selectionner;
 
     private Tresor tresor;
     
@@ -32,6 +32,7 @@ public class Tuile {
     public HashMap<String, Aventurier> aventurierPresent;
 
     public Tuile(String nom, int ligne, int colonne, Grille g,Tresor tresor) {
+        selectionner=false;
         aventurierPresent=new HashMap<>();
         this.nom = nom;
         this.ligne = ligne;
@@ -41,6 +42,7 @@ public class Tuile {
     }
 
     public Tuile(String nom, int ligne, int colonne, EtatTuile etatTuile, Grille g) {
+        selectionner=false;
         aventurierPresent=new HashMap<>();
         this.nom = nom;
         this.ligne = ligne;
@@ -78,6 +80,14 @@ public class Tuile {
 
     public boolean isInondée() {
         return etatTuile==INONDEE;
+    }
+
+    public boolean isSelectionner() {
+        return selectionner;
+    }
+
+    public void setSelectionner(boolean selectionner) {
+        this.selectionner = selectionner;
     }
 
     public void setInondée() {

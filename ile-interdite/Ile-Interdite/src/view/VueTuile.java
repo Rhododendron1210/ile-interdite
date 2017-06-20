@@ -25,7 +25,6 @@ public class VueTuile extends JButton{
             couleur = Color.orange;
         } else if (tuile.getEtatTuile()==INONDEE){
             couleur = Color.BLUE;
-            
         } else {
             couleur =Color.gray;
             this.setEnabled(false);
@@ -52,6 +51,7 @@ public class VueTuile extends JButton{
     }
 
     public void setCouleur(Color couleur) {
+        
         this.couleur = couleur;
     }
 

@@ -227,7 +227,8 @@ public class Contrôleur implements Observateur{
             if (msg.getIdTuile()==null){
                 HashSet<Tuile> tuiles =new HashSet<>();
                 tuiles=aventurierCourant.tuilesPossibles(this.getGrille());
-                //vuePlateau.tuilespossibles...
+                vuePlateau.selectionnerDeplacer();
+                vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
                 aventurierCourant.getPosition().supprAventurier(aventurierCourant);
                 String placement=String.valueOf(msg.getIdTuile());
