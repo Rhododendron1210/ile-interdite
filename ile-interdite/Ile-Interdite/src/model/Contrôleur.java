@@ -340,9 +340,13 @@ public class Contrôleur implements Observateur{
         niv=niv+1;
         getGrille().setNiveauEaux(niv);
         this.addDefausseTirage(carte);
+        if (grille.getNiveauEaux()==5){
+            //finDePartie();
+        }else{
         Collections.shuffle(defausseInondation);
         while( !(defausseInondation.empty()) ){
             this.addPiocheInondation(defausseInondation.pop());
+        }
         }
        
         
