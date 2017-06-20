@@ -1,6 +1,7 @@
 package model;
 
 import Tresor.CarteInondation;
+import Tresor.CarteTirage;
 import util.Observateur;
 import static java.awt.Color.black;
 import java.util.ArrayList;
@@ -18,6 +19,9 @@ import model.aventuriers.Navigateur;
 import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import util.Message;
+import util.Utils.EtatTuile;
+import static util.Utils.EtatTuile.ASSECHEE;
+import static util.Utils.EtatTuile.INONDEE;
 import view.VueAventurier;
 import view.VuePlateau;
 
@@ -38,15 +42,18 @@ public class Contrôleur implements Observateur{
     private Grille grille;
     private VueAventurier vueAventurier;
     private VuePlateau vuePlateau;
+    private Stack<CarteTirage> piocheTirage;
+    private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
     private Stack<CarteInondation> defausseInondation;
+    private boolean finJeu = false;
     
     public Contrôleur(){
         grille=new Grille();
         //vueAventurier = new VueAventurier();
         joueurs= new HashMap<>();
-        demarerPartie();
-        //initialisationPartie();
+        //demarerPartie();
+        initialisationPartie();
         grille.afficheGrille();
         tourDeJeu();
         this.setPiocheInondation(new Stack());
@@ -54,9 +61,12 @@ public class Contrôleur implements Observateur{
         ArrayList tuiles = this.getGrille().getTuiles();
         for(Object tuile : tuiles){
             CarteInondation cI = new CarteInondation((Tuile) tuile);
-            this.getPiocheInondation().add(cI);
+            this.getPiocheInondation().push(cI);
         }
         Collections.shuffle(piocheInondation);
+        defausseTirage=new Stack<>();
+        
+        piocheTirage=new Stack<>();//ligne a refaire
     }
     
     public void afficherJoueurs(){
@@ -108,7 +118,14 @@ public class Contrôleur implements Observateur{
     public void setDefausseInondation(Stack<CarteInondation> defausseInondation) {
         this.defausseInondation = defausseInondation;
     }
-    
+
+    public boolean isFinJeu() {
+        return finJeu;
+    }
+
+    public void setFinJeu(boolean finJeu) {
+        this.finJeu = finJeu;
+    }
     
     public void demarerPartie(){//methode avec ihm
         grille.creeTuiles();
@@ -175,6 +192,8 @@ public class Contrôleur implements Observateur{
             } 
         }
         //grille.getTuile(1, 3).addAventurier(a);
+        Tuile [][] tuiles = grille.getGrille();
+        vuePlateau= new VuePlateau(tuiles);
         
     }
     
@@ -355,12 +374,61 @@ public class Contrôleur implements Observateur{
         //tour(a);
     }
     
-    private void monteeEaux(){
+    private void monteeEaux(CarteTirage inon){
         int niv = getGrille().getNiveauEaux();
         niv=niv+1;
         getGrille().setNiveauEaux(niv);
+        this.addDefausseTirage(inon);
+        Collections.shuffle(defausseInondation);
+        while( !(defausseInondation.empty()) ){
+            this.addPiocheInondation(defausseInondation.peek());
+            defausseInondation.pop();
+        }
+       
         
     }
+    
+    public void tirerCarteInondation(){
+        CarteInondation cI = this.getPiocheInondation().pop();
+        Tuile t = cI.getTuile();
+        this.getDefausseInondation().push(cI);
+        EtatTuile etat = t.getEtatTuile();
+        if(etat == ASSECHEE){
+            t.setInondée();
+        }
+        else if(etat == INONDEE){
+            int ligne = t.getLigne();
+            int colonne = t.getColonne();
+            Grille g = this.getGrille();
+            ArrayList tuilesAdjacentes = g.getTuilesAdjacentes(ligne, colonne);
+            if(!(t.getAventurierPresent().isEmpty())){            
+                if(tuilesAdjacentes.isEmpty()){
+                    this.setFinJeu(true);
+                }
+                else{
+                        Aventurier a = null;
+                        for(String key : t.getAventurierPresent().keySet()){
+                            a = t.getAventurierPresent().get(key);
+                        }
+                        this.deplacement(a);                
+                }
+            }
+        }
+        else{
+            System.out.println("La tuile est déjà coulée");
+        }
+    }
+
+    private void addDefausseTirage(CarteTirage inon) {
+        defausseTirage.add(inon);
+    }
+
+    private void addPiocheInondation(CarteInondation inon) {
+        piocheInondation.add(inon);
+    }
+    
+  
+    
 
     
 }

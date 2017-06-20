@@ -80,7 +80,7 @@ public class Tuile {
         return etatTuile==INONDEE;
     }
 
-    public void setInondée(boolean submergee) {
+    public void setInondée() {
         this.etatTuile = INONDEE;
     }
 
@@ -88,7 +88,7 @@ public class Tuile {
         return etatTuile==COULEE;
     }
 
-    public void setCoulee(boolean coulee) {
+    public void setCoulee() {
         this.etatTuile = COULEE;
     }
 
