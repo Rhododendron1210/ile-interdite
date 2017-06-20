@@ -118,7 +118,7 @@ public abstract class Aventurier extends ObjetIdentifie{
     private boolean recuperationTresorPossible(Tresor tresor) {
         int i=0;
         for (CarteTirage carte:possede){
-            if (carte.getNom()==tresor){
+            if (carte.getNom()=="CarteTresor"){
                 i=i+1;
             }
         }
