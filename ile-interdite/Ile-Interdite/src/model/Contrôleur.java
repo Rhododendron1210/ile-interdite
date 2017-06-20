@@ -4,6 +4,7 @@ import Tresor.CarteInondation;
 import util.Observateur;
 import static java.awt.Color.black;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -55,7 +56,7 @@ public class Contrôleur implements Observateur{
             CarteInondation cI = new CarteInondation((Tuile) tuile);
             this.getPiocheInondation().add(cI);
         }
-        
+        Collections.shuffle(piocheInondation);
     }
     
     public void afficherJoueurs(){
