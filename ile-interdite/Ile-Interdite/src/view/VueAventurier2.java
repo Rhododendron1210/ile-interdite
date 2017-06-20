@@ -28,8 +28,10 @@ public class VueAventurier2 extends JFrame{
     
     public VueAventurier2(Aventurier a){
         this.setSize(200,util.Parameters.HAUTEUR_VUE_AVENTURIER );
-        this.setLocation(500, Parameters.TOP_AUTRES_VUES);
+        this.setLocation(1400, Parameters.TOP_AUTRES_VUES);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        this.setUndecorated(Parameters.UNDECORATED);
+        this.setResizable(Parameters.RESIZABLE);
         this.setLayout(new BorderLayout());
         nomAventurier= new JLabel(a.getNom());
         this.add(nomAventurier,BorderLayout.NORTH);
