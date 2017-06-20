@@ -23,6 +23,7 @@ import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
 import view.VueAventurier;
+import view.VueNiveau;
 import view.VuePlateau;
 
 /*
@@ -46,15 +47,15 @@ public class Contrôleur implements Observateur{
     private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
     private Stack<CarteInondation> defausseInondation;
-    //private VueNiveau
+    private VueNiveau vueNiveau;
     private boolean finJeu = false;
     
     public Contrôleur(){
         grille=new Grille();
         //vueAventurier = new VueAventurier();
         joueurs= new HashMap<>();
-        //demarerPartie();
         initialisationPartie();
+        afficher();
         grille.afficheGrille();
         tourDeJeu();
         this.setPiocheInondation(new Stack());
@@ -74,6 +75,11 @@ public class Contrôleur implements Observateur{
         for(String e:joueurs.keySet()){
             System.out.println(joueurs.get(e).getRole()+"  "+joueurs.get(e).getTuile().getNom()+joueurs.get(e).getTuile().getEtatTuile());            
         }
+    }
+    public void afficher(){
+        Tuile [][] tuiles = grille.getGrille();
+        vuePlateau= new VuePlateau(tuiles);
+        vueNiveau=new VueNiveau(1);
     }
 
     public HashMap<String, Aventurier> getJoueurs() {
@@ -128,12 +134,7 @@ public class Contrôleur implements Observateur{
         this.finJeu = finJeu;
     }
     
-    public void demarerPartie(){//methode avec ihm
-        grille.creeTuiles();
-        Tuile [][] tuiles = grille.getGrille();
-        vuePlateau= new VuePlateau(tuiles);
-        
-    }
+    
     
     public void initialisationPartie(){//Methode sans ihm
         
@@ -261,51 +262,13 @@ public class Contrôleur implements Observateur{
                 tuile.addAventurier(a);
                 a.setPosition(tuile);
                 grille.afficheGrille();
-            }
+            }     
             
-            
-            //tour(a);
-            
+                        
         }
     }
     
-    /*public void faireAction(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Choisir un joueur :");
-        System.out.println("1.Ingénieur");
-        System.out.println("2.Navigateur");
-        System.out.println("3.Plongeur");
-        System.out.println("4.Pilote");
-        System.out.println("5.Explorateur");
-        System.out.println("6.Messager");
-        Aventurier av;
-        int i = sc.nextInt();
-        if (i==1){
-            av=joueurs.get("Ingé");
-        } else if(i==2){
-            av=joueurs.get("Nav");
-        }else if(i==3){
-            av=joueurs.get("Plong");
-        }else if(i==4){
-            av=joueurs.get("Pilote");
-        }else if(i==5){
-            av=joueurs.get("Explo");
-        }else{
-            av=joueurs.get("Mess");
-        }
-        
-        System.out.println("Choisir une action :");
-        System.out.println("1. Déplacement");
-        System.out.println("2. Assechement");
-        System.out.println("3. Arret");
-        i = sc.nextInt();
-        if (i==1){
-            deplacement(av);
-        } else if(i==2){
-            assecherTuile(av);
-        } 
-        
-    }*/
+    
     
     public void tour(Aventurier a){
         Scanner sc = new Scanner(System.in);
@@ -323,9 +286,6 @@ public class Contrôleur implements Observateur{
             afficherJoueurs();
             tour(a);
         } 
-        
-        
-        //grille.afficheGrille();
     }
     
     
@@ -382,8 +342,7 @@ public class Contrôleur implements Observateur{
         this.addDefausseTirage(inon);
         Collections.shuffle(defausseInondation);
         while( !(defausseInondation.empty()) ){
-            this.addPiocheInondation(defausseInondation.peek());
-            defausseInondation.pop();
+            this.addPiocheInondation(defausseInondation.pop());
         }
        
         
@@ -424,13 +383,25 @@ public class Contrôleur implements Observateur{
         defausseTirage.add(inon);
     }
 
-    private void addPiocheInondation(CarteInondation inon) {
+    private void addPiocheInondation(CarteInondation inon){
         piocheInondation.add(inon);
+    }
+    
+    private CarteTirage piocherCarteTirage(){
+        //pioche une carte et la retourne
+        //mélange et remet les carte dans la pioche si la pioche est vide
+        CarteTirage carte=piocheTirage.pop();
+        if (piocheTirage.empty()){
+            while(!defausseTirage.empty()){
+               piocheTirage.add(defausseTirage.pop());
+            }
+            Collections.shuffle(piocheTirage);
+        }
+        return carte;
     }
     
   
     
 
-    
 }
 
