@@ -24,6 +24,9 @@ public class Grille {
 
     private Tuile[][] grille;
     private ArrayList<Tuile>tuiles;
+    private int niveauEaux;
+
+    
 
     public Grille() {
         grille = new Tuile[6][6];
@@ -252,6 +255,13 @@ public class Grille {
 
     public ArrayList<Tuile> getTuiles() {
         return tuiles;
+    }
+    public int getNiveauEaux() {
+        return niveauEaux;
+    }
+
+    public void setNiveauEaux(int niveauEaux) {
+        this.niveauEaux = niveauEaux;
     }
     
 

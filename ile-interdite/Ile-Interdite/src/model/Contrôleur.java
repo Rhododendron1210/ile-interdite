@@ -1,11 +1,14 @@
 package model;
 
+import Tresor.CarteInondation;
 import util.Observateur;
 import static java.awt.Color.black;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Stack;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import model.aventuriers.Aventurier;
 import model.aventuriers.Explorateur;
@@ -35,6 +38,9 @@ public class Contrôleur implements Observateur{
     private Grille grille;
     private VueAventurier vueAventurier;
     private VuePlateau vuePlateau;
+    private Stack<CarteInondation> piocheInondation;
+    private Stack<CarteInondation> defausseInondation;
+    
     public Contrôleur(){
         grille=new Grille();
         //vueAventurier = new VueAventurier();
@@ -43,6 +49,14 @@ public class Contrôleur implements Observateur{
         //initialisationPartie();
         grille.afficheGrille();
         tourDeJeu();
+        this.setPiocheInondation(new Stack());
+        this.setDefausseInondation(new Stack());
+        ArrayList tuiles = this.getGrille().getTuiles();
+        for(Object tuile : tuiles){
+            CarteInondation cI = new CarteInondation((Tuile) tuile);
+            this.getPiocheInondation().add(cI);
+        }
+        Collections.shuffle(piocheInondation);
     }
     
     public void afficherJoueurs(){
@@ -71,6 +85,30 @@ public class Contrôleur implements Observateur{
         this.grille = grille;
     }
 
+    public VuePlateau getVuePlateau() {
+        return vuePlateau;
+    }
+
+    public void setVuePlateau(VuePlateau vuePlateau) {
+        this.vuePlateau = vuePlateau;
+    }
+
+    public Stack<CarteInondation> getPiocheInondation() {
+        return piocheInondation;
+    }
+
+    public void setPiocheInondation(Stack<CarteInondation> piocheInondation) {
+        this.piocheInondation = piocheInondation;
+    }
+
+    public Stack<CarteInondation> getDefausseInondation() {
+        return defausseInondation;
+    }
+
+    public void setDefausseInondation(Stack<CarteInondation> defausseInondation) {
+        this.defausseInondation = defausseInondation;
+    }
+    
     
     public void demarerPartie(){//methode avec ihm
         grille.creeTuiles();
@@ -264,7 +302,8 @@ public class Contrôleur implements Observateur{
         } else if (i==4){
             afficherJoueurs();
             tour(a);
-        }
+        } 
+        
         
         //grille.afficheGrille();
     }
@@ -314,6 +353,13 @@ public class Contrôleur implements Observateur{
             grille.afficheGrille();
         }
         //tour(a);
+    }
+    
+    private void monteeEaux(){
+        int niv = getGrille().getNiveauEaux();
+        niv=niv+1;
+        getGrille().setNiveauEaux(niv);
+        
     }
 
     
