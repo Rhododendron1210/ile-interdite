@@ -335,11 +335,11 @@ public class Contrôleur implements Observateur{
         //tour(a);
     }
     
-    private void monteeEaux(CarteTirage inon){
+    private void monteeEaux(CarteTirage carte){
         int niv = getGrille().getNiveauEaux();
         niv=niv+1;
         getGrille().setNiveauEaux(niv);
-        this.addDefausseTirage(inon);
+        this.addDefausseTirage(carte);
         Collections.shuffle(defausseInondation);
         while( !(defausseInondation.empty()) ){
             this.addPiocheInondation(defausseInondation.pop());
@@ -379,12 +379,12 @@ public class Contrôleur implements Observateur{
         }
     }
 
-    private void addDefausseTirage(CarteTirage inon) {
-        defausseTirage.add(inon);
+    private void addDefausseTirage(CarteTirage carte) {
+        defausseTirage.add(carte);
     }
 
-    private void addPiocheInondation(CarteInondation inon){
-        piocheInondation.add(inon);
+    private void addPiocheInondation(CarteInondation carte){
+        piocheInondation.add(carte);
     }
     
     private CarteTirage piocherCarteTirage(){
