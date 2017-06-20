@@ -46,6 +46,7 @@ public class Contrôleur implements Observateur{
     private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
     private Stack<CarteInondation> defausseInondation;
+    //private VueNiveau
     private boolean finJeu = false;
     
     public Contrôleur(){
