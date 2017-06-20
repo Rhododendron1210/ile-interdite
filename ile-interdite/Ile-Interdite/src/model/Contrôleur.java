@@ -260,51 +260,13 @@ public class Contrôleur implements Observateur{
                 tuile.addAventurier(a);
                 a.setPosition(tuile);
                 grille.afficheGrille();
-            }
+            }     
             
-            
-            //tour(a);
-            
+                        
         }
     }
     
-    /*public void faireAction(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Choisir un joueur :");
-        System.out.println("1.Ingénieur");
-        System.out.println("2.Navigateur");
-        System.out.println("3.Plongeur");
-        System.out.println("4.Pilote");
-        System.out.println("5.Explorateur");
-        System.out.println("6.Messager");
-        Aventurier av;
-        int i = sc.nextInt();
-        if (i==1){
-            av=joueurs.get("Ingé");
-        } else if(i==2){
-            av=joueurs.get("Nav");
-        }else if(i==3){
-            av=joueurs.get("Plong");
-        }else if(i==4){
-            av=joueurs.get("Pilote");
-        }else if(i==5){
-            av=joueurs.get("Explo");
-        }else{
-            av=joueurs.get("Mess");
-        }
-        
-        System.out.println("Choisir une action :");
-        System.out.println("1. Déplacement");
-        System.out.println("2. Assechement");
-        System.out.println("3. Arret");
-        i = sc.nextInt();
-        if (i==1){
-            deplacement(av);
-        } else if(i==2){
-            assecherTuile(av);
-        } 
-        
-    }*/
+    
     
     public void tour(Aventurier a){
         Scanner sc = new Scanner(System.in);
@@ -322,9 +284,6 @@ public class Contrôleur implements Observateur{
             afficherJoueurs();
             tour(a);
         } 
-        
-        
-        //grille.afficheGrille();
     }
     
     
@@ -381,8 +340,7 @@ public class Contrôleur implements Observateur{
         this.addDefausseTirage(inon);
         Collections.shuffle(defausseInondation);
         while( !(defausseInondation.empty()) ){
-            this.addPiocheInondation(defausseInondation.peek());
-            defausseInondation.pop();
+            this.addPiocheInondation(defausseInondation.pop());
         }
        
         
@@ -427,9 +385,12 @@ public class Contrôleur implements Observateur{
         piocheInondation.add(inon);
     }
     
+    private CarteTirage piocherCarteTirage(){
+        return piocheTirage.pop();
+    }
+    
   
     
 
-    
 }
 
