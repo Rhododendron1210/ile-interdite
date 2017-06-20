@@ -63,9 +63,10 @@ public class Contrôleur implements Observateur{
         tourDeJeu();
         this.setPiocheInondation(new Stack());
         this.setDefausseInondation(new Stack());
-        ArrayList tuiles = this.getGrille().getTuiles();
-        for(Object tuile : tuiles){
-            CarteInondation cI = new CarteInondation((Tuile) tuile);
+        ArrayList<Tuile> tuiles;
+        tuiles = this.getGrille().getTuiles();
+        for(Tuile tuile : tuiles){
+            CarteInondation cI = new CarteInondation(tuile);
             this.getPiocheInondation().push(cI);
         }
         Collections.shuffle(piocheInondation);
