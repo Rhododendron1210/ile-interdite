@@ -11,7 +11,7 @@ import util.Utils;
  *
  * @author pestree
  */
-public class CarteTirage {
+public abstract class CarteTirage {
     private String nom;
     private String description;
 
@@ -23,6 +23,16 @@ public class CarteTirage {
     public Utils.Tresor getNom() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public String getTitre() {
+        return nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    
+    
     
     
 }

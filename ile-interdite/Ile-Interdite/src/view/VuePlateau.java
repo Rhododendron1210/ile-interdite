@@ -27,6 +27,7 @@ public class VuePlateau {
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         plateauCentre(tuiles);
+        frame.setSize(1200, util.Parameters.HAUTEUR_AUTRES_VUES);
         frame.setVisible(true);
         
     }
@@ -51,7 +52,7 @@ public class VuePlateau {
         panel.add(finir);
         frame.add(panel,BorderLayout.NORTH);
         grille = new VueGrille(tuiles);
-        frame.setSize(1200, 1000);
+        
         frame.add(grille,BorderLayout.CENTER);
     }
 }
