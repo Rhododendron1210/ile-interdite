@@ -23,6 +23,7 @@ import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
 import view.VueAventurier;
+import view.VueAventurier2;
 import view.VueNiveau;
 import view.VuePlateau;
 
@@ -41,7 +42,7 @@ public class Contrôleur implements Observateur{
     
     private HashMap<String,Aventurier> joueurs;
     private Grille grille;
-    private VueAventurier vueAventurier;
+    private VueAventurier2 vueAventurier2;
     private VuePlateau vuePlateau;
     private Stack<CarteTirage> piocheTirage;
     private Stack<CarteTirage> defausseTirage;
@@ -49,10 +50,11 @@ public class Contrôleur implements Observateur{
     private Stack<CarteInondation> defausseInondation;
     private VueNiveau vueNiveau;
     private boolean finJeu = false;
+   
     
     public Contrôleur(){
         grille=new Grille();
-        //vueAventurier = new VueAventurier();
+        //vueAventurier2 = new VueAventurier2();
         joueurs= new HashMap<>();
         initialisationPartie();
         afficher();
@@ -89,25 +91,13 @@ public class Contrôleur implements Observateur{
     public Grille getGrille() {
         return grille;
     }
-
-    public VueAventurier getVueAventurier() {
-        return vueAventurier;
-    }
-
+    
     public void setJoueurs(HashMap<String, Aventurier> joueurs) {
         this.joueurs = joueurs;
     }
 
     public void setGrille(Grille grille) {
         this.grille = grille;
-    }
-
-    public VuePlateau getVuePlateau() {
-        return vuePlateau;
-    }
-
-    public void setVuePlateau(VuePlateau vuePlateau) {
-        this.vuePlateau = vuePlateau;
     }
 
     public Stack<CarteInondation> getPiocheInondation() {
@@ -194,8 +184,7 @@ public class Contrôleur implements Observateur{
             } 
         }
         //grille.getTuile(1, 3).addAventurier(a);
-        Tuile [][] tuiles = grille.getGrille();
-        vuePlateau= new VuePlateau(tuiles);
+        
         
     }
     
@@ -214,7 +203,7 @@ public class Contrôleur implements Observateur{
     
     @Override
     public void traiterMessage(Message msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
     public void deplacement(Aventurier a){

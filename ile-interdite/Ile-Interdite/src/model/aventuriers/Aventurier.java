@@ -133,4 +133,12 @@ public abstract class Aventurier extends ObjetIdentifie{
     private void addTresor(Tresor tresor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public ArrayList<CarteTirage> getPossede() {
+        return possede;
+    }
+    
+    public void addCarte(CarteTirage carte){
+        possede.add(carte);
+    }
 }
