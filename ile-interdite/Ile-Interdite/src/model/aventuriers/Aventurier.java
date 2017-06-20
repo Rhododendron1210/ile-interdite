@@ -27,6 +27,7 @@ public abstract class Aventurier extends ObjetIdentifie{
     private Tuile position;
     private ArrayList<CarteTirage> possede;
     private Color couleur;
+    private ArrayList<Tresor> tresors;
 
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
@@ -42,6 +43,7 @@ public abstract class Aventurier extends ObjetIdentifie{
         colTuilePossible = new HashSet<>();
         this.setPosition(position);
         possede= new ArrayList<>();
+        tresors=new ArrayList<>();
     }
     
     public String getRole() {
@@ -102,20 +104,9 @@ public abstract class Aventurier extends ObjetIdentifie{
         return colTuilePossible;
     }
     
-    public void recuperationTresorTuile(Tresor tresor){
-        boolean t;
-        t=recuperationTresorPossible(tresor);
-        Tuile tuile;
-        tuile= getPosition();
-        Tresor tuileTresor=tuile.getTresor();
-        if(t && tuileTresor==tresor){
-            this.addTresor(tresor);
-        }
-        
-        
-    }
+    
 
-    private boolean recuperationTresorPossible(Tresor tresor) {
+    private boolean recuperationTresorPossible(Tresor tresor) {//a refaire
         int i=0;
         for (CarteTirage carte:possede){
             if (carte.getNom()=="CarteTresor"){
@@ -140,5 +131,9 @@ public abstract class Aventurier extends ObjetIdentifie{
     
     public void addCarte(CarteTirage carte){
         possede.add(carte);
+    }
+
+    public void addTresors(Tresor tresor) {
+        tresors.add(tresor);
     }
 }

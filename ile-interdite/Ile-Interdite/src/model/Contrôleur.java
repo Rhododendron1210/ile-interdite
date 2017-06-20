@@ -23,6 +23,7 @@ import static util.Utils.Commandes.BOUGER;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
+import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
 import view.VueNiveau;
@@ -53,8 +54,10 @@ public class Contrôleur implements Observateur{
     private VueNiveau vueNiveau;
     private boolean finJeu = false;
     private Aventurier aventurierCourant;
+    private ArrayList<Tresor> tresorsTrouvees;
     
     public Contrôleur(){
+        tresorsTrouvees=new ArrayList<>();
         grille=new Grille();
         joueurs= new HashMap<>();
         initialisationPartie();
@@ -224,7 +227,8 @@ public class Contrôleur implements Observateur{
             if (msg.getIdTuile()==null){
                 HashSet<Tuile> tuiles =new HashSet<>();
                 tuiles=aventurierCourant.tuilesPossibles(this.getGrille());
-                //vuePlateau.tuilespossibles...
+                vuePlateau.selectionnerDeplacer();
+                vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
                 aventurierCourant.getPosition().supprAventurier(aventurierCourant);
                 String placement=String.valueOf(msg.getIdTuile());
@@ -424,6 +428,16 @@ public class Contrôleur implements Observateur{
             Collections.shuffle(piocheTirage);
         }
         return carte;
+    }
+    public void recuperationTresorTuile( Aventurier a,Tresor tresor){
+        a.addTresors(tresor);
+        this.addTresorsTrouvees(tresor);
+        
+        
+    }
+
+    private void addTresorsTrouvees(Tresor tresor) {
+        tresorsTrouvees.add(tresor);
     }
     
   
