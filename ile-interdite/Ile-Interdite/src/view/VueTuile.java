@@ -9,13 +9,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import model.Tuile;
+import static util.Utils.EtatTuile.ASSECHEE;
+import static util.Utils.EtatTuile.INONDEE;
 
 public class VueTuile extends JPanel {
     
     VueTuile(Tuile tuile){
         JLabel label = new JLabel(tuile.getNom());
         this.add(label);
-        Border blackline = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackline);
+        if (tuile.getEtatTuile()==ASSECHEE){
+            this.setBackground(Color.orange);
+        } else if (tuile.getEtatTuile()==INONDEE){
+            this.setBackground(Color.BLUE);
+        } else {
+            this.setBackground(Color.gray);
+        }
     }  
 }

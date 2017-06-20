@@ -16,7 +16,7 @@ public class VuePlateau extends Observable {
         frame= new JFrame();
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         grille = new VueGrille(tuiles);
-        frame.setSize(1000, 1000);
+        frame.setSize(1500, 1200);
         frame.add(grille);
         frame.setVisible(true);
     }
