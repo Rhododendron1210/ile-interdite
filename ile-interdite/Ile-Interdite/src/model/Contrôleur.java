@@ -211,7 +211,9 @@ public class Contrôleur implements Observateur{
             }
             CarteTirage carte =this.piocherCarteTirage();
             if(carte.getNom()=="CarteMonteeDesEaux"){
-                
+                monteeEaux(carte);
+            }else{
+                joueurs.get(e).addCarte(carte);
             }
         }
     }
