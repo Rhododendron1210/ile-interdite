@@ -48,5 +48,5 @@ public class VueInscription extends Observable {
         
         //affichage de la fenêtre
         window.setVisible(true);
-    }
+   }
 }
