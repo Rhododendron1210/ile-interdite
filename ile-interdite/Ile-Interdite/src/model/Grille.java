@@ -150,10 +150,10 @@ public class Grille {
             System.out.println("__________________________________________________________________________________________________________________________________________________________________________________________");
 
             for (i = 0; i <= 5; i++) {
-                if (grille[w][i].getNomTuile() == null) {
+                if (grille[w][i].getNom() == null) {
                     System.out.print("|                              ");
                 } else {
-                    System.out.print("|   " + grille[w][i].getNomTuile() + "   ");
+                    System.out.print("|   " + grille[w][i].getNom() + "   ");
                 }
 
             }

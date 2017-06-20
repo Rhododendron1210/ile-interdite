@@ -16,6 +16,7 @@ import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import util.Message;
 import view.VueAventurier;
+import view.VuePlateau;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,11 +34,13 @@ public class Contrôleur implements Observateur{
     private HashMap<String,Aventurier> joueurs;
     private Grille grille;
     private VueAventurier vueAventurier;
+    private VuePlateau vuePlateau;
     public Contrôleur(){
         grille=new Grille();
-        VueAventurier vue;
+        //vueAventurier = new VueAventurier();
         joueurs= new HashMap<>();
-        initialisationPartie();
+        demarerPartie();
+        //initialisationPartie();
         grille.afficheGrille();
         tourDeJeu();
     }
@@ -69,9 +72,14 @@ public class Contrôleur implements Observateur{
     }
 
     
+    public void demarerPartie(){//methode avec ihm
+        grille.creeTuiles();
+        Tuile [][] tuiles = grille.getGrille();
+        vuePlateau= new VuePlateau(tuiles);
+        
+    }
     
-    
-    public void initialisationPartie(){
+    public void initialisationPartie(){//Methode sans ihm
         
         grille.creeTuiles();
         Aventurier a;
