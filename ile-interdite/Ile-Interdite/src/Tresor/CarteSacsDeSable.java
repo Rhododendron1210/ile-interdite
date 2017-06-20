@@ -11,7 +11,7 @@ package Tresor;
  */
 public class CarteSacsDeSable extends CarteTirage {
     
-    public CarteSacsDeSable(String nom, String description) {
-        super(nom,description);
+    public CarteSacsDeSable() {
+        super("CarteSacDeSable","description a metre");
     }
 }

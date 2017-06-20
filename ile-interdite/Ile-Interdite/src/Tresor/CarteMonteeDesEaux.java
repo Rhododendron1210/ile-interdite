@@ -11,7 +11,7 @@ package Tresor;
  */
 public class CarteMonteeDesEaux extends CarteTirage{
     
-    public CarteMonteeDesEaux(String nom, String description) {
-        super(nom,description);
+    public CarteMonteeDesEaux() {
+        super("CarteMonteeDesEaux","description a metre");
     }
 }
