@@ -429,6 +429,16 @@ public class Contrôleur implements Observateur{
         }
         return carte;
     }
+    public void recuperationTresorTuile( Aventurier a,Tresor tresor){
+        a.addTresors(tresor);
+        this.addTresorsTrouvees(tresor);
+        
+        
+    }
+
+    private void addTresorsTrouvees(Tresor tresor) {
+        tresorsTrouvees.add(tresor);
+    }
     
   
     
