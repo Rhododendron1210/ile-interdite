@@ -5,6 +5,7 @@
  */
 package model.aventuriers;
 
+import java.awt.Color;
 import model.Tuile;
 
 /**
@@ -15,6 +16,7 @@ public class Messager extends Aventurier{
     
     public Messager(String nom, String role,Tuile position) {
         super(nom, role,position);
+        super.setCouleur(Color.white);
     }
     
 }
