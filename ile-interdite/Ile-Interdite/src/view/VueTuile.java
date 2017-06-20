@@ -15,6 +15,7 @@ import static util.Utils.EtatTuile.INONDEE;
 public class VueTuile extends JButton{
     
     private Color couleur;
+    
     VueTuile(Tuile tuile){
         JPanel panel = new JPanel(new GridLayout(4,1));
         JLabel label = new JLabel(tuile.getNom());
@@ -45,6 +46,14 @@ public class VueTuile extends JButton{
         
         this.add(panel, BorderLayout.CENTER);
     }  
+
+    public Color getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(Color couleur) {
+        this.couleur = couleur;
+    }
 
     
 }

@@ -1,9 +1,13 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Observable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -66,5 +70,13 @@ public class VuePlateau {
         grille = new VueGrille(tuiles);
         
         frame.add(grille,BorderLayout.CENTER);
+    }
+    
+    public void afficherTuilesPossibles(HashSet<Tuile> tuiles){
+        for(Tuile tuile: tuiles){
+            int i = tuile.getLigne();
+            int j = tuile.getColonne();
+            this.grille.getAffichTuile()[i][j].setCouleur(Color.RED);
+        }
     }
 }
