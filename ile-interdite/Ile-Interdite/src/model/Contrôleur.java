@@ -302,7 +302,8 @@ public class Contrôleur implements Observateur{
         } else if (i==4){
             afficherJoueurs();
             tour(a);
-        }
+        } 
+        
         
         //grille.afficheGrille();
     }
@@ -352,6 +353,13 @@ public class Contrôleur implements Observateur{
             grille.afficheGrille();
         }
         //tour(a);
+    }
+    
+    private void monteeEaux(){
+        int niv = getGrille().getNiveauEaux();
+        niv=niv+1;
+        getGrille().setNiveauEaux(niv);
+        
     }
 
     
