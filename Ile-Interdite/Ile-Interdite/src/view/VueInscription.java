@@ -10,7 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.border.TitledBorder;
+import util.Message;
+import util.Observateur;
+import static util.Utils.Commandes.VALIDER_JOUEURS;
 
 /**
  *
@@ -18,12 +20,14 @@ import javax.swing.border.TitledBorder;
  */
 public class VueInscription extends Observable {
     
-    private String nbJoueurs;
-    private String difficulte;
+    private int nbJoueurs;
+    private int difficulte;
+    private Observateur observateur;
+    private JFrame window;
     
     public VueInscription(){
         
-        JFrame window = new JFrame("Inscription");
+        window = new JFrame("Inscription");
         window.setSize(900,600);
         
         JPanel panel = new JPanel(new GridLayout(3,1));
@@ -43,7 +47,7 @@ public class VueInscription extends Observable {
                 
         panel.add(panelSelectionNbJoueur);
         
-        //Partie selection difficulé
+        //Partie selection difficulté
         JPanel panelSelectionDifficulte = new JPanel(new GridLayout(1,4));
         
         JRadioButton boutNovice = new JRadioButton("Novice");
@@ -79,27 +83,28 @@ public class VueInscription extends Observable {
         
         //Récupération des données
         if (bout2.isSelected()) {
-            nbJoueurs = "2";
+            nbJoueurs = 2;
         } else if (bout3.isSelected()) {
-            nbJoueurs = "3";
+            nbJoueurs = 3;
         } else if (bout4.isSelected()) {
-            nbJoueurs = "4";
+            nbJoueurs = 4;
         }
         
         if (boutNovice.isSelected()) {
-            difficulte = "novice";
+            difficulte = 1;
         } else if (boutNormal.isSelected()) {
-            difficulte = "normal";
+            difficulte = 2;
         } else if (boutElite.isSelected()) {
-            difficulte = "élite";
+            difficulte = 3;
         } else if (boutLegendaire.isSelected()) {
-            difficulte = "légendaire";
+            difficulte = 4;
         }
         
         boutJouer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                Message m = new Message(VALIDER_JOUEURS, null, null, null,  null);
+                observateur.traiterMessage(m);
             }
         });
         
@@ -113,12 +118,32 @@ public class VueInscription extends Observable {
         boutQuitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               /* if(e.getSource() == boutQuitter){
-                    window.setVisible(false);
-                    window.dispose();
-                }*/
+                if(e.getSource() == boutQuitter){
+                    getWindow().setVisible(false);
+                    getWindow().dispose();
+                }
             }
         });
         
-   }
+    }
+
+    public int getNbJoueurs() {
+        return nbJoueurs;
+    }
+
+    public int getDifficulte() {
+        return difficulte;
+    }
+    
+    public void setObservateur(Observateur observateur){
+        this.observateur = observateur;
+    }
+
+    public JFrame getWindow() {
+        return window;
+    }
+
+    public void setWindow(JFrame window) {
+        this.window = window;
+    } 
 }
