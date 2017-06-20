@@ -209,6 +209,10 @@ public class Contrôleur implements Observateur{
                 this.tour(joueurs.get(e));
                 i=i+1;
             }
+            CarteTirage carte =this.piocherCarteTirage();
+            if(carte.getNom()=="CarteMonteeDesEaux"){
+                
+            }
         }
     }
     
