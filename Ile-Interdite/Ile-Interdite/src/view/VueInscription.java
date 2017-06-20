@@ -2,6 +2,8 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,6 +17,9 @@ import javax.swing.border.TitledBorder;
  * @author IUT2-Dept Info
  */
 public class VueInscription extends Observable {
+    
+    private String nbJoueurs;
+    private String difficulte;
     
     public VueInscription(){
         
@@ -67,8 +72,53 @@ public class VueInscription extends Observable {
         panelBoutons.add(boutQuitter);
         
         panel.add(panelBoutons);
+        
         //affichage de la fenêtre
         window.add(panel);
         window.setVisible(true);
+        
+        //Récupération des données
+        if (bout2.isSelected()) {
+            nbJoueurs = "2";
+        } else if (bout3.isSelected()) {
+            nbJoueurs = "3";
+        } else if (bout4.isSelected()) {
+            nbJoueurs = "4";
+        }
+        
+        if (boutNovice.isSelected()) {
+            difficulte = "novice";
+        } else if (boutNormal.isSelected()) {
+            difficulte = "normal";
+        } else if (boutElite.isSelected()) {
+            difficulte = "élite";
+        } else if (boutLegendaire.isSelected()) {
+            difficulte = "légendaire";
+        }
+        
+        boutJouer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        
+        boutRegles.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        
+        boutQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               /* if(e.getSource() == boutQuitter){
+                    window.setVisible(false);
+                    window.dispose();
+                }*/
+            }
+        });
+        
    }
 }
