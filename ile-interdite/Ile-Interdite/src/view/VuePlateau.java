@@ -40,7 +40,7 @@ public class VuePlateau {
         
     }
     
-    private void plateauDroit(){
+    /*private void plateauDroit(){
         JPanel droite = new JPanel(new BorderLayout());
         JPanel cartes = new JPanel(new GridLayout(1,2));
         JButton tirage = new JButton("Pioche carte pouvoir");
@@ -49,7 +49,7 @@ public class VuePlateau {
         cartes.add(innon);
         droite.add(cartes,BorderLayout.NORTH);
         
-    }
+    }*/
     private void plateauCentre(Tuile[][] tuiles){
         JPanel panel = new JPanel(new GridLayout(1,3));
         deplacer=new JButton("Déplacer");
@@ -77,6 +77,14 @@ public class VuePlateau {
             int i = tuile.getLigne();
             int j = tuile.getColonne();
             this.grille.getAffichTuile()[i][j].setCouleur(Color.RED);
+            
         }
+        this.grille.repaint();
     }
+
+    public void setObservateur(Observateur observateur) {
+        this.observateur = observateur;
+    }
+    
+    
 }

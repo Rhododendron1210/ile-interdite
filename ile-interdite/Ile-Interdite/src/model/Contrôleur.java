@@ -45,6 +45,7 @@ public class Contrôleur implements Observateur{
     private Grille grille;
     private VueAventurier2 vueAventurier2;
     private VuePlateau vuePlateau;
+    
     private Stack<CarteTirage> piocheTirage;
     private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
@@ -55,7 +56,6 @@ public class Contrôleur implements Observateur{
     
     public Contrôleur(){
         grille=new Grille();
-        //vueAventurier2 = new VueAventurier2();
         joueurs= new HashMap<>();
         initialisationPartie();
         afficher();
@@ -84,6 +84,7 @@ public class Contrôleur implements Observateur{
     public void afficher(){
         Tuile [][] tuiles = grille.getGrille();
         vuePlateau= new VuePlateau(tuiles);
+        vuePlateau.setObservateur(this);
         vueNiveau=new VueNiveau(1);
     }
 
@@ -129,7 +130,7 @@ public class Contrôleur implements Observateur{
     
     
     
-    public void initialisationPartie(){//Methode sans ihm
+    public void initialisationPartie(){
         
         grille.creeTuiles();
         Aventurier a;
