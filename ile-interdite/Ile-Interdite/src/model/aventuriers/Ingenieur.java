@@ -5,7 +5,6 @@
  */
 package model.aventuriers;
 
-import java.awt.Color;
 import model.Tuile;
 
 /**
@@ -16,7 +15,6 @@ public class Ingenieur extends Aventurier{
     
     public Ingenieur(String nom, String role,Tuile position) {
         super(nom, role,position);
-        super.setCouleur(Color.red);
     }
     
 }

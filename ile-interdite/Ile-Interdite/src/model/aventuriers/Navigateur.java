@@ -5,7 +5,6 @@
  */
 package model.aventuriers;
 
-import java.awt.Color;
 import model.Tuile;
 
 /**
@@ -16,7 +15,6 @@ public class Navigateur extends Aventurier{
     
     public Navigateur(String nom, String role,Tuile position) {
         super(nom, role,position);
-        super.setCouleur(Color.yellow);
     }
     
 }

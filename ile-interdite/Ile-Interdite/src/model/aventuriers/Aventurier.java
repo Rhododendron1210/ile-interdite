@@ -31,10 +31,6 @@ public abstract class Aventurier extends ObjetIdentifie{
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
-
-    public Color getCouleur() {
-        return couleur;
-    }
     
     Aventurier(String nom, String role,Tuile position){
         this.nom=nom;

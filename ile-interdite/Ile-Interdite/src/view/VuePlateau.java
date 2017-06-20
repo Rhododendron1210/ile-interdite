@@ -21,4 +21,8 @@ public class VuePlateau {
         frame.add(grille);
         frame.setVisible(true);
     }
+    
+    
+    
+    
 }

@@ -5,7 +5,6 @@
  */
 package model.aventuriers;
 
-import java.awt.Color;
 import model.Grille;
 import model.Tuile;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ public class Pilote extends Aventurier{
     
     public Pilote(String nom, String role,Tuile position) {
         super(nom, role,position);
-        super.setCouleur(Color.blue);
     }
     
     @Override
