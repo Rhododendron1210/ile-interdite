@@ -21,7 +21,7 @@ public class Explorateur extends Aventurier{
     
     public Explorateur(String nom, String role,Tuile position) {
         super(nom, role,position);
-        //super.setCouleur(Color.);
+        super.setCouleur(Color.green);
     }
     
     @Override

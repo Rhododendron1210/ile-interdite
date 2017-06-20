@@ -48,8 +48,8 @@ public class Contrôleur implements Observateur{
         grille=new Grille();
         //vueAventurier = new VueAventurier();
         joueurs= new HashMap<>();
-        demarerPartie();
-        //initialisationPartie();
+        //demarerPartie();
+        initialisationPartie();
         grille.afficheGrille();
         tourDeJeu();
         this.setPiocheInondation(new Stack());
@@ -181,6 +181,8 @@ public class Contrôleur implements Observateur{
             } 
         }
         //grille.getTuile(1, 3).addAventurier(a);
+        Tuile [][] tuiles = grille.getGrille();
+        vuePlateau= new VuePlateau(tuiles);
         
     }
     

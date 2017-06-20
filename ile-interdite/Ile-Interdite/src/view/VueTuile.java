@@ -14,25 +14,35 @@ import static util.Utils.EtatTuile.INONDEE;
 
 public class VueTuile extends JButton{
     
+    private Color couleur;
     VueTuile(Tuile tuile){
+        JPanel panel = new JPanel(new GridLayout(4,1));
         JLabel label = new JLabel(tuile.getNom());
         this.setLayout(new BorderLayout());
         this.add(label,BorderLayout.NORTH);
         if (tuile.getEtatTuile()==ASSECHEE){
-            this.setBackground(Color.orange);
+            couleur = Color.orange;
         } else if (tuile.getEtatTuile()==INONDEE){
-            this.setBackground(Color.BLUE);
+            couleur = Color.BLUE;
+            
         } else {
-            this.setBackground(Color.gray);
+            couleur =Color.gray;
             this.setEnabled(false);
         }
-        JPanel panel = new JPanel(new GridLayout(1,4));
+        panel.setBackground(couleur);
+        this.setBackground(couleur);
         HashMap<String,Aventurier> aventuriers = tuile.getAventurierPresent();
         for (Aventurier ave: aventuriers.values()){
+            JPanel joueur = new JPanel();
             if (ave!=null){
+                joueur.setBackground(ave.getCouleur());
                 
+            } else {
+                joueur.setBackground(couleur);
             }
+            panel.add(joueur);
         }
+        
         this.add(panel, BorderLayout.CENTER);
     }  
 
