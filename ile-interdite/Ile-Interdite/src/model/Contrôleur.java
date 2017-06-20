@@ -382,12 +382,21 @@ public class Contrôleur implements Observateur{
         defausseTirage.add(inon);
     }
 
-    private void addPiocheInondation(CarteInondation inon) {
+    private void addPiocheInondation(CarteInondation inon){
         piocheInondation.add(inon);
     }
     
     private CarteTirage piocherCarteTirage(){
-        return piocheTirage.pop();
+        //pioche une carte et la retourne
+        //mélange et remet les carte dans la pioche si la pioche est vide
+        CarteTirage carte=piocheTirage.pop();
+        if (piocheTirage.empty()){
+            while(!defausseTirage.empty()){
+               piocheTirage.add(defausseTirage.pop());
+            }
+            Collections.shuffle(piocheTirage);
+        }
+        return carte;
     }
     
   
