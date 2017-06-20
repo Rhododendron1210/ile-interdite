@@ -1,6 +1,7 @@
 package model;
 
 import Tresor.CarteInondation;
+import Tresor.CarteTirage;
 import util.Observateur;
 import static java.awt.Color.black;
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class Contrôleur implements Observateur{
     private Grille grille;
     private VueAventurier vueAventurier;
     private VuePlateau vuePlateau;
+    private Stack<CarteTirage> piocheTirage;
+    private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
     private Stack<CarteInondation> defausseInondation;
     
@@ -57,6 +60,9 @@ public class Contrôleur implements Observateur{
             this.getPiocheInondation().add(cI);
         }
         Collections.shuffle(piocheInondation);
+        defausseTirage=new Stack<>();
+        
+        piocheTirage=new Stack<>();//ligne a refaire
     }
     
     public void afficherJoueurs(){
@@ -355,12 +361,30 @@ public class Contrôleur implements Observateur{
         //tour(a);
     }
     
-    private void monteeEaux(){
+    private void monteeEaux(CarteTirage inon){
         int niv = getGrille().getNiveauEaux();
         niv=niv+1;
         getGrille().setNiveauEaux(niv);
+        this.addDefausseTirage(inon);
+        Collections.shuffle(defausseInondation);
+        while( !(defausseInondation.empty()) ){
+            this.addPiocheInondation(defausseInondation.peek());
+            defausseInondation.pop();
+        }
+       
         
     }
+
+    private void addDefausseTirage(CarteTirage inon) {
+        defausseTirage.add(inon);
+    }
+
+    private void addPiocheInondation(CarteInondation inon) {
+        piocheInondation.add(inon);
+    }
+    
+  
+    
 
     
 }
