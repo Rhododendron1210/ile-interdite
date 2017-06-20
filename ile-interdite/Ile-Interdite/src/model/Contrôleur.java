@@ -18,6 +18,9 @@ import model.aventuriers.Navigateur;
 import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import util.Message;
+import util.Utils.EtatTuile;
+import static util.Utils.EtatTuile.ASSECHEE;
+import static util.Utils.EtatTuile.INONDEE;
 import view.VueAventurier;
 import view.VuePlateau;
 
@@ -40,6 +43,7 @@ public class Contrôleur implements Observateur{
     private VuePlateau vuePlateau;
     private Stack<CarteInondation> piocheInondation;
     private Stack<CarteInondation> defausseInondation;
+    private boolean finJeu = false;
     
     public Contrôleur(){
         grille=new Grille();
@@ -54,7 +58,7 @@ public class Contrôleur implements Observateur{
         ArrayList tuiles = this.getGrille().getTuiles();
         for(Object tuile : tuiles){
             CarteInondation cI = new CarteInondation((Tuile) tuile);
-            this.getPiocheInondation().add(cI);
+            this.getPiocheInondation().push(cI);
         }
         Collections.shuffle(piocheInondation);
     }
@@ -108,7 +112,14 @@ public class Contrôleur implements Observateur{
     public void setDefausseInondation(Stack<CarteInondation> defausseInondation) {
         this.defausseInondation = defausseInondation;
     }
-    
+
+    public boolean isFinJeu() {
+        return finJeu;
+    }
+
+    public void setFinJeu(boolean finJeu) {
+        this.finJeu = finJeu;
+    }
     
     public void demarerPartie(){//methode avec ihm
         grille.creeTuiles();
@@ -355,13 +366,43 @@ public class Contrôleur implements Observateur{
         //tour(a);
     }
     
-    private void monteeEaux(){
+    /*private void monteeEaux(){
         int niv = getGrille().getNiveauEaux();
         niv=niv+1;
         getGrille().setNiveauEaux(niv);
         
+    }*/
+    
+    public void tirerCarteInondation(){
+        CarteInondation cI = this.getPiocheInondation().pop();
+        Tuile t = cI.getTuile();
+        this.getDefausseInondation().push(cI);
+        EtatTuile etat = t.getEtatTuile();
+        if(etat == ASSECHEE){
+            t.setInondée();
+        }
+        else if(etat == INONDEE){
+            int ligne = t.getLigne();
+            int colonne = t.getColonne();
+            Grille g = this.getGrille();
+            ArrayList tuilesAdjacentes = g.getTuilesAdjacentes(ligne, colonne);
+            if(!(t.getAventurierPresent().isEmpty())){            
+                if(tuilesAdjacentes.isEmpty()){
+                    this.setFinJeu(true);
+                }
+                else{
+                        Aventurier a = null;
+                        for(String key : t.getAventurierPresent().keySet()){
+                            a = t.getAventurierPresent().get(key);
+                        }
+                        this.deplacement(a);                
+                }
+            }
+        }
+        else{
+            System.out.println("La tuile est déjà coulée");
+        }
     }
-
     
 }
 
