@@ -23,6 +23,7 @@ import static util.Utils.Commandes.BOUGER;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
+import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
 import view.VueNiveau;
@@ -53,8 +54,10 @@ public class Contrôleur implements Observateur{
     private VueNiveau vueNiveau;
     private boolean finJeu = false;
     private Aventurier aventurierCourant;
+    private ArrayList<Tresor> tresorsTrouvees;
     
     public Contrôleur(){
+        tresorsTrouvees=new ArrayList<>();
         grille=new Grille();
         joueurs= new HashMap<>();
         initialisationPartie();
