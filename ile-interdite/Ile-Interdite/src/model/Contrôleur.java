@@ -1,6 +1,7 @@
 package model;
 
 import Tresor.CarteInondation;
+import Tresor.CarteTirage;
 import util.Observateur;
 import static java.awt.Color.black;
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class Contrôleur implements Observateur{
     private Grille grille;
     private VueAventurier vueAventurier;
     private VuePlateau vuePlateau;
+    private Stack<CarteTirage> piocheTirage;
+    private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
     private Stack<CarteInondation> defausseInondation;
     private boolean finJeu = false;
@@ -49,8 +52,8 @@ public class Contrôleur implements Observateur{
         grille=new Grille();
         //vueAventurier = new VueAventurier();
         joueurs= new HashMap<>();
-        demarerPartie();
-        //initialisationPartie();
+        //demarerPartie();
+        initialisationPartie();
         grille.afficheGrille();
         tourDeJeu();
         this.setPiocheInondation(new Stack());
@@ -61,6 +64,9 @@ public class Contrôleur implements Observateur{
             this.getPiocheInondation().push(cI);
         }
         Collections.shuffle(piocheInondation);
+        defausseTirage=new Stack<>();
+        
+        piocheTirage=new Stack<>();//ligne a refaire
     }
     
     public void afficherJoueurs(){
@@ -186,6 +192,8 @@ public class Contrôleur implements Observateur{
             } 
         }
         //grille.getTuile(1, 3).addAventurier(a);
+        Tuile [][] tuiles = grille.getGrille();
+        vuePlateau= new VuePlateau(tuiles);
         
     }
     
@@ -366,12 +374,19 @@ public class Contrôleur implements Observateur{
         //tour(a);
     }
     
-    /*private void monteeEaux(){
+    private void monteeEaux(CarteTirage inon){
         int niv = getGrille().getNiveauEaux();
         niv=niv+1;
         getGrille().setNiveauEaux(niv);
+        this.addDefausseTirage(inon);
+        Collections.shuffle(defausseInondation);
+        while( !(defausseInondation.empty()) ){
+            this.addPiocheInondation(defausseInondation.peek());
+            defausseInondation.pop();
+        }
+       
         
-    }*/
+    }
     
     public void tirerCarteInondation(){
         CarteInondation cI = this.getPiocheInondation().pop();
@@ -403,6 +418,18 @@ public class Contrôleur implements Observateur{
             System.out.println("La tuile est déjà coulée");
         }
     }
+
+    private void addDefausseTirage(CarteTirage inon) {
+        defausseTirage.add(inon);
+    }
+
+    private void addPiocheInondation(CarteInondation inon) {
+        piocheInondation.add(inon);
+    }
+    
+  
+    
+
     
 }
 

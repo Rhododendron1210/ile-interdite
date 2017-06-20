@@ -7,6 +7,7 @@ package model.aventuriers;
 
 import Tresor.CarteTirage;
 import Tresor.CarteTresor;
+import java.awt.Color;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,6 +26,15 @@ public abstract class Aventurier extends ObjetIdentifie{
     private HashSet<Tuile> colTuilePossible;
     private Tuile position;
     private ArrayList<CarteTirage> possede;
+    private Color couleur;
+
+    public void setCouleur(Color couleur) {
+        this.couleur = couleur;
+    }
+
+    public Color getCouleur() {
+        return couleur;
+    }
     
     Aventurier(String nom, String role,Tuile position){
         this.nom=nom;

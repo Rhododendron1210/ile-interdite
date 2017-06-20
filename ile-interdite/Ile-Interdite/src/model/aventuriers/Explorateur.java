@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package model.aventuriers;
+import java.awt.Color;
 import model.Tuile;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Explorateur extends Aventurier{
     
     public Explorateur(String nom, String role,Tuile position) {
         super(nom, role,position);
+        super.setCouleur(Color.green);
     }
     
     @Override
