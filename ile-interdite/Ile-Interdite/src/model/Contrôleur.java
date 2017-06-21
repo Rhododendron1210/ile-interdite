@@ -395,6 +395,9 @@ public class Contrôleur implements Observateur{
         else if(msg.getCommande() == TERMINER){
             this.actionEffectuer = 2;
             this.changerJoueur();
+            vuePlateau.dispose();
+            vuePlateau=new VuePlateau(grille.getGrille());
+            vuePlateau.setObservateur(this);
         }
     }
     
@@ -408,6 +411,7 @@ public class Contrôleur implements Observateur{
     public void assechement(Tuile tuile) {
         tuile.setAssechee();
         changerJoueur();
+        
         //Tuile[][] tuiles = grille.getGrille();
         //vuePlateau.update();
     }
