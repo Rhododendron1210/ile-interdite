@@ -10,7 +10,7 @@ import model.Tuile;
 import util.Message;
 import util.Observateur;
  
-public class VueGrille extends JPanel implements Observateur{
+public class VueGrille extends JPanel{
     private Tuile[][] tuiles;
     private VueTuile[][] affichTuile;
     private Observateur observateur;
@@ -37,7 +37,7 @@ public class VueGrille extends JPanel implements Observateur{
     private void creeGrille(){
         for(VueTuile[] t : affichTuile){
             for (VueTuile tuile : t){
-                tuile.setObservateur(this);
+                
                 this.add(tuile);
             }
         }
@@ -47,13 +47,7 @@ public class VueGrille extends JPanel implements Observateur{
         return affichTuile;
     }
 
-    public void setObservateur(Observateur observateur) {
-        this.observateur = observateur;
-    }
     
     
-    @Override
-    public void traiterMessage(Message msg) {
-        observateur.traiterMessage(msg);
-    }
+   
 }

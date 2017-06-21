@@ -16,9 +16,13 @@ import static util.Utils.EtatTuile.INONDEE;
 public class VueTuile extends JButton{
     
     private Color couleur;
-    private Observateur observateur;
+    private int colonne;
+    private int ligne;
+    
     
     VueTuile(Tuile tuile){
+        ligne= tuile.getLigne();
+        colonne=tuile.getColonne();
         JPanel panel = new JPanel(new GridLayout(4,1));
         JLabel label = new JLabel(tuile.getNom());
         this.setLayout(new BorderLayout());
@@ -48,6 +52,14 @@ public class VueTuile extends JButton{
         this.add(panel, BorderLayout.CENTER);
     }  
 
+    public int getColonne() {
+        return colonne;
+    }
+
+    public int getLigne() {
+        return ligne;
+    }
+
     public Color getCouleur() {
         return couleur;
     }
@@ -59,9 +71,7 @@ public class VueTuile extends JButton{
         System.out.println("couleur");
     }
 
-    public void setObservateur(Observateur observateur) {
-        this.observateur = observateur;
-    }
+    
     
     
 }

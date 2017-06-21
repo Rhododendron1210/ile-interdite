@@ -22,9 +22,9 @@ import static util.Utils.Commandes.BOUGER;
  *
  * @author IUT2-Dept Info
  */
-public class VuePlateau extends JFrame implements Observateur{
+public class VuePlateau extends JFrame {
     private VueGrille grille;
-    //private JFrame frame;
+    
     private Observateur observateur;
     private JButton deplacer;
     private JButton assecher;
@@ -68,7 +68,17 @@ public class VuePlateau extends JFrame implements Observateur{
         });
         
         for (VueTuile[] vues : grille.getAffichTuile()){
-            for (VueTuile vue)
+            for (VueTuile vue: vues){
+                vue.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String id = String.valueOf(vue.getLigne())+String.valueOf(vue.getColonne());
+                        Message m = new Message(BOUGER,null,null,null,Integer.valueOf(id));
+                        observateur.traiterMessage(m);
+                    }
+                    
+                });
+            }
         }
         
         
@@ -102,9 +112,6 @@ public class VuePlateau extends JFrame implements Observateur{
         this.repaint();
     }
 
-    @Override
-    public void traiterMessage(Message msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
 }
