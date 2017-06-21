@@ -24,12 +24,14 @@ import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import util.Message;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.VALIDER_JOUEURS;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
+import view.VueInscription;
 import view.VueNiveau;
 import view.VuePlateau;
 
@@ -59,8 +61,12 @@ public class Contrôleur implements Observateur{
     private boolean finJeu = false;
     private Aventurier aventurierCourant;
     private ArrayList<Tresor> tresorsTrouvees;
+    private VueInscription vueInscription;
+    private int nbJoueurs;
+    private int difficulte;
     
     public Contrôleur(){
+        vueInscription = new VueInscription();
         tresorsTrouvees=new ArrayList<>();
         grille=new Grille();
         joueurs= new HashMap<>();
@@ -68,12 +74,6 @@ public class Contrôleur implements Observateur{
         this.setDefausseInondation(new Stack());
         defausseTirage=new Stack<>();
         piocheTirage=new Stack<>();
-        initialisationPartie();
-        grille.afficheGrille();
-        //tourDeJeu();
-        afficher();
-        lancerJeu();
-        
     }
     
     public void afficherJoueurs(){
@@ -287,9 +287,15 @@ public class Contrôleur implements Observateur{
                 vuePlateau.deselectionner();
                 
             }
-            
-            
         } 
+        if (msg.getCommande() == VALIDER_JOUEURS){
+            vueInscription.getWindow().dispose();
+            initialisationPartie();
+            grille.afficheGrille();
+            //tourDeJeu();
+            afficher();
+            lancerJeu();
+        }
     }
     
     /*public void deplacement(Aventurier a){
