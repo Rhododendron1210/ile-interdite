@@ -1,7 +1,9 @@
 package model;
 
 import Tresor.CarteInondation;
+import Tresor.CarteMonteeDesEaux;
 import Tresor.CarteTirage;
+import Tresor.CarteTresor;
 import util.Observateur;
 import static java.awt.Color.black;
 import java.util.ArrayList;
@@ -191,7 +193,28 @@ public class Contrôleur implements Observateur{
             } 
         }
         //grille.getTuile(1, 3).addAventurier(a);
-        
+        CarteTirage carte ;
+        carte=new CarteMonteeDesEaux();
+        piocheTirage.add(carte);
+        carte=new CarteMonteeDesEaux();
+        piocheTirage.add(carte);
+        int i;
+        for (i=0 ;i<6 ;i++){
+            carte=new CarteTresor("Zephir","pas description");
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<6 ;i++){
+            carte=new CarteTresor("PIERRE","pas description");
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<6 ;i++){
+            carte=new CarteTresor("CRISTAL","pas description");
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<6 ;i++){
+            carte=new CarteTresor("CALICE","pas description");
+            piocheTirage.add(carte);
+        }
         
     }
     public void lancerJeu(){
