@@ -351,11 +351,7 @@ public class Contrôleur implements Observateur{
             difficulte= msg.getDifficulte();
             initialisationPartie(nbJoueurs);
             afficher();
-            try {
-                tourDeJeu();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Contrôleur.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             lancerJeu();
         }
     }
