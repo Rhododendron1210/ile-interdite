@@ -73,6 +73,7 @@ public class Contrôleur implements Observateur{
         defausseTirage=new Stack<>();
         piocheTirage=new Stack<>();
         vueInscription = new VueInscription();
+        vueInscription.setObservateur(this);
         
         
     }
@@ -86,7 +87,8 @@ public class Contrôleur implements Observateur{
         Tuile [][] tuiles = grille.getGrille();
         vuePlateau= new VuePlateau(tuiles);
         vuePlateau.setObservateur(this);
-        vueNiveau=new VueNiveau(1);
+        
+        vueNiveau=new VueNiveau(difficulte);
     }
 
     public HashMap<String, Aventurier> getJoueurs() {
@@ -145,6 +147,7 @@ public class Contrôleur implements Observateur{
                 a = new Explorateur("explorateur              ","Explorateur",t);
                 joueurs.put("explorateur", a);
                 t.aventurierPresent.put(a.getNom(),a);
+                aventurierCourant=a;
             } 
         }
         
@@ -208,29 +211,30 @@ public class Contrôleur implements Observateur{
         int i;
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("Zephir","pas description");
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("PIERRE","pas description");
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("CRISTAL","pas description");
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("CALICE","pas description");
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<3 ;i++){
             carte=new CarteSacsDeSable();
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<4 ;i++){
             carte=new CarteHelicoptere();
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         
+        Collections.shuffle(piocheTirage);
         
         
         ArrayList<Tuile> tuiles;
@@ -315,7 +319,12 @@ public class Contrôleur implements Observateur{
                 
             }
         } else if(msg.getCommande()==VALIDER_JOUEURS) {
+            vueInscription.getWindow().dispose();
             nbJoueurs=msg.getNbJoueurs();
+            difficulte= msg.getDifficulte();
+            initialisationPartie();
+            afficher();
+            lancerJeu();
         }
     }
     
