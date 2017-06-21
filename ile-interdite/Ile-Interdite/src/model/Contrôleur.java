@@ -66,18 +66,9 @@ public class Contrôleur implements Observateur{
         joueurs= new HashMap<>();
         this.setPiocheInondation(new Stack());
         this.setDefausseInondation(new Stack());
-        ArrayList<Tuile> tuiles;
-        tuiles = this.getGrille().getTuiles();
-        for(Tuile tuile : tuiles){
-            CarteInondation cI = new CarteInondation(tuile);
-            this.getPiocheInondation().push(cI);
-        }
-        Collections.shuffle(piocheInondation);
         defausseTirage=new Stack<>();
-        
-        piocheTirage=new Stack<>();//ligne a refaire
+        piocheTirage=new Stack<>();
         initialisationPartie();
-        
         grille.afficheGrille();
         //tourDeJeu();
         afficher();
@@ -227,6 +218,17 @@ public class Contrôleur implements Observateur{
             carte=new CarteHelicoptere();
             piocheTirage.add(carte);
         }
+        
+        
+        
+        ArrayList<Tuile> tuiles;
+        tuiles = this.getGrille().getTuiles();
+        for(Tuile tuile : tuiles){
+            CarteInondation cI = new CarteInondation(tuile);
+            this.getPiocheInondation().push(cI);
+        }
+        Collections.shuffle(piocheInondation);
+        
         
     }
     public void lancerJeu(){
