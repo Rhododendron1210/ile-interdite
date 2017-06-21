@@ -60,8 +60,11 @@ public class Contrôleur implements Observateur{
         tresorsTrouvees=new ArrayList<>();
         grille=new Grille();
         joueurs= new HashMap<>();
-        grille.afficheGrille();
+        initialisationPartie();
         afficher();
+        grille.afficheGrille();
+        //tourDeJeu();
+        lancerJeu();
         this.setPiocheInondation(new Stack());
         this.setDefausseInondation(new Stack());
         ArrayList<Tuile> tuiles;
@@ -72,10 +75,8 @@ public class Contrôleur implements Observateur{
         }
         Collections.shuffle(piocheInondation);
         defausseTirage=new Stack<>();
-        piocheTirage=new Stack<>();//ligne a refaire
-        initialisationPartie();
-        lancerJeu();
         
+        piocheTirage=new Stack<>();//ligne a refaire
     }
     
     public void afficherJoueurs(){
@@ -136,8 +137,6 @@ public class Contrôleur implements Observateur{
         
         grille.creeTuiles();
         Aventurier a;
-        
-        
         a = new Explorateur("explorateur              ","Explorateur",grille.getTuile(2, 4));
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="La Porte de Cuivre      "){
@@ -154,6 +153,7 @@ public class Contrôleur implements Observateur{
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
+        //grille.getTuile(2, 1).addAventurier(a);
          
         a=new Ingenieur(   "ingénieur                ","Ingénieur",grille.getTuile(0, 3));
         for (Tuile t :grille.getTuiles()){
@@ -162,6 +162,7 @@ public class Contrôleur implements Observateur{
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
+        //grille.getTuile(0, 3).addAventurier(a);
         
         a=new Pilote(     "pilote                   ","Pilote",grille.getTuile(2, 3));
         for (Tuile t :grille.getTuiles()){
@@ -171,7 +172,7 @@ public class Contrôleur implements Observateur{
             } 
         }
         
-        
+        //grille.getTuile(2, 3).addAventurier(a);
         
         a=new Plongeur(   "plongeur                 ","Plongeur",grille.getTuile(1, 2));
         for (Tuile t :grille.getTuiles()){
@@ -180,6 +181,7 @@ public class Contrôleur implements Observateur{
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
+        //grille.getTuile(1, 2).addAventurier(a);
         
         a=new Navigateur( "navigateur               ","Navigateur",grille.getTuile(1, 3));
         for (Tuile t :grille.getTuiles()){
@@ -188,7 +190,7 @@ public class Contrôleur implements Observateur{
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
-        
+        //grille.getTuile(1, 3).addAventurier(a);
         
         
     }
