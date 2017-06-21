@@ -12,7 +12,8 @@ public class Message implements Serializable {
     private final Integer idCarte ;
     private final  Utils.Tresor tresor ;
     private final Integer idTuile ;
-    
+    private int nbJoueurs;
+    private int difficulte;
     public Message(Utils.Commandes commande, Integer idAventurier, Integer idCarte,  Utils.Tresor tresor, Integer idTuile) {
         this.commande = commande ;
         this.idAventurier = idAventurier ;
@@ -20,6 +21,18 @@ public class Message implements Serializable {
         this.tresor = tresor ;
         this.idTuile = idTuile ;
     }
+    
+    public Message(Utils.Commandes commande, Integer idAventurier, Integer idCarte,  Utils.Tresor tresor, Integer idTuile, int nbJoueurs, int difficulte) {
+        this.commande = commande ;
+        this.idAventurier = idAventurier ;
+        this.idCarte = idCarte ;
+        this.tresor = tresor ;
+        this.idTuile = idTuile ;
+        this.nbJoueurs = nbJoueurs;
+        this.difficulte=difficulte;
+    }
+    
+    
 
     /**
      * @return the commande
@@ -89,4 +102,13 @@ public class Message implements Serializable {
         }
         return txt ;
     }
+
+    public int getNbJoueurs() {
+        return nbJoueurs;
+    }
+
+    public int getDifficulte() {
+        return difficulte;
+    }
+    
 }

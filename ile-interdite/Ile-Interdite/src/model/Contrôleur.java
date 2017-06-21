@@ -24,12 +24,14 @@ import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import util.Message;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.VALIDER_JOUEURS;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
+import view.VueInscription;
 import view.VueNiveau;
 import view.VuePlateau;
 
@@ -50,7 +52,9 @@ public class Contrôleur implements Observateur{
     private Grille grille;
     private VueAventurier2 vueAventurier2;
     private VuePlateau vuePlateau;
-    
+    private VueInscription vueInscription;
+    private int nbJoueurs;
+    private int difficulte;
     private Stack<CarteTirage> piocheTirage;
     private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
@@ -68,6 +72,7 @@ public class Contrôleur implements Observateur{
         this.setDefausseInondation(new Stack());
         defausseTirage=new Stack<>();
         piocheTirage=new Stack<>();
+        vueInscription = new VueInscription();
         
         
     }
@@ -291,9 +296,9 @@ public class Contrôleur implements Observateur{
                 vuePlateau.deselectionner();
                 
             }
-            
-            
-        } 
+        } else if(msg.getCommande()==VALIDER_JOUEURS) {
+            nbJoueurs=msg.getNbJoueurs();
+        }
     }
     
     /*public void deplacement(Aventurier a){

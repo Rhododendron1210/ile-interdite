@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -111,6 +112,8 @@ public class VuePlateau extends JFrame {
         grille.creeGrille();
         this.repaint();
     }
+    
+    
 
    
     
