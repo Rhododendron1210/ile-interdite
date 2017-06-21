@@ -103,7 +103,8 @@ public class VueInscription extends Observable {
         boutJouer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Message m = new Message(VALIDER_JOUEURS, null, null, null,  null);
+                Message m;
+                m = new Message(VALIDER_JOUEURS, null, null, null,  null, 0, 0);
                 observateur.traiterMessage(m);
             }
         });

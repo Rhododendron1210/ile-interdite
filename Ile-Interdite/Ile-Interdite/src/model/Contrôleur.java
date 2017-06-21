@@ -59,6 +59,9 @@ public class Contrôleur implements Observateur{
     private boolean finJeu = false;
     private Aventurier aventurierCourant;
     
+    private int nbJoueur;
+    private int difficulté;
+    
     public Contrôleur(){
         vueInscription = new VueInscription();
         vueInscription.setObservateur(this);
@@ -437,9 +440,5 @@ public class Contrôleur implements Observateur{
         }
         return carte;
     }
-    
-  
-    
-
 }
 

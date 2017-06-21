@@ -12,16 +12,19 @@ public class Message implements Serializable {
     private final Integer idCarte ;
     private final  Utils.Tresor tresor ;
     private final Integer idTuile ;
+    private final int nbJoueurs;
+    private final int difficulte;
     
-    
-    public Message(Utils.Commandes commande, Integer idAventurier, Integer idCarte,  Utils.Tresor tresor, Integer idTuile) {
+    public Message(Utils.Commandes commande, Integer idAventurier, Integer idCarte,  Utils.Tresor tresor, Integer idTuile, int nbJoueurs, int difficulte) {
         this.commande = commande ;
         this.idAventurier = idAventurier ;
         this.idCarte = idCarte ;
         this.tresor = tresor ;
         this.idTuile = idTuile ;
+        this.nbJoueurs = nbJoueurs;
+        this.difficulte = difficulte;
     }
-
+    
     /**
      * @return the commande
      */
