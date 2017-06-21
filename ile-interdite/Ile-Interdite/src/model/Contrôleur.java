@@ -68,11 +68,7 @@ public class Contrôleur implements Observateur{
         this.setDefausseInondation(new Stack());
         defausseTirage=new Stack<>();
         piocheTirage=new Stack<>();
-        initialisationPartie();
-        grille.afficheGrille();
-        //tourDeJeu();
-        afficher();
-        lancerJeu();
+        
         
     }
     
@@ -134,36 +130,40 @@ public class Contrôleur implements Observateur{
         
         grille.creeTuiles();
         Aventurier a;
-        a = new Explorateur("explorateur              ","Explorateur",grille.getTuile(2, 4));
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="La Porte de Cuivre      "){
-                joueurs.put("Pilote", a);
+                a = new Explorateur("explorateur              ","Explorateur",t);
+
+                joueurs.put("explorateur", a);
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
-        aventurierCourant= a;
         
-        a= new Messager(    "messager                 ","Messager",grille.getTuile(2, 1));
+        
+        
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="La Porte d'Argent       "){
-                joueurs.put("Pilote", a);
+                a= new Messager(    "messager                 ","Messager",t);
+                joueurs.put("messager", a);
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
         //grille.getTuile(2, 1).addAventurier(a);
          
-        a=new Ingenieur(   "ingénieur                ","Ingénieur",grille.getTuile(0, 3));
+        
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="La Porte de Bronze      "){
-                joueurs.put("Pilote", a);
+                a=new Ingenieur(   "ingénieur                ","Ingénieur",t);
+                joueurs.put("ingénieur", a);
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
         //grille.getTuile(0, 3).addAventurier(a);
         
-        a=new Pilote(     "pilote                   ","Pilote",grille.getTuile(2, 3));
+       
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="Heliport                "){
+                a=new Pilote(     "pilote                   ","Pilote",t);
                 joueurs.put("Pilote", a);
                 t.aventurierPresent.put(a.getNom(),a);
             } 
@@ -171,10 +171,11 @@ public class Contrôleur implements Observateur{
         
         //grille.getTuile(2, 3).addAventurier(a);
         
-        a=new Plongeur(   "plongeur                 ","Plongeur",grille.getTuile(1, 2));
+        
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="La Porte de Fer         "){
-                joueurs.put("Pilote", a);
+                a=new Plongeur(   "plongeur                 ","Plongeur",t);
+                joueurs.put("plongeur", a);
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
@@ -183,10 +184,12 @@ public class Contrôleur implements Observateur{
         a=new Navigateur( "navigateur               ","Navigateur",grille.getTuile(1, 3));
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="La Porte d'or           "){
-                joueurs.put("Pilote", a);
+                a=new Navigateur( "navigateur               ","Navigateur",t);
+                joueurs.put("navigateur", a);
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
+        aventurierCourant=joueurs.get("navigateur");
         //grille.getTuile(1, 3).addAventurier(a);
         CarteTirage carte ;
         carte=new CarteMonteeDesEaux();
@@ -231,6 +234,7 @@ public class Contrôleur implements Observateur{
         
         
     }
+    
     public void lancerJeu(){
         vueAventurier2=new VueAventurier2(aventurierCourant);
         
