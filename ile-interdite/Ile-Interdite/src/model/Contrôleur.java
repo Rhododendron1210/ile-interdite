@@ -27,6 +27,7 @@ import model.aventuriers.Plongeur;
 import util.Message;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.TERMINER;
 import static util.Utils.Commandes.VALIDER_JOUEURS;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
@@ -383,6 +384,11 @@ public class Contrôleur implements Observateur{
                 vuePlateau.setObservateur(this);
 
             }
+        }
+        
+        else if(msg.getCommande() == TERMINER){
+            this.actionEffectuer = 2;
+            this.changerJoueur();
         }
     }
     

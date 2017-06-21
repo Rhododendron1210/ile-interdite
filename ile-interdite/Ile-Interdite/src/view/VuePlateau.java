@@ -15,6 +15,7 @@ import util.Observateur;
 import util.Parameters;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.TERMINER;
 
 /**
  *
@@ -82,6 +83,15 @@ public class VuePlateau extends JFrame {
                 observateur.traiterMessage(m);
             }
             
+        });
+        
+        finir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commande = TERMINER;
+                Message m = new Message(TERMINER,null,null,null,null);
+                observateur.traiterMessage(m);
+            }
         });
         
         for (VueTuile[] vues : grille.getAffichTuile()){
