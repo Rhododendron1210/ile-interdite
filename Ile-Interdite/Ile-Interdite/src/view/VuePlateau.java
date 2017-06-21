@@ -68,7 +68,7 @@ public class VuePlateau {
         deplacer.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                Message m = new Message(BOUGER,null,null,null,null);
+                Message m = new Message(BOUGER,null,null,null,null,0,0);
                 observateur.traiterMessage(m);
             }
             
