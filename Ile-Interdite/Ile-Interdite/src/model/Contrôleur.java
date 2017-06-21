@@ -66,6 +66,7 @@ public class Contrôleur implements Observateur{
     private int difficulte;
     
     public Contrôleur(){
+        vueInscription = new VueInscription();
         tresorsTrouvees=new ArrayList<>();
         grille=new Grille();
         joueurs= new HashMap<>();
@@ -73,8 +74,6 @@ public class Contrôleur implements Observateur{
         this.setDefausseInondation(new Stack());
         defausseTirage=new Stack<>();
         piocheTirage=new Stack<>();
-        
-        
     }
     
     public void afficherJoueurs(){
