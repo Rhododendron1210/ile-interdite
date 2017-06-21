@@ -73,6 +73,7 @@ public class Contrôleur implements Observateur{
         defausseTirage=new Stack<>();
         piocheTirage=new Stack<>();
         vueInscription = new VueInscription();
+        vueInscription.setObservateur(this);
         
         
     }
@@ -86,6 +87,7 @@ public class Contrôleur implements Observateur{
         Tuile [][] tuiles = grille.getGrille();
         vuePlateau= new VuePlateau(tuiles);
         vuePlateau.setObservateur(this);
+        
         vueNiveau=new VueNiveau(1);
     }
 
@@ -141,6 +143,7 @@ public class Contrôleur implements Observateur{
 
                 joueurs.put("explorateur", a);
                 t.aventurierPresent.put(a.getNom(),a);
+                aventurierCourant=a;
             } 
         }
         
@@ -311,7 +314,12 @@ public class Contrôleur implements Observateur{
                 
             }
         } else if(msg.getCommande()==VALIDER_JOUEURS) {
+            vueInscription.getWindow().dispose();
             nbJoueurs=msg.getNbJoueurs();
+            difficulte= msg.getDifficulte();
+            initialisationPartie();
+            afficher();
+            lancerJeu();
         }
     }
     
