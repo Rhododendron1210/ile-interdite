@@ -33,7 +33,7 @@ public class VueInscription extends Observable {
     public VueInscription(){
         //je suis vivant
         window = new JFrame("Inscription");
-        window.setSize(900,600);
+        window.setSize(600,250);
         
         JPanel panel = new JPanel(new GridLayout(3,1));
         
