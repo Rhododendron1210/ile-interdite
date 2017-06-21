@@ -548,9 +548,11 @@ public class Contrôleur implements Observateur{
     private void changerJoueur(){
         actionEffectuer=actionEffectuer+1;
         if (actionEffectuer==3){
+            piocherCarteTirage();
             if(joueurs.indexOf(aventurierCourant)+1!=joueurs.size()){
                aventurierCourant=joueurs.get(joueurs.indexOf(aventurierCourant)+1);
                actionEffectuer=0; 
+               
             }else{
                 aventurierCourant=joueurs.get(0);
                 actionEffectuer=0; 
