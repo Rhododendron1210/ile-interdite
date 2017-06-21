@@ -197,7 +197,7 @@ public class Contrôleur implements Observateur{
                 t.aventurierPresent.put(a.getNom(),a);
             } 
         }
-        aventurierCourant=joueurs.get("navigateur");
+        //aventurierCourant=joueurs.get("navigateur");
         //grille.getTuile(1, 3).addAventurier(a);
         CarteTirage carte ;
         carte=new CarteMonteeDesEaux();
