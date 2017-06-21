@@ -237,6 +237,20 @@ public class Contrôleur implements Observateur{
         }
         Collections.shuffle(piocheInondation);
         
+        for (String e:joueurs.keySet()){
+            carte=piocherCarteTirage();
+            if(carte.getNom()=="CarteMonteeDesEaux"){
+                monteeEaux(carte);
+            }else{
+                joueurs.get(e).addCarte(carte);
+            }
+            carte=piocherCarteTirage();
+            if(carte.getNom()=="CarteMonteeDesEaux"){
+                monteeEaux(carte);
+            }else{
+                joueurs.get(e).addCarte(carte);
+            }
+        }
         
     }
     
@@ -417,7 +431,7 @@ public class Contrôleur implements Observateur{
             grille.afficheGrille();
         }
         //tour(a);
-    }
+    }*/
     
     private void monteeEaux(CarteTirage carte){
         int niv = getGrille().getNiveauEaux();
@@ -434,7 +448,7 @@ public class Contrôleur implements Observateur{
         }
        
         
-    }*/
+    }
     
     public void tirerCarteInondation(){
         CarteInondation cI = this.getPiocheInondation().pop();
