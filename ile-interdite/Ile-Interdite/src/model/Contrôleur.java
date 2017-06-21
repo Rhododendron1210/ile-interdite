@@ -237,7 +237,7 @@ public class Contrôleur implements Observateur{
     }
     
     
-    public void tourDeJeu(){
+    /*public void tourDeJeu(){
         int i;
         for(String e:joueurs.keySet()){
             //afficher vueAventurier
@@ -256,7 +256,7 @@ public class Contrôleur implements Observateur{
                 joueurs.get(e).addCarte(carte);
             }
         }
-    }
+    }*/
     
     @Override
     public void traiterMessage(Message msg) {
@@ -264,7 +264,7 @@ public class Contrôleur implements Observateur{
             if (msg.getIdTuile()==null){
                 HashSet<Tuile> tuiles =new HashSet<>();
                 tuiles=aventurierCourant.tuilesPossibles(this.getGrille());
-                vuePlateau.selectionnerDeplacer();
+                
                 vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
                 aventurierCourant.getPosition().supprAventurier(aventurierCourant);
@@ -284,15 +284,15 @@ public class Contrôleur implements Observateur{
                 System.out.println(colonne);
                 tuile.addAventurier(aventurierCourant);
                 aventurierCourant.setPosition(tuile);
-                Tuile [][] tuiles = grille.getGrille();
-                vuePlateau=new VuePlateau(tuiles);
+                vuePlateau.deselectionner();
+                
             }
             
             
         } 
     }
     
-    public void deplacement(Aventurier a){
+    /*public void deplacement(Aventurier a){
         int ligne=0;
         int colonne=0;
         boolean end ;
@@ -341,11 +341,11 @@ public class Contrôleur implements Observateur{
             
                         
         }
-    }
+    }*/
     
     
     
-    public void tour(Aventurier a){
+    /*public void tour(Aventurier a){
         Scanner sc = new Scanner(System.in);
         int i;
         System.out.println("Choisir une action :");
@@ -362,9 +362,9 @@ public class Contrôleur implements Observateur{
             tour(a);
         } 
     }
+    */
     
-    
-    public void assecherTuile(Aventurier a){
+    /*public void assecherTuile(Aventurier a){
         HashSet<Tuile> tuiles = a.assechementPossible(this.getGrille());
         int ligne=0;
         int colonne=0;
@@ -425,7 +425,7 @@ public class Contrôleur implements Observateur{
         }
        
         
-    }
+    }*/
     
     public void tirerCarteInondation(){
         CarteInondation cI = this.getPiocheInondation().pop();
@@ -449,7 +449,7 @@ public class Contrôleur implements Observateur{
                         for(String key : t.getAventurierPresent().keySet()){
                             a = t.getAventurierPresent().get(key);
                         }
-                        this.deplacement(a);                
+                        //this.deplacement(a);                
                 }
             }
         }
