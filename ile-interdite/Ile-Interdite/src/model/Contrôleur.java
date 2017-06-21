@@ -141,67 +141,95 @@ public class Contrôleur implements Observateur{
         ArrayList<Aventurier> aventuriers = new ArrayList();
         a = new Explorateur("explorateur              ","Explorateur",null);
         aventuriers.add(a);
+        a= new Messager(    "messager                 ","Messager",null);
+        aventuriers.add(a);
+        a=new Ingenieur(   "ingénieur                ","Ingénieur",null);
+        aventuriers.add(a);
+        a=new Pilote(     "pilote                   ","Pilote",null);
+        aventuriers.add(a);
+        a=new Plongeur(   "plongeur                 ","Plongeur",null);
+        aventuriers.add(a);        
+        a=new Navigateur( "navigateur               ","Navigateur",null);
         
-        for (Tuile t :grille.getTuiles()){
-            if (t.getNom()=="La Porte de Cuivre      "){
-                a = new Explorateur("explorateur              ","Explorateur",t);
-                joueurs.put("explorateur", a);
-                t.aventurierPresent.put(a.getNom(),a);
-                aventurierCourant=a;
-            } 
+        Collections.shuffle(aventuriers);
+        
+        for(int i = 0; i < nbJoueur; i++){
+            a = aventuriers.get(i);
+            String nm = a.getRole();
+            
+            if(nm == "Explorateur"){
+                for (Tuile t :grille.getTuiles()){
+                    if (t.getNom()=="La Porte de Cuivre      "){
+                        a.setPosition(t);
+                        joueurs.put("explorateur", a);
+                        t.aventurierPresent.put(a.getNom(),a);
+                        aventurierCourant=a;
+                    } 
+                }
+            }
+
+            else if(nm == "Messager"){
+                for (Tuile t :grille.getTuiles()){
+                    if (t.getNom()=="La Porte d'Argent       "){
+                        a.setPosition(t);
+                        joueurs.put("messager", a);
+                        t.aventurierPresent.put(a.getNom(),a);
+                    } 
+                }
+            }
+            //grille.getTuile(2, 1).addAventurier(a);
+
+            else if(nm == "Ingénieur"){
+                for (Tuile t :grille.getTuiles()){
+                    if (t.getNom()=="La Porte de Bronze      "){
+                        a.setPosition(t);
+                        joueurs.put("ingénieur", a);
+                        t.aventurierPresent.put(a.getNom(),a);
+                    } 
+                }
+            }
+            //grille.getTuile(0, 3).addAventurier(a);
+
+            else if(nm == "Pilote"){            
+                for (Tuile t :grille.getTuiles()){
+                    if (t.getNom()=="Heliport                "){
+                        a.setPosition(t);
+                        joueurs.put("Pilote", a);
+                        t.aventurierPresent.put(a.getNom(),a);
+                    } 
+                }
+            }
+            //grille.getTuile(2, 3).addAventurier(a);
+
+            else if(nm == "Plongeur"){
+                for (Tuile t :grille.getTuiles()){
+                    if (t.getNom()=="La Porte de Fer         "){
+                        a.setPosition(t);
+                        joueurs.put("plongeur", a);
+                        t.aventurierPresent.put(a.getNom(),a);
+                    } 
+                }
+            }
+            //grille.getTuile(1, 2).addAventurier(a);
+
+            else if(nm == "Navigateur"){            
+                for (Tuile t :grille.getTuiles()){
+                    if (t.getNom()=="La Porte d'or           "){
+                        a.setPosition(t);
+                        joueurs.put("navigateur", a);
+                        t.aventurierPresent.put(a.getNom(),a);
+                    } 
+                }
+            }
+            
+            else{
+                System.out.println("InitialisationPartie : Rôle non trouvé");
+            }
+            
+            if(i == 0){
+                aventurierCourant=a;                
+            }
         }
-        
-        
-        
-        for (Tuile t :grille.getTuiles()){
-            if (t.getNom()=="La Porte d'Argent       "){
-                a= new Messager(    "messager                 ","Messager",t);
-                joueurs.put("messager", a);
-                t.aventurierPresent.put(a.getNom(),a);
-            } 
-        }
-        //grille.getTuile(2, 1).addAventurier(a);
-         
-        
-        for (Tuile t :grille.getTuiles()){
-            if (t.getNom()=="La Porte de Bronze      "){
-                a=new Ingenieur(   "ingénieur                ","Ingénieur",t);
-                joueurs.put("ingénieur", a);
-                t.aventurierPresent.put(a.getNom(),a);
-            } 
-        }
-        //grille.getTuile(0, 3).addAventurier(a);
-        
-       
-        for (Tuile t :grille.getTuiles()){
-            if (t.getNom()=="Heliport                "){
-                a=new Pilote(     "pilote                   ","Pilote",t);
-                joueurs.put("Pilote", a);
-                t.aventurierPresent.put(a.getNom(),a);
-            } 
-        }
-        
-        //grille.getTuile(2, 3).addAventurier(a);
-        
-        
-        for (Tuile t :grille.getTuiles()){
-            if (t.getNom()=="La Porte de Fer         "){
-                a=new Plongeur(   "plongeur                 ","Plongeur",t);
-                joueurs.put("plongeur", a);
-                t.aventurierPresent.put(a.getNom(),a);
-            } 
-        }
-        //grille.getTuile(1, 2).addAventurier(a);
-        
-       
-        for (Tuile t :grille.getTuiles()){
-            if (t.getNom()=="La Porte d'or           "){
-                a=new Navigateur( "navigateur               ","Navigateur",t);
-                joueurs.put("navigateur", a);
-                t.aventurierPresent.put(a.getNom(),a);
-            } 
-        }
-        aventurierCourant=joueurs.get("navigateur");
         //grille.getTuile(1, 3).addAventurier(a);
         CarteTirage carte ;
         carte=new CarteMonteeDesEaux();
@@ -322,7 +350,7 @@ public class Contrôleur implements Observateur{
             vueInscription.getWindow().dispose();
             nbJoueurs=msg.getNbJoueurs();
             difficulte= msg.getDifficulte();
-            initialisationPartie();
+            initialisationPartie(nbJoueurs);
             afficher();
             lancerJeu();
         }
@@ -488,6 +516,7 @@ public class Contrôleur implements Observateur{
                         //this.deplacement(a);                
                 }
             }
+            t.setCoulee();
         }
         else{
             System.out.println("La tuile est déjà coulée");
