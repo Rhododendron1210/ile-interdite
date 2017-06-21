@@ -27,6 +27,7 @@ import model.aventuriers.Plongeur;
 import util.Message;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.TERMINER;
 import static util.Utils.Commandes.VALIDER_JOUEURS;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
@@ -280,20 +281,11 @@ public class Contrôleur implements Observateur{
         }
         Collections.shuffle(piocheInondation);
         
-        for (Aventurier aventurier :joueurs){
-            carte=piocherCarteTirage();
-            if(carte.getNom()=="CarteMonteeDesEaux"){
-                monteeEaux(carte);
-            }else{
-                aventurier.addCarte(carte);
-            }
-            carte=piocherCarteTirage();
-            if(carte.getNom()=="CarteMonteeDesEaux"){
-                monteeEaux(carte);
-            }else{
-                aventurier.addCarte(carte);
-            }
-        }
+        
+            piocherCarteTirage(joueurs.get(0));
+            piocherCarteTirage(joueurs.get(0));
+            
+        
         
     }
     
@@ -303,7 +295,7 @@ public class Contrôleur implements Observateur{
     }
     
     
-    public void tourDeJeu() throws InterruptedException{
+   /* public void tourDeJeu() throws InterruptedException{
         int i;
         for(Aventurier aventurier :joueurs){
             //afficher vueAventurier
@@ -320,7 +312,7 @@ public class Contrôleur implements Observateur{
                 aventurier.addCarte(carte);
             }
         }
-    }
+    }*/
     
     @Override
     public void traiterMessage(Message msg) {
@@ -392,6 +384,11 @@ public class Contrôleur implements Observateur{
                 vuePlateau.setObservateur(this);
 
             }
+        }
+        
+        else if(msg.getCommande() == TERMINER){
+            this.actionEffectuer = 2;
+            this.changerJoueur();
         }
     }
     
@@ -530,7 +527,7 @@ public class Contrôleur implements Observateur{
         piocheInondation.push(carte);
     }
     
-    private CarteTirage piocherCarteTirage(){
+    private void piocherCarteTirage(Aventurier a){
         //pioche une carte et la retourne
         //mélange et remet les carte dans la pioche si la pioche est vide
         CarteTirage carte=piocheTirage.pop();
@@ -540,7 +537,12 @@ public class Contrôleur implements Observateur{
             }
             Collections.shuffle(piocheTirage);
         }
-        return carte;
+        if(carte.getNom()=="CarteMonteeDesEaux"){
+                monteeEaux(carte);
+            }else{
+                a.addCarte(carte);
+            }
+        
     }
     public void recuperationTresorTuile( Aventurier a,Tresor tresor){
         a.addTresors(tresor);
@@ -553,15 +555,17 @@ public class Contrôleur implements Observateur{
     }
     private void changerJoueur(){
         actionEffectuer=actionEffectuer+1;
-        if (actionEffectuer==3){
+        if (actionEffectuer==3){            
             if(joueurs.indexOf(aventurierCourant)+1!=joueurs.size()){
                aventurierCourant=joueurs.get(joueurs.indexOf(aventurierCourant)+1);
                actionEffectuer=0; 
+               
             }else{
                 aventurierCourant=joueurs.get(0);
                 actionEffectuer=0; 
             }
-            
+            piocherCarteTirage(aventurierCourant);
+            piocherCarteTirage(aventurierCourant);
         }
         vueAventurier2.dispose();
         vueAventurier2= new VueAventurier2(aventurierCourant);
