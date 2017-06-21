@@ -64,11 +64,6 @@ public class Contrôleur implements Observateur{
         tresorsTrouvees=new ArrayList<>();
         grille=new Grille();
         joueurs= new HashMap<>();
-        initialisationPartie();
-        afficher();
-        grille.afficheGrille();
-        //tourDeJeu();
-        lancerJeu();
         this.setPiocheInondation(new Stack());
         this.setDefausseInondation(new Stack());
         ArrayList<Tuile> tuiles;
@@ -81,6 +76,13 @@ public class Contrôleur implements Observateur{
         defausseTirage=new Stack<>();
         
         piocheTirage=new Stack<>();//ligne a refaire
+        initialisationPartie();
+        
+        grille.afficheGrille();
+        //tourDeJeu();
+        afficher();
+        lancerJeu();
+        
     }
     
     public void afficherJoueurs(){
