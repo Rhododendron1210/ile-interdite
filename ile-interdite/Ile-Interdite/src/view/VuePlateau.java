@@ -108,7 +108,7 @@ public class VuePlateau extends JFrame {
             //this.grille.getAffichTuile()[i][j].setCouleur(Color.RED);
             //this.grille.getAffichTuile()[i][j].repaint();
             this.grille.getAffichTuile()[i][j].getBouton().setEnabled(true);
-            grille.repaint();
+            //grille.repaint();
             System.out.println("passer");
         }
         repaint();
