@@ -241,9 +241,9 @@ public class Contrôleur implements Observateur{
         //grille.getTuile(1, 3).addAventurier(a);
         CarteTirage carte ;
         carte=new CarteMonteeDesEaux();
-        piocheTirage.add(carte);
+        piocheTirage.push(carte);
         carte=new CarteMonteeDesEaux();
-        piocheTirage.add(carte);
+        piocheTirage.push(carte);
         int i;
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("Zephir","pas description");
@@ -486,7 +486,7 @@ public class Contrôleur implements Observateur{
         niv=niv+1;
         getGrille().setNiveauEaux(niv);
         this.addDefausseTirage(carte);
-        if (grille.getNiveauEaux()==5){
+        if (difficulte==5){
             //finDePartie();
         }else{
         Collections.shuffle(defausseInondation);
