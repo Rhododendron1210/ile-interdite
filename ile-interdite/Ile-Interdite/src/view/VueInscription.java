@@ -151,14 +151,14 @@ public class VueInscription extends Observable {
                 panel.add(image6);
                 panel.add(image7);
                 panel.add(image8);
-                image1.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/1.jpg"));
-                image2.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/2.jpg"));
-                image3.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/3.jpg"));
-                image4.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/4.jpg"));
-                image5.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/5.jpg"));
-                image6.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/6.jpg"));
-                image7.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/7.jpg"));
-                image8.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/8.jpg"));
+                image1.insertIcon(new ImageIcon("1.jpg"));
+                image2.insertIcon(new ImageIcon("2.jpg"));
+                image3.insertIcon(new ImageIcon("3.jpg"));
+                image4.insertIcon(new ImageIcon("4.jpg"));
+                image5.insertIcon(new ImageIcon("5.jpg"));
+                image6.insertIcon(new ImageIcon("6.jpg"));
+                image7.insertIcon(new ImageIcon("7.jpg"));
+                image8.insertIcon(new ImageIcon("8.jpg"));
                 regles.add(texteDeroulant);
                 regles.setVisible(true);
             }
