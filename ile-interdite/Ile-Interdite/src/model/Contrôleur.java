@@ -1,7 +1,9 @@
 package model;
 
+import Tresor.CarteHelicoptere;
 import Tresor.CarteInondation;
 import Tresor.CarteMonteeDesEaux;
+import Tresor.CarteSacsDeSable;
 import Tresor.CarteTirage;
 import Tresor.CarteTresor;
 import util.Observateur;
@@ -213,6 +215,14 @@ public class Contrôleur implements Observateur{
         }
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("CALICE","pas description");
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<3 ;i++){
+            carte=new CarteSacsDeSable();
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<4 ;i++){
+            carte=new CarteHelicoptere();
             piocheTirage.add(carte);
         }
         
