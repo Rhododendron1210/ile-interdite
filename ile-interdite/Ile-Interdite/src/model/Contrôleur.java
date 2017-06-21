@@ -32,6 +32,7 @@ import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
 import view.VueInscription;
+import view.VueMessage;
 import view.VueNiveau;
 import view.VuePlateau;
 
@@ -63,6 +64,7 @@ public class Contrôleur implements Observateur{
     private boolean finJeu = false;
     private Aventurier aventurierCourant;
     private ArrayList<Tresor> tresorsTrouvees;
+    private VueMessage vueMessage;
     
     public Contrôleur(){
         tresorsTrouvees=new ArrayList<>();
@@ -87,7 +89,7 @@ public class Contrôleur implements Observateur{
         Tuile [][] tuiles = grille.getGrille();
         vuePlateau= new VuePlateau(tuiles);
         vuePlateau.setObservateur(this);
-        
+        vueMessage=new VueMessage();
         vueNiveau=new VueNiveau(difficulte);
     }
 
@@ -230,6 +232,7 @@ public class Contrôleur implements Observateur{
                 aventurierCourant=a;                
             }
         }
+
         //grille.getTuile(1, 3).addAventurier(a);
         CarteTirage carte ;
         carte=new CarteMonteeDesEaux();
@@ -326,23 +329,9 @@ public class Contrôleur implements Observateur{
                 
                 vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
-                aventurierCourant.getPosition().supprAventurier(aventurierCourant);
-                String placement=String.valueOf(msg.getIdTuile());
-                int ligne;
-                int colonne;
-                if (placement.length()==1){
-                    ligne=0;
-                    colonne=Integer.valueOf(String.valueOf(placement.charAt(0)));
-                } else {
-                    ligne=Integer.valueOf(String.valueOf(placement.charAt(0)));
-                    colonne=Integer.valueOf(String.valueOf(placement.charAt(1)));
-                }
-                Tuile tuile=grille.getTuile(ligne, colonne);
-                System.out.println(placement);
-                System.out.println(ligne);
-                System.out.println(colonne);
-                tuile.addAventurier(aventurierCourant);
-                aventurierCourant.setPosition(tuile);
+                
+                deplacement(aventurierCourant,aventurierCourant.getPosition());
+                vuePlateau.repaint();
                 vuePlateau.deselectionner();
                 
             }
@@ -356,56 +345,11 @@ public class Contrôleur implements Observateur{
         }
     }
     
-    /*public void deplacement(Aventurier a){
-        int ligne=0;
-        int colonne=0;
-        boolean end ;
-        HashSet<Tuile> tuiles =new HashSet<>();
-        tuiles=a.tuilesPossibles(this.getGrille());
-        if (tuiles.isEmpty()){
-            System.out.println("ne peut pas se deplacer");
-            tour(a);
-        }
-        else{
-            System.out.println("Tuiles Possibles : ");
-            for(Tuile tuile :tuiles){
-                tuile.afficheTuile();
-            }
-            Scanner sc = new Scanner(System.in);
-            end =true;
-            System.out.println("Taper ligne=0 et colonne=0 pour annuler le coix d'action.");
-            while(end ){
-                
-                System.out.println("Ligne");
-                ligne = sc.nextInt();
-                System.out.println("colonne");
-                colonne= sc.nextInt();
-                if(ligne==0&&colonne==0){
-                    end=false;
-                    tour(a);
-                } else if (ligne<6&&ligne>=0&&colonne<6&&colonne>=0){
-                    if (tuiles.contains(grille.getTuile(ligne,colonne))){
-                      end=false;  
-                    } else {
-                        System.out.println("Case avec déplacement non possible");
-                    }
-                    
-                } else {
-                    System.out.println("Case en dehors du plateau");
-                }
-                
-            }
-            if(ligne!=0&&colonne!=0){
+    public void deplacement(Aventurier a,Tuile tuile){            
                 a.getPosition().supprAventurier(a);
-                Tuile tuile=grille.getTuile(ligne, colonne);
                 tuile.addAventurier(a);
                 a.setPosition(tuile);
-                grille.afficheGrille();
-            }     
-            
-                        
-        }
-    }*/
+    }
     
     
     
