@@ -285,6 +285,10 @@ public class Contrôleur implements Observateur{
             piocherCarteTirage(joueurs.get(0));
             piocherCarteTirage(joueurs.get(0));
             
+            for(i=0;i<difficulte;i++){
+                tirerCarteInondation();
+            }
+            
         
         
     }
@@ -377,6 +381,7 @@ public class Contrôleur implements Observateur{
                 Tuile tuile = grille.getTuile(ligne, colonne);
                 assechement(tuile);
                 
+                
                 //vuePlateau.update();
                 //vuePlateau.deselectionner();
                 vuePlateau.dispose();
@@ -401,6 +406,7 @@ public class Contrôleur implements Observateur{
 
     public void assechement(Tuile tuile) {
         tuile.setAssechee();
+        changerJoueur();
         //Tuile[][] tuiles = grille.getGrille();
         //vuePlateau.update();
     }
@@ -483,7 +489,7 @@ public class Contrôleur implements Observateur{
             this.addPiocheInondation(defausseInondation.pop());
         }
         }
-       
+        vueNiveau.setNiveau(nbJoueurs);
         
     }
     
@@ -566,6 +572,12 @@ public class Contrôleur implements Observateur{
             }
             piocherCarteTirage(aventurierCourant);
             piocherCarteTirage(aventurierCourant);
+            int i;
+            for(i=0;i<difficulte;i++){
+                tirerCarteInondation();
+            }
+            
+            
         }
         vueAventurier2.dispose();
         vueAventurier2= new VueAventurier2(aventurierCourant);
