@@ -410,11 +410,11 @@ public class Contrôleur implements Observateur{
     }
 
     private void addDefausseTirage(CarteTirage carte) {
-        defausseTirage.add(carte);
+        defausseTirage.push(carte);
     }
 
     private void addPiocheInondation(CarteInondation carte){
-        piocheInondation.add(carte);
+        piocheInondation.push(carte);
     }
     
     private CarteTirage piocherCarteTirage(){
@@ -423,7 +423,7 @@ public class Contrôleur implements Observateur{
         CarteTirage carte=piocheTirage.pop();
         if (piocheTirage.empty()){
             while(!defausseTirage.empty()){
-               piocheTirage.add(defausseTirage.pop());
+               piocheTirage.push(defausseTirage.pop());
             }
             Collections.shuffle(piocheTirage);
         }
