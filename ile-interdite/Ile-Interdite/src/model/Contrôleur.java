@@ -330,6 +330,7 @@ public class Contrôleur implements Observateur {
                 Tuile tuile = grille.getTuile(ligne, colonne);
 
                 deplacement(aventurierCourant, tuile);
+                
                 vuePlateau.update();
                 vuePlateau.deselectionner();
 
@@ -366,6 +367,7 @@ public class Contrôleur implements Observateur {
                 }
                 Tuile tuile = grille.getTuile(ligne, colonne);
                 assechement(tuile);
+                
                 vuePlateau.update();
                 vuePlateau.deselectionner();
 
@@ -381,7 +383,8 @@ public class Contrôleur implements Observateur {
 
     public void assechement(Tuile tuile) {
         tuile.setAssechee();
-        vuePlateau.update();
+        //Tuile[][] tuiles = grille.getGrille();
+        //vuePlateau.update();
     }
 
     /*public void tour(Aventurier a){

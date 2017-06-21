@@ -69,7 +69,6 @@ public class VueTuile extends JPanel{
     }
 
     public void setCouleur(Color couleur) {
-        
         this.couleur = couleur;
         bouton.repaint();
         System.out.println("couleur");
@@ -77,6 +76,7 @@ public class VueTuile extends JPanel{
     
     VueTuile(Tuile tuile){
         this.tuile=tuile;
+        
         this.setLayout(new BorderLayout());
         bouton= new JButton(tuile.getNom());
         if (tuile.getEtatTuile()==ASSECHEE){

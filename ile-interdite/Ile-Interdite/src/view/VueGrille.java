@@ -52,7 +52,11 @@ public class VueGrille extends JPanel{
     public Tuile[][] getTuiles() {
         return tuiles;
     }
-
+    
+    public void upadate(){
+        initialiser();
+        creeGrille();
+    }
     
     
     
