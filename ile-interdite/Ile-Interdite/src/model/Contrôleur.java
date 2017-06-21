@@ -485,10 +485,8 @@ public class Contrôleur implements Observateur{
     }*/
     
     private void monteeEaux(CarteTirage carte){
-        System.out.print("fgztrhlzlthẑotrphokerthetrktykeohêotkyhjokteypjkptyokjpr$oykjtypj$orktyjoketp$o");
-        int niv = getGrille().getNiveauEaux();
-        niv=niv+1;
-        getGrille().setNiveauEaux(niv);
+               
+        difficulte=difficulte+1;
         this.addDefausseTirage(carte);
         if (difficulte==5){
             //finDePartie();
@@ -497,8 +495,9 @@ public class Contrôleur implements Observateur{
         while( !(defausseInondation.empty()) ){
             this.addPiocheInondation(defausseInondation.pop());
         }
+       
         }
-        vueNiveau.setNiveau(nbJoueurs);
+        vueNiveau.setNiveau(difficulte);
         
     }
     
