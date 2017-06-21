@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import model.aventuriers.Aventurier;
 import model.aventuriers.Explorateur;
@@ -299,16 +301,14 @@ public class Contrôleur implements Observateur{
     }
     
     
-    /*public void tourDeJeu(){
+    public void tourDeJeu() throws InterruptedException{
         int i;
         for(String e:joueurs.keySet()){
             //afficher vueAventurier
+            aventurierCourant=joueurs.get(e);
             i=0;
             while (i<3){
-                //afficher nb commandes
-                System.out.println("Action :"+String.valueOf(i+1)+" du "+joueurs.get(e).getNom());
-                aventurierCourant=joueurs.get(e);
-                this.tour(joueurs.get(e));
+                //afficher nb commande
                 i=i+1;
             }
             CarteTirage carte =this.piocherCarteTirage();
@@ -318,7 +318,7 @@ public class Contrôleur implements Observateur{
                 joueurs.get(e).addCarte(carte);
             }
         }
-    }*/
+    }
     
     @Override
     public void traiterMessage(Message msg) {
@@ -329,18 +329,8 @@ public class Contrôleur implements Observateur{
                 
                 vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
-                String placement=String.valueOf(msg.getIdTuile());
-                int ligne;
-                int colonne;
-                if (placement.length()==1){
-                    ligne=0;
-                    colonne=Integer.valueOf(String.valueOf(placement.charAt(0)));
-                } else {
-                    ligne=Integer.valueOf(String.valueOf(placement.charAt(0)));
-                    colonne=Integer.valueOf(String.valueOf(placement.charAt(1)));
-                }
-                Tuile tuile=grille.getTuile(ligne, colonne);
-                deplacement(aventurierCourant,tuile);
+                
+                deplacement(aventurierCourant,aventurierCourant.getPosition());
                 vuePlateau.repaint();
                 vuePlateau.deselectionner();
                 
@@ -351,10 +341,14 @@ public class Contrôleur implements Observateur{
             difficulte= msg.getDifficulte();
             initialisationPartie(nbJoueurs);
             afficher();
+            try {
+                tourDeJeu();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Contrôleur.class.getName()).log(Level.SEVERE, null, ex);
+            }
             lancerJeu();
         }
     }
-    
     
     public void deplacement(Aventurier a,Tuile tuile){            
                 a.getPosition().supprAventurier(a);

@@ -8,10 +8,13 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import util.Message;
 import util.Observateur;
 import static util.Utils.Commandes.VALIDER_JOUEURS;
@@ -127,7 +130,37 @@ public class VueInscription extends Observable {
         boutRegles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                JFrame regles = new JFrame("Règles");
+                regles.setSize(750,1000);
+                JPanel panel = new JPanel(new GridLayout(8,1));
+                JTextPane image1 = new JTextPane();
+                JTextPane image2 = new JTextPane();
+                JTextPane image3 = new JTextPane();
+                JTextPane image4 = new JTextPane();
+                JTextPane image5 = new JTextPane();
+                JTextPane image6 = new JTextPane();
+                JTextPane image7 = new JTextPane();
+                JTextPane image8 = new JTextPane();
+                JScrollPane texteDeroulant = new JScrollPane(panel);
+                texteDeroulant.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                panel.add(image1);
+                panel.add(image2);
+                panel.add(image3);
+                panel.add(image4);
+                panel.add(image5);
+                panel.add(image6);
+                panel.add(image7);
+                panel.add(image8);
+                image1.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/1.jpg"));
+                image2.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/2.jpg"));
+                image3.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/3.jpg"));
+                image4.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/4.jpg"));
+                image5.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/5.jpg"));
+                image6.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/6.jpg"));
+                image7.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/7.jpg"));
+                image8.insertIcon(new ImageIcon("/users/info/etu-s2/epalley/Règles ileinterdite/8.jpg"));
+                regles.add(texteDeroulant);
+                regles.setVisible(true);
             }
         });
         
