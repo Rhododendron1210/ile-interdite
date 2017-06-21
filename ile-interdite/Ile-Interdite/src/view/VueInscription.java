@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,14 +37,19 @@ public class VueInscription extends Observable {
         //Partie selection du nombre de joueur
         JPanel panelSelectionNbJoueur = new JPanel(new GridLayout(1,3));
 
-        JRadioButton bout2 = new JRadioButton("2 joueurs");
+        JRadioButton bout2 = new JRadioButton("2 joueurs",true);
         JRadioButton bout3 = new JRadioButton("3 joueurs");
-        JRadioButton bout4 = new JRadioButton("4 joueurs");
-                
+        JRadioButton bout4 = new JRadioButton("4 joueurs");     
+        
+        ButtonGroup grNbJoueurs = new ButtonGroup();
+        grNbJoueurs.add(bout2);
+        grNbJoueurs.add(bout3);
+        grNbJoueurs.add(bout4);
+        
         panelSelectionNbJoueur.add(bout2);
         panelSelectionNbJoueur.add(bout3);
         panelSelectionNbJoueur.add(bout4);
-        
+                
         panelSelectionNbJoueur.setBorder(BorderFactory.createTitledBorder("Nombre de joueurs")); 
                 
         panel.add(panelSelectionNbJoueur);
@@ -52,15 +58,21 @@ public class VueInscription extends Observable {
         JPanel panelSelectionDifficulte = new JPanel(new GridLayout(1,4));
         
         JRadioButton boutNovice = new JRadioButton("Novice");
-        JRadioButton boutNormal = new JRadioButton("Normal");
+        JRadioButton boutNormal = new JRadioButton("Normal",true);
         JRadioButton boutElite = new JRadioButton("Elite");
         JRadioButton boutLegendaire = new JRadioButton("Légendadire");
+        
+        ButtonGroup grDifficulte = new ButtonGroup();
+        grDifficulte.add(boutNovice);
+        grDifficulte.add(boutNormal);
+        grDifficulte.add(boutElite);
+        grDifficulte.add(boutLegendaire);
         
         panelSelectionDifficulte.add(boutNovice);
         panelSelectionDifficulte.add(boutNormal);
         panelSelectionDifficulte.add(boutElite);
         panelSelectionDifficulte.add(boutLegendaire);
-        
+                
         panelSelectionDifficulte.setBorder(BorderFactory.createTitledBorder("Difficulté")); 
         
         panel.add(panelSelectionDifficulte);
