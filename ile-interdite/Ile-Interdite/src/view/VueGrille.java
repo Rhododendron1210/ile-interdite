@@ -28,7 +28,8 @@ public class VueGrille extends JPanel{
             int j = 0;
             for (Tuile tuile : t){
                 VueTuile vue = new VueTuile(tuile);
-                
+                vue.getBouton().setEnabled(false);
+                this.add(vue);
                 affichTuile[i][j] = vue;
                 j += 1;
             }
@@ -48,6 +49,11 @@ public class VueGrille extends JPanel{
         return affichTuile;
     }
 
+    public Tuile[][] getTuiles() {
+        return tuiles;
+    }
+
+    
     
     
    

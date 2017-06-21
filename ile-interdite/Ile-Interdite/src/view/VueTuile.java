@@ -22,7 +22,6 @@ public class VueTuile extends JPanel{
     private int colonne;
     private int ligne;
     private Tuile tuile;
-    private String nom;
     private JButton bouton;
     
     /*VueTuile(Tuile tuile){
@@ -72,7 +71,7 @@ public class VueTuile extends JPanel{
     public void setCouleur(Color couleur) {
         
         this.couleur = couleur;
-        repaint();
+        bouton.repaint();
         System.out.println("couleur");
     }
     
@@ -102,49 +101,29 @@ public class VueTuile extends JPanel{
     }
     private void joueurs(){
         JLabel joueur;
+        
         HashMap<String,Aventurier> aventuriers = tuile.getAventurierPresent();
+        int i = aventuriers.size();
+        if (i!=0){
+            
+        }
+        JPanel panel = new JPanel(new GridLayout(1,i));
         for (Aventurier ave: aventuriers.values()){
             if (ave!=null){
                 joueur= new JLabel(ave.getNom());
-                this.add(joueur,BorderLayout.NORTH);
+                panel.add(joueur);
                 System.out.println("set joueur");
-            } 
-               
-            
+            }  
         }
+        this.add(panel,BorderLayout.NORTH);
     }
     public void update(){
         joueurs();
         validate();
+        
         repaint();
     }
     
-    /*@Override
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        int x = this.getX();
-        int y = this.getY();
-        if (tuile.getNom()!=null){
-            g.setColor(Color.black);
-            g.drawString(tuile.getNom(), x+5, y+5);
-            System.out.println(tuile.getNom());
-        }
-        int height = this.getHeight();
-        int width=this.getWidth();
-        int i=1;
-        HashMap<String,Aventurier> aventuriers = tuile.getAventurierPresent();
-        for (Aventurier ave: aventuriers.values()){
-            if (ave!=null){
-                g.setColor(ave.getCouleur());
-                g.fillRect(x, y+height/5*i, width, height/5);
-                
-            } else {
-                g.setColor(couleur);
-                g.fillRect(x, y+height/5*i, width, height/5);
-            }
-            i=i+1;
-        }
-        
-    }*/
+   
     
 }

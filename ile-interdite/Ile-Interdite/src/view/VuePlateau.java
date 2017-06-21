@@ -18,6 +18,7 @@ import model.aventuriers.Aventurier;
 import util.Message;
 import util.Observateur;
 import util.Parameters;
+import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
 
 /**
@@ -31,6 +32,7 @@ public class VuePlateau extends JFrame {
     private JButton deplacer;
     private JButton assecher;
     private JButton finir;
+    private util.Utils.Commandes commande;
     public VuePlateau(Tuile[][] tuiles){
         
         this.setLocation(180, Parameters.TOP_AUTRES_VUES);
@@ -65,7 +67,21 @@ public class VuePlateau extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 assecher.setEnabled(false);
                 finir.setEnabled(false);
+                commande=BOUGER;
                 Message m = new Message(BOUGER,null,null,null,null);
+                observateur.traiterMessage(m);
+            }
+            
+        });
+        
+        
+        assecher.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deplacer.setEnabled(false);
+                finir.setEnabled(false);
+                commande=ASSECHER;
+                Message m = new Message(ASSECHER,null,null,null,null);
                 observateur.traiterMessage(m);
             }
             
@@ -77,7 +93,7 @@ public class VuePlateau extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         String id = String.valueOf(vue.getLigne())+String.valueOf(vue.getColonne());
-                        Message m = new Message(BOUGER,null,null,null,Integer.valueOf(id));
+                        Message m = new Message(commande,null,null,null,Integer.valueOf(id));
                         observateur.traiterMessage(m);
                     }
                     

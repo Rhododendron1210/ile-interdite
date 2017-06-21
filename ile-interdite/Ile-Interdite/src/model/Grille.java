@@ -76,7 +76,7 @@ public class Grille {
         
         tuile = new Tuile("Le Pond des Abimes      ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Porte de Bronze      ",ASSECHEE , this);
+        tuile = new Tuile("La Porte de Bronze      ",INONDEE , this);
         tuiles.add(tuile);
         tuile = new Tuile("La Caverne des Ombres   ", ASSECHEE, this);
         tuiles.add(tuile);
