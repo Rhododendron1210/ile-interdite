@@ -295,6 +295,7 @@ public class Contrôleur implements Observateur{
     
     public void lancerJeu(){
         vueAventurier2=new VueAventurier2(aventurierCourant);
+        vueMessage.setLabel("au tour du "+aventurierCourant.getNom());
         
     }
     
@@ -561,10 +562,12 @@ public class Contrôleur implements Observateur{
     }
     private void changerJoueur(){
         actionEffectuer=actionEffectuer+1;
+        vueMessage.setLabel("nb de coups restants :\n"+(3-actionEffectuer)+"/3");
         if (actionEffectuer==3){            
             if(joueurs.indexOf(aventurierCourant)+1!=joueurs.size()){
                aventurierCourant=joueurs.get(joueurs.indexOf(aventurierCourant)+1);
                actionEffectuer=0; 
+               vueMessage.setLabel("Au tour du "+aventurierCourant.getNom());
                
             }else{
                 aventurierCourant=joueurs.get(0);
