@@ -23,6 +23,7 @@ public class VueTuile extends JPanel{
     private int ligne;
     private Tuile tuile;
     private String nom;
+    private JButton bouton;
     
     /*VueTuile(Tuile tuile){
         ligne= tuile.getLigne();
@@ -77,6 +78,8 @@ public class VueTuile extends JPanel{
     
     VueTuile(Tuile tuile){
         this.tuile=tuile;
+        this.setLayout(new BorderLayout());
+        bouton= new JButton(tuile.getNom());
         if (tuile.getEtatTuile()==ASSECHEE){
             setCouleur(Color.orange);
         } else if (tuile.getEtatTuile()==INONDEE){
@@ -85,14 +88,38 @@ public class VueTuile extends JPanel{
             setCouleur(Color.gray);
             this.setEnabled(false);
         }
-        this.setBackground(couleur);
+        bouton.setBackground(couleur);
         ligne= tuile.getLigne();
         colonne=tuile.getColonne();
-        repaint();
+        joueurs();
+        this.add(bouton,BorderLayout.CENTER);
+        
         
     }
     
-    @Override
+    public JButton getBouton(){
+        return bouton;
+    }
+    private void joueurs(){
+        JLabel joueur;
+        HashMap<String,Aventurier> aventuriers = tuile.getAventurierPresent();
+        for (Aventurier ave: aventuriers.values()){
+            if (ave!=null){
+                joueur= new JLabel(ave.getNom());
+                this.add(joueur,BorderLayout.NORTH);
+                System.out.println("set joueur");
+            } 
+               
+            
+        }
+    }
+    public void update(){
+        joueurs();
+        validate();
+        repaint();
+    }
+    
+    /*@Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         int x = this.getX();
@@ -118,6 +145,6 @@ public class VueTuile extends JPanel{
             i=i+1;
         }
         
-    }
+    }*/
     
 }

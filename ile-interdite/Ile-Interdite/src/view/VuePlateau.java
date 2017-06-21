@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import model.Tuile;
+import model.aventuriers.Aventurier;
 import util.Message;
 import util.Observateur;
 import util.Parameters;
@@ -72,7 +73,7 @@ public class VuePlateau extends JFrame {
         
         for (VueTuile[] vues : grille.getAffichTuile()){
             for (VueTuile vue: vues){
-                vue.addActionListener(new ActionListener(){
+                vue.getBouton().addActionListener(new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         String id = String.valueOf(vue.getLigne())+String.valueOf(vue.getColonne());
@@ -93,7 +94,7 @@ public class VuePlateau extends JFrame {
             int j = tuile.getColonne();
             //this.grille.getAffichTuile()[i][j].setCouleur(Color.RED);
             //this.grille.getAffichTuile()[i][j].repaint();
-            this.grille.getAffichTuile()[i][j].setEnabled(true);
+            this.grille.getAffichTuile()[i][j].getBouton().setEnabled(true);
             grille.repaint();
             System.out.println("passer");
         }
@@ -113,7 +114,13 @@ public class VuePlateau extends JFrame {
         this.repaint();
     }
     
-    
+    public void update(){
+        for(VueTuile[] tuiles : grille.getAffichTuile()){
+            for (VueTuile tuile : tuiles){
+                tuile.update();
+            }
+        }
+    }
 
    
     

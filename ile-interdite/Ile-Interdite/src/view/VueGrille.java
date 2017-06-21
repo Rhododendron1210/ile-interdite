@@ -38,7 +38,7 @@ public class VueGrille extends JPanel{
     public void creeGrille(){
         for(VueTuile[] t : affichTuile){
             for (VueTuile tuile : t){
-                tuile.setEnabled(false);
+                tuile.getBouton().setEnabled(false);
                 this.add(tuile);
             }
         }

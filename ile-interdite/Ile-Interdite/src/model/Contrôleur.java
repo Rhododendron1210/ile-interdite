@@ -329,9 +329,19 @@ public class Contrôleur implements Observateur{
                 
                 vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
-                
-                deplacement(aventurierCourant,aventurierCourant.getPosition());
-                vuePlateau.repaint();
+                String placement=String.valueOf(msg.getIdTuile());
+                int ligne;
+                int colonne;
+                if (placement.length()==1){
+                    ligne=0;
+                    colonne=Integer.valueOf(String.valueOf(placement.charAt(0)));
+                } else {
+                    ligne=Integer.valueOf(String.valueOf(placement.charAt(0)));
+                    colonne=Integer.valueOf(String.valueOf(placement.charAt(1)));
+                }
+                Tuile tuile=grille.getTuile(ligne, colonne);
+                deplacement(aventurierCourant,tuile);
+                vuePlateau.update();
                 vuePlateau.deselectionner();
                 
             }
