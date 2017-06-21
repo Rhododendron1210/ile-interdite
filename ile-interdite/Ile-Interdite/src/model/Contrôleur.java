@@ -294,9 +294,23 @@ public class Contrôleur implements Observateur{
                 
                 vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
-                
-                deplacement(aventurierCourant,aventurierCourant.getPosition());
-                vuePlateau.repaint();
+                aventurierCourant.getPosition().supprAventurier(aventurierCourant);
+                String placement=String.valueOf(msg.getIdTuile());
+                int ligne;
+                int colonne;
+                if (placement.length()==1){
+                    ligne=0;
+                    colonne=Integer.valueOf(String.valueOf(placement.charAt(0)));
+                } else {
+                    ligne=Integer.valueOf(String.valueOf(placement.charAt(0)));
+                    colonne=Integer.valueOf(String.valueOf(placement.charAt(1)));
+                }
+                Tuile tuile=grille.getTuile(ligne, colonne);
+                System.out.println(placement);
+                System.out.println(ligne);
+                System.out.println(colonne);
+                tuile.addAventurier(aventurierCourant);
+                aventurierCourant.setPosition(tuile);
                 vuePlateau.deselectionner();
                 
             }
@@ -310,11 +324,56 @@ public class Contrôleur implements Observateur{
         }
     }
     
-    public void deplacement(Aventurier a,Tuile tuile){            
+    /*public void deplacement(Aventurier a){
+        int ligne=0;
+        int colonne=0;
+        boolean end ;
+        HashSet<Tuile> tuiles =new HashSet<>();
+        tuiles=a.tuilesPossibles(this.getGrille());
+        if (tuiles.isEmpty()){
+            System.out.println("ne peut pas se deplacer");
+            tour(a);
+        }
+        else{
+            System.out.println("Tuiles Possibles : ");
+            for(Tuile tuile :tuiles){
+                tuile.afficheTuile();
+            }
+            Scanner sc = new Scanner(System.in);
+            end =true;
+            System.out.println("Taper ligne=0 et colonne=0 pour annuler le coix d'action.");
+            while(end ){
+                
+                System.out.println("Ligne");
+                ligne = sc.nextInt();
+                System.out.println("colonne");
+                colonne= sc.nextInt();
+                if(ligne==0&&colonne==0){
+                    end=false;
+                    tour(a);
+                } else if (ligne<6&&ligne>=0&&colonne<6&&colonne>=0){
+                    if (tuiles.contains(grille.getTuile(ligne,colonne))){
+                      end=false;  
+                    } else {
+                        System.out.println("Case avec déplacement non possible");
+                    }
+                    
+                } else {
+                    System.out.println("Case en dehors du plateau");
+                }
+                
+            }
+            if(ligne!=0&&colonne!=0){
                 a.getPosition().supprAventurier(a);
+                Tuile tuile=grille.getTuile(ligne, colonne);
                 tuile.addAventurier(a);
                 a.setPosition(tuile);
-    }
+                grille.afficheGrille();
+            }     
+            
+                        
+        }
+    }*/
     
     
     
