@@ -50,6 +50,21 @@ public class Tuile {
         this.etatTuile= etatTuile;
         
     }
+    public Tuile(String nom, EtatTuile etatTuile, Grille g) {
+        selectionner=false;
+        aventurierPresent=new HashMap<>();
+        this.nom = nom;
+        this.etatTuile= etatTuile;
+        
+    }
+
+    public void setLigne(int ligne) {
+        this.ligne = ligne;
+    }
+
+    public void setColonne(int colonne) {
+        this.colonne = colonne;
+    }
 
     public Tuile(String le_Palais_des_Marées, int i, int i0, boolean b, boolean b0, Grille aThis) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

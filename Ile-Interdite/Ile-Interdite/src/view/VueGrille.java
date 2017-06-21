@@ -7,17 +7,20 @@ import java.awt.LayoutManager;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import model.Tuile;
+import util.Message;
+import util.Observateur;
  
-public class VueGrille extends JPanel {
+public class VueGrille extends JPanel{
     private Tuile[][] tuiles;
     private VueTuile[][] affichTuile;
+    private Observateur observateur;
+    
     VueGrille(Tuile[][] tuiles){
         this.setLayout(new GridLayout(6,6));
         this.tuiles=tuiles;
         this.affichTuile = new VueTuile[6][6];
         initialiser();
         creeGrille();
-        
     }
     private void initialiser(){
         int i = 0;
@@ -34,6 +37,7 @@ public class VueGrille extends JPanel {
     private void creeGrille(){
         for(VueTuile[] t : affichTuile){
             for (VueTuile tuile : t){
+                
                 this.add(tuile);
             }
         }
@@ -42,4 +46,8 @@ public class VueGrille extends JPanel {
     public VueTuile[][] getAffichTuile() {
         return affichTuile;
     }
+
+    
+    
+   
 }

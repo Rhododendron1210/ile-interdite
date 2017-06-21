@@ -12,7 +12,7 @@ package Tresor;
 public class CarteTresor extends CarteTirage {
 
     public CarteTresor(String nom, String description) {
-        super("CarteTresor","description a metre");
+        super(nom,description);
     }
     
 }

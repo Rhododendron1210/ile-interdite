@@ -1,7 +1,11 @@
 package model;
 
+import Tresor.CarteHelicoptere;
 import Tresor.CarteInondation;
+import Tresor.CarteMonteeDesEaux;
+import Tresor.CarteSacsDeSable;
 import Tresor.CarteTirage;
+import Tresor.CarteTresor;
 import util.Observateur;
 import static java.awt.Color.black;
 import java.util.ArrayList;
@@ -24,6 +28,7 @@ import static util.Utils.Commandes.VALIDER_JOUEURS;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
+import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
 import view.VueInscription;
@@ -53,18 +58,22 @@ public class Contrôleur implements Observateur{
     private Stack<CarteInondation> piocheInondation;
     private Stack<CarteInondation> defausseInondation;
     private VueNiveau vueNiveau;
-    private VueInscription vueInscription;
-    
-    private Observateur observateur;
     private boolean finJeu = false;
     private Aventurier aventurierCourant;
-    
-    private int nbJoueur;
-    private int difficulté;
+    private ArrayList<Tresor> tresorsTrouvees;
+    private VueInscription vueInscription;
+    private int nbJoueurs;
+    private int difficulte;
     
     public Contrôleur(){
         vueInscription = new VueInscription();
-        vueInscription.setObservateur(this);
+        tresorsTrouvees=new ArrayList<>();
+        grille=new Grille();
+        joueurs= new HashMap<>();
+        this.setPiocheInondation(new Stack());
+        this.setDefausseInondation(new Stack());
+        defausseTirage=new Stack<>();
+        piocheTirage=new Stack<>();
     }
     
     public void afficherJoueurs(){
@@ -179,6 +188,46 @@ public class Contrôleur implements Observateur{
             } 
         }
         //grille.getTuile(1, 3).addAventurier(a);
+        CarteTirage carte ;
+        carte=new CarteMonteeDesEaux();
+        piocheTirage.add(carte);
+        carte=new CarteMonteeDesEaux();
+        piocheTirage.add(carte);
+        int i;
+        for (i=0 ;i<6 ;i++){
+            carte=new CarteTresor("Zephir","pas description");
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<6 ;i++){
+            carte=new CarteTresor("PIERRE","pas description");
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<6 ;i++){
+            carte=new CarteTresor("CRISTAL","pas description");
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<6 ;i++){
+            carte=new CarteTresor("CALICE","pas description");
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<3 ;i++){
+            carte=new CarteSacsDeSable();
+            piocheTirage.add(carte);
+        }
+        for (i=0 ;i<4 ;i++){
+            carte=new CarteHelicoptere();
+            piocheTirage.add(carte);
+        }
+        
+        
+        
+        ArrayList<Tuile> tuiles;
+        tuiles = this.getGrille().getTuiles();
+        for(Tuile tuile : tuiles){
+            CarteInondation cI = new CarteInondation(tuile);
+            this.getPiocheInondation().push(cI);
+        }
+        Collections.shuffle(piocheInondation);
         
         
     }
@@ -215,43 +264,38 @@ public class Contrôleur implements Observateur{
             if (msg.getIdTuile()==null){
                 HashSet<Tuile> tuiles =new HashSet<>();
                 tuiles=aventurierCourant.tuilesPossibles(this.getGrille());
-                //vuePlateau.tuilespossibles...
+                vuePlateau.selectionnerDeplacer();
+                vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
                 aventurierCourant.getPosition().supprAventurier(aventurierCourant);
                 String placement=String.valueOf(msg.getIdTuile());
-                Tuile tuile=grille.getTuile(Integer.valueOf(placement.charAt(0)), Integer.valueOf(placement.charAt(1)));
+                int ligne;
+                int colonne;
+                if (placement.length()==1){
+                    ligne=0;
+                    colonne=Integer.valueOf(String.valueOf(placement.charAt(0)));
+                } else {
+                    ligne=Integer.valueOf(String.valueOf(placement.charAt(0)));
+                    colonne=Integer.valueOf(String.valueOf(placement.charAt(1)));
+                }
+                Tuile tuile=grille.getTuile(ligne, colonne);
+                System.out.println(placement);
+                System.out.println(ligne);
+                System.out.println(colonne);
                 tuile.addAventurier(aventurierCourant);
                 aventurierCourant.setPosition(tuile);
                 Tuile [][] tuiles = grille.getGrille();
                 vuePlateau=new VuePlateau(tuiles);
-            }
-        }
-        else if (msg.getCommande() == VALIDER_JOUEURS){
+            } 
+        } 
+        if (msg.getCommande()==VALIDER_JOUEURS){
             vueInscription.getWindow().dispose();
-            int nbJoueurs = vueInscription.getNbJoueurs();
-            int difficulte = vueInscription.getDifficulte();
-            grille=new Grille();
-            //vueAventurier2 = new VueAventurier2();
-            joueurs= new HashMap<>();
-            initialisationPartie();
-            afficher();
-            grille.afficheGrille();
+             initialisationPartie();
+             grille.afficheGrille();
             //tourDeJeu();
+            afficher();
             lancerJeu();
-            this.setPiocheInondation(new Stack());
-            this.setDefausseInondation(new Stack());
-            ArrayList<Tuile> tuiles;
-            tuiles = this.getGrille().getTuiles();
-            for(Tuile tuile : tuiles){
-                CarteInondation cI = new CarteInondation(tuile);
-                this.getPiocheInondation().push(cI);
-            }
-            Collections.shuffle(piocheInondation);
-            defausseTirage=new Stack<>();
-
-            piocheTirage=new Stack<>();//ligne a refaire
         }
-             
     }
     
     public void deplacement(Aventurier a){
@@ -421,11 +465,11 @@ public class Contrôleur implements Observateur{
     }
 
     private void addDefausseTirage(CarteTirage carte) {
-        defausseTirage.add(carte);
+        defausseTirage.push(carte);
     }
 
     private void addPiocheInondation(CarteInondation carte){
-        piocheInondation.add(carte);
+        piocheInondation.push(carte);
     }
     
     private CarteTirage piocherCarteTirage(){
@@ -434,11 +478,25 @@ public class Contrôleur implements Observateur{
         CarteTirage carte=piocheTirage.pop();
         if (piocheTirage.empty()){
             while(!defausseTirage.empty()){
-               piocheTirage.add(defausseTirage.pop());
+               piocheTirage.push(defausseTirage.pop());
             }
             Collections.shuffle(piocheTirage);
         }
         return carte;
     }
+    public void recuperationTresorTuile( Aventurier a,Tresor tresor){
+        a.addTresors(tresor);
+        this.addTresorsTrouvees(tresor);
+        
+        
+    }
+
+    private void addTresorsTrouvees(Tresor tresor) {
+        tresorsTrouvees.add(tresor);
+    }
+    
+  
+    
+
 }
 

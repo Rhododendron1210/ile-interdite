@@ -88,7 +88,7 @@ public class VueInscription extends Observable {
             nbJoueurs = 3;
         } else if (bout4.isSelected()) {
             nbJoueurs = 4;
-        }
+}
         
         if (boutNovice.isSelected()) {
             difficulte = 1;
