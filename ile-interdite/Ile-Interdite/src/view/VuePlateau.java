@@ -128,14 +128,7 @@ public class VuePlateau extends JFrame {
         this.repaint();
     }
     
-    public void update(){
-        
-        for(VueTuile[] t : grille.getAffichTuile()){
-            for (VueTuile tuile : t){
-                tuile.update();
-            }
-        }
-    }
+    
 
    
     

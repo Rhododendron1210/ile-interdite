@@ -1,13 +1,8 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import model.Tuile;
-import util.Message;
 import util.Observateur;
  
 public class VueGrille extends JPanel{
@@ -53,10 +48,7 @@ public class VueGrille extends JPanel{
         return tuiles;
     }
     
-    public void upadate(){
-        initialiser();
-        creeGrille();
-    }
+    
     
     
     
