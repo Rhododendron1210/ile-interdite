@@ -107,7 +107,7 @@ public class VueTuile extends JPanel{
         if (i!=0){
             
         }
-        JPanel panel = new JPanel(new GridLayout(1,i));
+        JPanel panel = new JPanel(new GridLayout(i,1));
         for (Aventurier ave: aventuriers.values()){
             if (ave!=null){
                 joueur= new JLabel(ave.getNom());
@@ -116,12 +116,6 @@ public class VueTuile extends JPanel{
             }  
         }
         this.add(panel,BorderLayout.NORTH);
-    }
-    public void update(){
-        joueurs();
-        validate();
-        
-        repaint();
     }
     
    
