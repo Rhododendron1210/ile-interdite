@@ -181,7 +181,7 @@ public class Contrôleur implements Observateur{
         }
         //grille.getTuile(1, 2).addAventurier(a);
         
-        a=new Navigateur( "navigateur               ","Navigateur",grille.getTuile(1, 3));
+       
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="La Porte d'or           "){
                 a=new Navigateur( "navigateur               ","Navigateur",t);
