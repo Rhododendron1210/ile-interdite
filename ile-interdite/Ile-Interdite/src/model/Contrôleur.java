@@ -84,11 +84,12 @@ public class Contrôleur implements Observateur{
         }
     }
     public void afficher(){
+        
         Tuile [][] tuiles = grille.getGrille();
         vuePlateau= new VuePlateau(tuiles);
         vuePlateau.setObservateur(this);
         
-        vueNiveau=new VueNiveau(1);
+        vueNiveau=new VueNiveau(difficulte);
     }
 
     public HashMap<String, Aventurier> getJoueurs() {
