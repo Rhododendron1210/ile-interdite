@@ -74,53 +74,53 @@ public class Grille {
         
         
         
-        tuile = new Tuile("Le Pond des Abimes      ", 0, 2, ASSECHEE, this);
+        tuile = new Tuile("Le Pond des Abimes      ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Porte de Bronze      ", 0, 3,ASSECHEE , this);
+        tuile = new Tuile("La Porte de Bronze      ",ASSECHEE , this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Caverne des Ombres   ", 1, 1, ASSECHEE, this);
+        tuile = new Tuile("La Caverne des Ombres   ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Porte de Fer         ", 1, 2, ASSECHEE, this);
+        tuile = new Tuile("La Porte de Fer         ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Porte d'or           ", 1, 3, ASSECHEE, this);
+        tuile = new Tuile("La Porte d'or           ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Les Falaises de L'oubli ", 1, 4, ASSECHEE, this);
+        tuile = new Tuile("Les Falaises de L'oubli ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Palais de Corail     ", 2, 0, ASSECHEE, this);
+        tuile = new Tuile("Le Palais de Corail     ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Porte d'Argent       ", 2, 1, ASSECHEE, this);
+        tuile = new Tuile("La Porte d'Argent       ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Les Dunes de L'Illusion ", 2, 2, ASSECHEE, this);
+        tuile = new Tuile("Les Dunes de L'Illusion ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Heliport                ", 2, 3, ASSECHEE, this);
+        tuile = new Tuile("Heliport                ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Porte de Cuivre      ", 2, 4, ASSECHEE, this);
+        tuile = new Tuile("La Porte de Cuivre      ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Jardin des Hurlements", 2, 5, ASSECHEE, this);
+        tuile = new Tuile("Le Jardin des Hurlements", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Foret Pourpre        ", 3, 0, ASSECHEE, this);
+        tuile = new Tuile("La Foret Pourpre        ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Lagon Perdu          ", 3, 1, ASSECHEE, this);
+        tuile = new Tuile("Le Lagon Perdu          ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Marais Brumeux       ", 3, 2, ASSECHEE, this);
+        tuile = new Tuile("Le Marais Brumeux       ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Observatoire            ", 3, 3,ASSECHEE , this);
+        tuile = new Tuile("Observatoire            ",ASSECHEE , this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Rocher Fantome       ", 3, 4, ASSECHEE, this);
+        tuile = new Tuile("Le Rocher Fantome       ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Caverne du Brasier   ", 3, 5,ASSECHEE , this);
+        tuile = new Tuile("La Caverne du Brasier   ",ASSECHEE , this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Temple du Soleil     ", 4, 1, ASSECHEE, this);
+        tuile = new Tuile("Le Temple du Soleil     ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Temple de la Lune    ", 4, 2, ASSECHEE, this);
+        tuile = new Tuile("Le Temple de la Lune    ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Palais des Marées    ", 4, 3, ASSECHEE, this);
+        tuile = new Tuile("Le Palais des Marées    ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Val du Crepuscule    ", 4, 4, ASSECHEE, this);
+        tuile = new Tuile("Le Val du Crepuscule    ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("La Tour de Guet         ", 5, 2, ASSECHEE, this);
+        tuile = new Tuile("La Tour de Guet         ", ASSECHEE, this);
         tuiles.add(tuile);
-        tuile = new Tuile("Le Jardin des Murmures  ", 5, 3,ASSECHEE , this);
+        tuile = new Tuile("Le Jardin des Murmures  ",ASSECHEE , this);
         tuiles.add(tuile);
         
         
@@ -134,6 +134,8 @@ public class Grille {
         for (i = 0; i <= 5; i++){
             for (w = 0; w <= 5; w++) {
                 if (grille[i][w]==null){
+                    tuiles.get(t).setLigne(i);
+                    tuiles.get(t).setColonne(w);
                     grille[i][w]=tuiles.get(t);
                     t=t+1;
                 }

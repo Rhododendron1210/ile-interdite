@@ -67,6 +67,9 @@ public class VuePlateau extends JFrame implements Observateur{
             
         });
         
+        for (VueTuile[] vues : grille.getAffichTuile()){
+            for (VueTuile vue)
+        }
         
         
     }

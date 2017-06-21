@@ -232,7 +232,19 @@ public class Contrôleur implements Observateur{
             } else {
                 aventurierCourant.getPosition().supprAventurier(aventurierCourant);
                 String placement=String.valueOf(msg.getIdTuile());
-                Tuile tuile=grille.getTuile(Integer.valueOf(placement.charAt(0)), Integer.valueOf(placement.charAt(1)));
+                int ligne;
+                int colonne;
+                if (placement.length()==1){
+                    ligne=0;
+                    colonne=Integer.valueOf(String.valueOf(placement.charAt(0)));
+                } else {
+                    ligne=Integer.valueOf(String.valueOf(placement.charAt(0)));
+                    colonne=Integer.valueOf(String.valueOf(placement.charAt(1)));
+                }
+                Tuile tuile=grille.getTuile(ligne, colonne);
+                System.out.println(placement);
+                System.out.println(ligne);
+                System.out.println(colonne);
                 tuile.addAventurier(aventurierCourant);
                 aventurierCourant.setPosition(tuile);
                 Tuile [][] tuiles = grille.getGrille();
