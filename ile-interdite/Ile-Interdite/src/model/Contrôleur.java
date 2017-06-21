@@ -32,6 +32,7 @@ import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
 import view.VueInscription;
+import view.VueMessage;
 import view.VueNiveau;
 import view.VuePlateau;
 
@@ -63,6 +64,7 @@ public class Contrôleur implements Observateur{
     private boolean finJeu = false;
     private Aventurier aventurierCourant;
     private ArrayList<Tresor> tresorsTrouvees;
+    private VueMessage vueMessage;
     
     public Contrôleur(){
         tresorsTrouvees=new ArrayList<>();
@@ -87,7 +89,7 @@ public class Contrôleur implements Observateur{
         Tuile [][] tuiles = grille.getGrille();
         vuePlateau= new VuePlateau(tuiles);
         vuePlateau.setObservateur(this);
-        
+        vueMessage=new VueMessage();
         vueNiveau=new VueNiveau(difficulte);
     }
 
