@@ -131,14 +131,18 @@ public class Contrôleur implements Observateur{
     
     
     
-    public void initialisationPartie(){
+    public void initialisationPartie(int nbJoueur){
         
         grille.creeTuiles();
         Aventurier a;
+        
+        ArrayList<Aventurier> aventuriers = new ArrayList();
+        a = new Explorateur("explorateur              ","Explorateur",null);
+        aventuriers.add(a);
+        
         for (Tuile t :grille.getTuiles()){
             if (t.getNom()=="La Porte de Cuivre      "){
                 a = new Explorateur("explorateur              ","Explorateur",t);
-
                 joueurs.put("explorateur", a);
                 t.aventurierPresent.put(a.getNom(),a);
             } 
