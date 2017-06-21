@@ -24,14 +24,12 @@ import model.aventuriers.Pilote;
 import model.aventuriers.Plongeur;
 import util.Message;
 import static util.Utils.Commandes.BOUGER;
-import static util.Utils.Commandes.VALIDER_JOUEURS;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
-import view.VueInscription;
 import view.VueNiveau;
 import view.VuePlateau;
 
@@ -61,12 +59,8 @@ public class Contrôleur implements Observateur{
     private boolean finJeu = false;
     private Aventurier aventurierCourant;
     private ArrayList<Tresor> tresorsTrouvees;
-    private VueInscription vueInscription;
-    private int nbJoueurs;
-    private int difficulte;
     
     public Contrôleur(){
-        vueInscription = new VueInscription();
         tresorsTrouvees=new ArrayList<>();
         grille=new Grille();
         joueurs= new HashMap<>();
@@ -74,6 +68,12 @@ public class Contrôleur implements Observateur{
         this.setDefausseInondation(new Stack());
         defausseTirage=new Stack<>();
         piocheTirage=new Stack<>();
+        initialisationPartie();
+        grille.afficheGrille();
+        //tourDeJeu();
+        afficher();
+        lancerJeu();
+        
     }
     
     public void afficherJoueurs(){
@@ -237,7 +237,7 @@ public class Contrôleur implements Observateur{
     }
     
     
-    public void tourDeJeu(){
+    /*public void tourDeJeu(){
         int i;
         for(String e:joueurs.keySet()){
             //afficher vueAventurier
@@ -256,7 +256,7 @@ public class Contrôleur implements Observateur{
                 joueurs.get(e).addCarte(carte);
             }
         }
-    }
+    }*/
     
     @Override
     public void traiterMessage(Message msg) {
@@ -264,7 +264,7 @@ public class Contrôleur implements Observateur{
             if (msg.getIdTuile()==null){
                 HashSet<Tuile> tuiles =new HashSet<>();
                 tuiles=aventurierCourant.tuilesPossibles(this.getGrille());
-                vuePlateau.selectionnerDeplacer();
+                
                 vuePlateau.afficherTuilesPossibles(tuiles);
             } else {
                 aventurierCourant.getPosition().supprAventurier(aventurierCourant);
@@ -284,21 +284,15 @@ public class Contrôleur implements Observateur{
                 System.out.println(colonne);
                 tuile.addAventurier(aventurierCourant);
                 aventurierCourant.setPosition(tuile);
-                Tuile [][] tuiles = grille.getGrille();
-                vuePlateau=new VuePlateau(tuiles);
-            } 
+                vuePlateau.deselectionner();
+                
+            }
+            
+            
         } 
-        if (msg.getCommande()==VALIDER_JOUEURS){
-            vueInscription.getWindow().dispose();
-             initialisationPartie();
-             grille.afficheGrille();
-            //tourDeJeu();
-            afficher();
-            lancerJeu();
-        }
     }
     
-    public void deplacement(Aventurier a){
+    /*public void deplacement(Aventurier a){
         int ligne=0;
         int colonne=0;
         boolean end ;
@@ -347,11 +341,11 @@ public class Contrôleur implements Observateur{
             
                         
         }
-    }
+    }*/
     
     
     
-    public void tour(Aventurier a){
+    /*public void tour(Aventurier a){
         Scanner sc = new Scanner(System.in);
         int i;
         System.out.println("Choisir une action :");
@@ -368,9 +362,9 @@ public class Contrôleur implements Observateur{
             tour(a);
         } 
     }
+    */
     
-    
-    public void assecherTuile(Aventurier a){
+    /*public void assecherTuile(Aventurier a){
         HashSet<Tuile> tuiles = a.assechementPossible(this.getGrille());
         int ligne=0;
         int colonne=0;
@@ -431,7 +425,7 @@ public class Contrôleur implements Observateur{
         }
        
         
-    }
+    }*/
     
     public void tirerCarteInondation(){
         CarteInondation cI = this.getPiocheInondation().pop();
@@ -455,7 +449,7 @@ public class Contrôleur implements Observateur{
                         for(String key : t.getAventurierPresent().keySet()){
                             a = t.getAventurierPresent().get(key);
                         }
-                        this.deplacement(a);                
+                        //this.deplacement(a);                
                 }
             }
         }

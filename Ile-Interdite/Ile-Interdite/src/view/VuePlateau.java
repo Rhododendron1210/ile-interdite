@@ -61,6 +61,8 @@ public class VuePlateau extends JFrame {
         deplacer.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                assecher.setEnabled(false);
+                finir.setEnabled(false);
                 Message m = new Message(BOUGER,null,null,null,null,0,0);
                 observateur.traiterMessage(m);
             }
@@ -88,8 +90,9 @@ public class VuePlateau extends JFrame {
         for(Tuile tuile: tuiles){
             int i = tuile.getLigne();
             int j = tuile.getColonne();
-            this.grille.getAffichTuile()[i][j].setCouleur(Color.RED);
+            //this.grille.getAffichTuile()[i][j].setCouleur(Color.RED);
             //this.grille.getAffichTuile()[i][j].repaint();
+            this.grille.getAffichTuile()[i][j].setEnabled(true);
             grille.repaint();
             System.out.println("passer");
         }
@@ -100,15 +103,12 @@ public class VuePlateau extends JFrame {
         this.observateur = observateur;
     }
     
-    public void selectionnerDeplacer(){
-        assecher.setEnabled(false);
-        finir.setEnabled(false);
-        this.repaint();
-    }
+    
     public void deselectionner(){
         assecher.setEnabled(true);
         finir.setEnabled(true);
         deplacer.setEnabled(true);
+        grille.creeGrille();
         this.repaint();
     }
 

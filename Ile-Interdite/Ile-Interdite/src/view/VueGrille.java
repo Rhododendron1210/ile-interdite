@@ -28,16 +28,17 @@ public class VueGrille extends JPanel{
             int j = 0;
             for (Tuile tuile : t){
                 VueTuile vue = new VueTuile(tuile);
+                
                 affichTuile[i][j] = vue;
                 j += 1;
             }
             i += 1;
         }
     }
-    private void creeGrille(){
+    public void creeGrille(){
         for(VueTuile[] t : affichTuile){
             for (VueTuile tuile : t){
-                
+                tuile.setEnabled(false);
                 this.add(tuile);
             }
         }
