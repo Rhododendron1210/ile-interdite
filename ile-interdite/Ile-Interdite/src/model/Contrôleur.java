@@ -240,35 +240,38 @@ public class Contrôleur implements Observateur{
 
         //grille.getTuile(1, 3).addAventurier(a);
         CarteTirage carte ;
-        carte=new CarteMonteeDesEaux();
-        piocheTirage.push(carte);
-        carte=new CarteMonteeDesEaux();
-        piocheTirage.push(carte);
+        
         int i;
-        for (i=0 ;i<6 ;i++){
+        for (i=0 ;i<5 ;i++){
             carte=new CarteTresor("Zephir","pas description");
             piocheTirage.push(carte);
         }
-        for (i=0 ;i<6 ;i++){
+        for (i=0 ;i<5 ;i++){
             carte=new CarteTresor("PIERRE","pas description");
             piocheTirage.push(carte);
         }
-        for (i=0 ;i<6 ;i++){
+        for (i=0 ;i<5 ;i++){
             carte=new CarteTresor("CRISTAL","pas description");
             piocheTirage.push(carte);
         }
-        for (i=0 ;i<6 ;i++){
+        for (i=0 ;i<5 ;i++){
             carte=new CarteTresor("CALICE","pas description");
             piocheTirage.push(carte);
         }
-        for (i=0 ;i<3 ;i++){
+        for (i=0 ;i<2 ;i++){
             carte=new CarteSacsDeSable();
             piocheTirage.push(carte);
         }
-        for (i=0 ;i<4 ;i++){
+        for (i=0 ;i<3 ;i++){
             carte=new CarteHelicoptere();
             piocheTirage.push(carte);
         }
+        for (i=0 ;i<2 ;i++){
+            carte=new CarteMonteeDesEaux();
+            piocheTirage.push(carte);
+        }
+        
+        
         
         Collections.shuffle(piocheTirage);
         
@@ -482,6 +485,7 @@ public class Contrôleur implements Observateur{
     }*/
     
     private void monteeEaux(CarteTirage carte){
+        System.out.print("fgztrhlzlthẑotrphokerthetrktykeohêotkyhjokteypjkptyokjpr$oykjtypj$orktyjoketp$o");
         int niv = getGrille().getNiveauEaux();
         niv=niv+1;
         getGrille().setNiveauEaux(niv);

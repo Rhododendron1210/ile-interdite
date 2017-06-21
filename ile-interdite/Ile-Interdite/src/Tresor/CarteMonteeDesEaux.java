@@ -12,6 +12,6 @@ package Tresor;
 public class CarteMonteeDesEaux extends CarteTirage{
     
     public CarteMonteeDesEaux() {
-        super("CarteHelicoptere","description a metre");
+        super("CarteMonteeDesEaux","description a metre");
     }
 }
