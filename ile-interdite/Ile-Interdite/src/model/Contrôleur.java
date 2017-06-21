@@ -207,29 +207,30 @@ public class Contrôleur implements Observateur{
         int i;
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("Zephir","pas description");
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("PIERRE","pas description");
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("CRISTAL","pas description");
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<6 ;i++){
             carte=new CarteTresor("CALICE","pas description");
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<3 ;i++){
             carte=new CarteSacsDeSable();
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         for (i=0 ;i<4 ;i++){
             carte=new CarteHelicoptere();
-            piocheTirage.add(carte);
+            piocheTirage.push(carte);
         }
         
+        Collections.shuffle(piocheTirage);
         
         
         ArrayList<Tuile> tuiles;
