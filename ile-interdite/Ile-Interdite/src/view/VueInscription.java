@@ -27,7 +27,7 @@ public class VueInscription extends Observable {
     private JFrame window;
     
     public VueInscription(){
-        
+        //je suis vivant
         window = new JFrame("Inscription");
         window.setSize(900,600);
         
