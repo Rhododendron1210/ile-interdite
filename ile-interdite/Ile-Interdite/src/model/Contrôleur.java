@@ -510,7 +510,8 @@ public class Contrôleur implements Observateur{
     }
     private void changerJoueur(){
         if (actionEffectuer==3){
-            aventurierCourant=joueurs.get(joueurs.indexOf(aventurierCourant)+1);            
+            aventurierCourant=joueurs.get(joueurs.indexOf(aventurierCourant)+1);
+            actionEffectuer=0;
         }
     }
     
