@@ -83,13 +83,19 @@ public class VueInscription extends Observable {
         window.setVisible(true);
         
         //Récupération des données
+       
+        
+        boutJouer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Récupération des données
         if (bout2.isSelected()) {
             nbJoueurs = 2;
         } else if (bout3.isSelected()) {
             nbJoueurs = 3;
         } else if (bout4.isSelected()) {
             nbJoueurs = 4;
-}
+        }
         
         if (boutNovice.isSelected()) {
             difficulte = 1;
@@ -100,12 +106,8 @@ public class VueInscription extends Observable {
         } else if (boutLegendaire.isSelected()) {
             difficulte = 4;
         }
-        
-        boutJouer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
                 Message m;
-                m = new Message(VALIDER_JOUEURS, null, null, null,  null, 0, 0);
+                m = new Message(VALIDER_JOUEURS, null, null, null,  null, nbJoueurs , difficulte);
                 observateur.traiterMessage(m);
             }
         });
