@@ -346,8 +346,11 @@ public class Contrôleur implements Observateur{
 
                 deplacement(aventurierCourant, tuile);
                 
-                vuePlateau.update();
-                vuePlateau.deselectionner();
+                //vuePlateau.update();
+                //vuePlateau.deselectionner();
+                vuePlateau.dispose();
+                vuePlateau=new VuePlateau(grille.getGrille());
+                vuePlateau.setObservateur(this);
                 
             }
         } else if(msg.getCommande()==VALIDER_JOUEURS) {
@@ -383,8 +386,11 @@ public class Contrôleur implements Observateur{
                 Tuile tuile = grille.getTuile(ligne, colonne);
                 assechement(tuile);
                 
-                vuePlateau.update();
-                vuePlateau.deselectionner();
+                //vuePlateau.update();
+                //vuePlateau.deselectionner();
+                vuePlateau.dispose();
+                vuePlateau=new VuePlateau(grille.getGrille());
+                vuePlateau.setObservateur(this);
 
             }
         }
@@ -563,6 +569,8 @@ public class Contrôleur implements Observateur{
             }
             
         }
+        vueAventurier2.dispose();
+        vueAventurier2= new VueAventurier2(aventurierCourant);
             
         
     }
