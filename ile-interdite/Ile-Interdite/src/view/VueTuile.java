@@ -41,7 +41,7 @@ public class VueTuile extends JPanel{
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
         bouton.repaint();
-        System.out.println("couleur");
+       
     }
     
     VueTuile(Tuile tuile){
