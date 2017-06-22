@@ -40,6 +40,7 @@ import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
+import view.VueDefausse;
 import view.VueEchange;
 import view.VueInscription;
 import view.VueMessage;
@@ -321,7 +322,7 @@ public class Contrôleur implements Observateur{
             prendreTresor();
         }
         else if(msg.getCommande() == DEFAUSSE){
-            carteADefausser();
+            System.out.println("sqdf");
         } else if (msg.getCommande() == DONNER){
             if(msg.getIdAventurier()==null&&msg.getIdCarte()==null){
                 vueEchange= new VueEchange(aventurierCourant.getPossede(),joueurs);
@@ -691,8 +692,9 @@ public class Contrôleur implements Observateur{
     }
     
     private void carteADefausser() {
+        
         if (aventurierCourant.getPossede().size()>8){               
-                    //VueDefausse(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());                
+                    VueDefausse vueDefausse=new VueDefausse(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());                
         }    
     }
     
