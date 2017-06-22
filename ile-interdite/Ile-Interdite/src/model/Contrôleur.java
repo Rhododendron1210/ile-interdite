@@ -480,12 +480,13 @@ public class Contrôleur implements Observateur{
         actionEffectuer=actionEffectuer+1;
         vueMessage.setLabel("nb de coups restants :\n"+(3-actionEffectuer)+"/3");
         if (actionEffectuer==3){
-            piocherCarteTirage(aventurierCourant);
-            piocherCarteTirage(aventurierCourant);
             int i;
             for(i=0;i<difficulte;i++){
                 tirerCarteInondation();
             }
+            piocherCarteTirage(aventurierCourant);
+            piocherCarteTirage(aventurierCourant);
+            
             if(joueurs.indexOf(aventurierCourant)+1!=joueurs.size()){
                aventurierCourant=joueurs.get(joueurs.indexOf(aventurierCourant)+1);
                actionEffectuer=0; 
