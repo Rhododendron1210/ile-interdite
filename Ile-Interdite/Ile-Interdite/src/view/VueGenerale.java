@@ -34,7 +34,7 @@ public class VueGenerale extends JFrame implements Observateur{
     private int difficulte;
     private Observateur observateur;
     private VueTresor vueTresor;
-    
+    //
     public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs,Aventurier a,ArrayList<Tresor> tresorsTrouves){
         this.setLayout(new BorderLayout());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
