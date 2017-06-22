@@ -6,19 +6,11 @@ import Tresor.CarteMonteeDesEaux;
 import Tresor.CarteSacsDeSable;
 import Tresor.CarteTirage;
 import Tresor.CarteTresor;
-import java.awt.BorderLayout;
 import util.Observateur;
-import static java.awt.Color.black;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Stack;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.text.html.HTMLDocument.Iterator;
 import model.aventuriers.Aventurier;
 import model.aventuriers.Explorateur;
 import model.aventuriers.Ingenieur;
@@ -39,15 +31,11 @@ import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.COULEE;
 import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
-import view.VueAventurier;
-import view.VueAventurier2;
 import view.VueDefausse;
 import view.VueEchange;
 import view.VueGenerale;
 import view.VueInscription;
-import view.VueMessage;
-import view.VueNiveau;
-import view.VuePlateau;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
