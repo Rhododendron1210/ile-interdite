@@ -1,0 +1,18 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package view;
+
+import javax.swing.JFrame;
+
+/**
+ *
+ * @author epalley
+ */
+public class VueDefausse extends JFrame{
+    VueDefausse(int nbDefausse){
+        JFrame window = new JFrame("Défausse des cartes");
+    }
+}
