@@ -145,8 +145,6 @@ public abstract class Aventurier extends ObjetIdentifie{
         this.tresors = tresors;
     }
     
-    public void removePossede(CarteTirage carte){
-        possede.remove(carte);
-    }
+    
     
 }

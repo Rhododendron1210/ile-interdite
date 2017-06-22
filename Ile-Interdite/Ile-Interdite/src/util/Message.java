@@ -1,7 +1,6 @@
 package util;
 
 import java.io.Serializable;
-import util.Utils.Tresor;
 
 /**
  *
@@ -11,13 +10,13 @@ public class Message implements Serializable {
     private final Utils.Commandes commande ;
     private final String idAventurier ;
     private final String idCarte ;
-    private final  Tresor tresor ;
+    private final  Utils.Tresor tresor ;
     private final Integer idTuile ;
     private int nbJoueurs;
     private int difficulte;
     private String nomCarte;
     
-    public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Tresor tresor, Integer idTuile) {
+    public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Utils.Tresor tresor, Integer idTuile) {
         this.commande = commande ;
         this.idAventurier = idAventurier ;
         this.idCarte = idCarte ;
@@ -25,7 +24,7 @@ public class Message implements Serializable {
         this.idTuile = idTuile ;
     }
     
-    public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Tresor tresor, Integer idTuile, int nbJoueurs, int difficulte) {
+    public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Utils.Tresor tresor, Integer idTuile, int nbJoueurs, int difficulte) {
         this.commande = commande ;
         this.idAventurier = idAventurier ;
         this.idCarte = idCarte ;
@@ -81,7 +80,7 @@ public class Message implements Serializable {
     public Boolean hasTresor() {
         return tresor != null ;
     }
-    public  Tresor getTresor() {
+    public  Utils.Tresor getTresor() {
         return tresor;
     }
 

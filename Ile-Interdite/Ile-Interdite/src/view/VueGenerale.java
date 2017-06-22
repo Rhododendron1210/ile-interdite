@@ -18,8 +18,6 @@ import model.Tuile;
 import model.aventuriers.Aventurier;
 import util.Message;
 import util.Observateur;
-import util.Utils;
-import util.Utils.Tresor;
 
 /**
  *
@@ -33,9 +31,8 @@ public class VueGenerale extends JFrame implements Observateur{
     private VueMessage vueMessage;
     private int difficulte;
     private Observateur observateur;
-    private VueTresor vueTresor;
     
-    public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs,Aventurier a,ArrayList<Tresor> tresorsTrouves){
+    public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs,Aventurier a){
         this.setLayout(new BorderLayout());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height);
@@ -44,12 +41,8 @@ public class VueGenerale extends JFrame implements Observateur{
         vuePlateau.setObservateur(this);
         this.add(vuePlateau,BorderLayout.CENTER);
         this.difficulte=difficulte;
-        JPanel panelGauche = new JPanel(new GridLayout(2,1));
         vueNiveau=new VueNiveau(difficulte);
-        vueTresor = new VueTresor(tresorsTrouves);
-        panelGauche.add(vueNiveau);
-        panelGauche.add(vueTresor);
-        this.add(panelGauche,BorderLayout.WEST);
+        this.add(vueNiveau,BorderLayout.WEST);
         int i = joueurs.size();
         JPanel panel = new JPanel(new GridLayout(1,i));
         aventuriers = new ArrayList();
@@ -97,5 +90,6 @@ public class VueGenerale extends JFrame implements Observateur{
     public void setNiveau(Integer niveau){
         vueNiveau.setNiveau(niveau);
     }
+    
     
 }
