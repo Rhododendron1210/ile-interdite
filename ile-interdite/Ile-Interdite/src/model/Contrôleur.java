@@ -6,19 +6,11 @@ import Tresor.CarteMonteeDesEaux;
 import Tresor.CarteSacsDeSable;
 import Tresor.CarteTirage;
 import Tresor.CarteTresor;
-import java.awt.BorderLayout;
 import util.Observateur;
-import static java.awt.Color.black;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Stack;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.text.html.HTMLDocument.Iterator;
 import model.aventuriers.Aventurier;
 import model.aventuriers.Explorateur;
 import model.aventuriers.Ingenieur;
@@ -39,15 +31,11 @@ import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.COULEE;
 import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
-import view.VueAventurier;
-import view.VueAventurier2;
 import view.VueDefausse;
 import view.VueEchange;
 import view.VueGenerale;
 import view.VueInscription;
-import view.VueMessage;
-import view.VueNiveau;
-import view.VuePlateau;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -81,8 +69,8 @@ public class Contrôleur implements Observateur {
         tresorsTrouvees = new ArrayList<>();
         grille = new Grille();
         joueurs = new ArrayList<>();
-        this.setPiocheInondation(new Stack());
-        this.setDefausseInondation(new Stack());
+        piocheInondation=new Stack();
+        defausseInondation=new Stack();
         defausseTirage = new Stack<>();
         piocheTirage = new Stack<>();
         vueInscription = new VueInscription();
@@ -143,7 +131,7 @@ public class Contrôleur implements Observateur {
         tuiles = grille.getTuiles();
         for (Tuile tuile : tuiles) {
             CarteInondation cI = new CarteInondation(tuile);
-            this.getPiocheInondation().push(cI);
+            this.piocheInondation.push(cI);
         }
         Collections.shuffle(piocheInondation);
 
@@ -288,16 +276,16 @@ public class Contrôleur implements Observateur {
     }
 
     public void tirerCarteInondation() {
-        Stack defausse = this.getDefausseInondation();
-        if (this.getPiocheInondation().isEmpty()) {
+        Stack defausse = this.defausseInondation;
+        if (this.piocheInondation.isEmpty()) {
             Collections.shuffle(defausse);                                      //On mélange la defausse
             while (!(defausse.isEmpty())) {
-                this.getPiocheInondation().push(getDefausseInondation().pop()); //On deplace la defausse dans la pioche
+                this.piocheInondation.push(defausseInondation.pop()); //On deplace la defausse dans la pioche
             }
         }
-        CarteInondation cI = this.getPiocheInondation().pop();
+        CarteInondation cI = this.piocheInondation.pop();
         Tuile t = cI.getTuile();
-        this.getDefausseInondation().push(cI);
+        this.defausseInondation.push(cI);
         EtatTuile etat = t.getEtatTuile();
         if (etat == ASSECHEE) {
             t.setInondée();
@@ -377,11 +365,11 @@ public class Contrôleur implements Observateur {
         this.addTresorsTrouvees(tresor);
 
     }
-
+    //
     private void addTresorsTrouvees(Tresor tresor) {
         tresorsTrouvees.add(tresor);
     }
-
+    //compte les coups du joueur et passe au joueur suivant si coups=3
     private void changerJoueur() {
         actionEffectuer = actionEffectuer + 1;
         
@@ -413,22 +401,22 @@ public class Contrôleur implements Observateur {
         vueGenerale.setMessage("nb de coups restants :\n" + (3 - actionEffectuer) + "/3");
 
     }
-
+    //place les joueurs sur leur tuile de départ en foncton du nb de joueurs
     public void initialiserJoueur(int nbJoueur) {
         Aventurier a;
 
         ArrayList<Aventurier> aventuriers = new ArrayList();
-        a = new Explorateur("explorateur              ", "Explorateur", null);
+        a = new Explorateur("Explorateur              ", "Explorateur", null);
         aventuriers.add(a);
-        a = new Messager("messager                 ", "Messager", null);
+        a = new Messager("Messager                 ", "Messager", null);
         aventuriers.add(a);
-        a = new Ingenieur("ingénieur                ", "Ingénieur", null);
+        a = new Ingenieur("Ingénieur                ", "Ingénieur", null);
         aventuriers.add(a);
-        a = new Pilote("pilote                   ", "Pilote", null);
+        a = new Pilote("Pilote                   ", "Pilote", null);
         aventuriers.add(a);
-        a = new Plongeur("plongeur                 ", "Plongeur", null);
+        a = new Plongeur("Plongeur                 ", "Plongeur", null);
         aventuriers.add(a);
-        a = new Navigateur("navigateur               ", "Navigateur", null);
+        a = new Navigateur("Navigateur               ", "Navigateur", null);
 
         Collections.shuffle(aventuriers);
 
@@ -498,7 +486,7 @@ public class Contrôleur implements Observateur {
             }
         }
     }
-
+    //place les trésors sur les bonnes tuiles
     public void initialiserTresor() {
         ArrayList<Tuile> tuiles = grille.getTuiles();
         for (Tuile tuile : tuiles) {
@@ -517,7 +505,7 @@ public class Contrôleur implements Observateur {
         }
 
     }
-
+    //verifie toutes les conditions pour pouvoir recuperer un trésor
     private void prendreTresor() {
         Tuile tuile = aventurierCourant.getPosition();
         if (!(tuile.getTresor() == null)) {
@@ -542,14 +530,14 @@ public class Contrôleur implements Observateur {
             vueGenerale.setMessage("Pas une carte tresor!");
         }
     }
-
+    //quand l'aventurier a + de 9 cartes une fenetre s'affiche pour vider les crtes en trop
     private void carteADefausser() {
         while (aventurierCourant.getPossede().size() > 8) {
             vueDefausse=new VueDefausse(aventurierCourant.getPossede().size() - 8, aventurierCourant.getPossede());
             vueDefausse.setObservateur(this);
         }
     }
-
+    //Donne une carte a un aventurier
     private void donnerCarteTirage(Aventurier a, Aventurier a2, CarteTirage carte) {
         boolean b = false;
         int i = 0;
@@ -563,7 +551,7 @@ public class Contrôleur implements Observateur {
         a2.addCarte(carte);
 
     }
-
+    //Methode qui permet de voir si une partie est gagnée
     private void gagner() {
         ArrayList<Tresor> tresors = new ArrayList();
         boolean b = false;
@@ -587,44 +575,7 @@ public class Contrôleur implements Observateur {
             }
         }
     }
-    
-    
-    //getters 
-    public ArrayList< Aventurier> getJoueurs() {
-        return joueurs;
-    }
-
-    public void setJoueurs(ArrayList<Aventurier> joueurs) {
-        this.joueurs = joueurs;
-    }
-
-    public void setGrille(Grille grille) {
-        this.grille = grille;
-    }
-
-    public Stack<CarteInondation> getPiocheInondation() {
-        return piocheInondation;
-    }
-
-    public void setPiocheInondation(Stack<CarteInondation> piocheInondation) {
-        this.piocheInondation = piocheInondation;
-    }
-
-    public Stack<CarteInondation> getDefausseInondation() {
-        return defausseInondation;
-    }
-
-    public void setDefausseInondation(Stack<CarteInondation> defausseInondation) {
-        this.defausseInondation = defausseInondation;
-    }
-
-    public boolean isFinJeu() {
-        return finJeu;
-    }
-
-    public void setFinJeu(boolean finJeu) {
-        this.finJeu = finJeu;
-    }
+    //retourne les trésors deja trouvée par les aventuriers
     public ArrayList<Tresor> getTresorsObtenus(){
         ArrayList<Tresor> tresorsObtenus = new ArrayList();
         for(Aventurier a : joueurs){

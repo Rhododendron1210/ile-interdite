@@ -42,7 +42,7 @@ public class VuePlateau extends JPanel {
         
     }
     
-    
+    //cree le plateau centrale avec les boutons, la grille
     private void plateauCentre(Tuile[][] tuiles){
         JPanel panel = new JPanel(new GridLayout(1,3));
         deplacer=new JButton("Déplacer");
@@ -70,6 +70,7 @@ public class VuePlateau extends JPanel {
         tresor.setEnabled(true);
         panel2.add(tresor);
         this.add(panel2,BorderLayout.EAST);
+        //les action listeners
         
         tresor.addActionListener(new ActionListener(){
             @Override
@@ -143,7 +144,7 @@ public class VuePlateau extends JPanel {
         
         
     }
-    
+    //permet de mettre en evidences le stuiles possible a la selection
     public void afficherTuilesPossibles(HashSet<Tuile> tuiles){
         for(Tuile tuile: tuiles){
             int i = tuile.getLigne();
@@ -153,12 +154,12 @@ public class VuePlateau extends JPanel {
         }
         repaint();
     }
-
+    
     public void setObservateur(Observateur observateur) {
         this.observateur = observateur;
     }
     
-    
+    //mettre les 3 boutons principla
     public void deselectionner(){
         assecher.setEnabled(true);
         finir.setEnabled(true);
@@ -166,20 +167,11 @@ public class VuePlateau extends JPanel {
         grille.creeGrille();
         this.repaint();
     }
-
+    //permet d'activer le bouton pour la carte helico
     public void setHelico(boolean b) {
         helico.setEnabled(b);
     }
-
-    public void sePasser(boolean b) {
-        passer.setEnabled(b);
-    }
-
-   
-    public void setTresor(boolean b) {
-        tresor.setEnabled(b);
-    }
-
+    //permet d'activer le bouton pour la carte sac de sable
     public void setSacSable(boolean b) {
         sacSable.setEnabled(b);
     }
