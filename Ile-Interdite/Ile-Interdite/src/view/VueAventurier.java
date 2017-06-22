@@ -22,10 +22,10 @@ import util.Parameters;
  *
  * @author louesdol
  */
-public class VueAventurier2 extends JPanel{
+public class VueAventurier extends JPanel{
     private JLabel nomAventurier;
     
-    public VueAventurier2(Aventurier a,Color couleur){
+    public VueAventurier(Aventurier a,Color couleur){
         this.setLayout(new BorderLayout());
         nomAventurier= new JLabel(a.getNom());
         this.add(nomAventurier,BorderLayout.NORTH);

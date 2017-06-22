@@ -106,20 +106,7 @@ public abstract class Aventurier extends ObjetIdentifie{
     
     
 
-    private boolean recuperationTresorPossible(Tresor tresor) {//a refaire
-        int i=0;
-        for (CarteTirage carte:possede){
-            if (carte.getNom()=="CarteTresor"){
-                i=i+1;
-            }
-        }
-        if(i>=4){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+
 
     private void addTresor(Tresor tresor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

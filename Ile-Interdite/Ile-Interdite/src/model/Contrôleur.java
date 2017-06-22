@@ -209,24 +209,24 @@ public class Contrôleur implements Observateur {
         } else if (msg.getCommande() == RECUPERER_TRESOR) {
             prendreTresor();
         } else if (msg.getCommande() == DEFAUSSE) {
-            if (msg.getNomCarte()== null) {
+            if (msg.getNomCarte() == null) {
                 carteADefausser(aventurierCourant);
             } else {
                 vueDefausse.dispose();
                 boolean b = false;
                 int i = 0;
-                while (b == false&&i<aventurierCourant.getPossede().size()) {
+                while (b == false && i < aventurierCourant.getPossede().size()) {
                     if (aventurierCourant.getPossede().get(i).getNom() == msg.getNomCarte()) {
                         addDefausseTirage(aventurierCourant.getPossede().get(i));
-                        aventurierCourant.removePossede(aventurierCourant.getPossede().get(i));
+                        aventurierCourant.getPossede().remove(aventurierCourant.getPossede().get(i));
                     }
                     i = i + 1;
                 }
+                vueGenerale.dispose();
+                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
+                vueGenerale.setObservateur(this);
             }
-            
-            vueGenerale.dispose();
-            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
-            vueGenerale.setObservateur(this);
+
         } else if (msg.getCommande() == DONNER) {
             if (msg.getIdAventurier() == null && msg.getIdCarte() == null) {
                 vueEchange = new VueEchange(aventurierCourant.getPossede(), aventurierCourant.getPosition().getAventurierPresent(), aventurierCourant);
@@ -252,7 +252,7 @@ public class Contrôleur implements Observateur {
                 vueGenerale.setObservateur(this);
             }
 
-        } 
+        }
     }
 
     public void deplacement(Aventurier a, Tuile tuile) {
@@ -386,7 +386,8 @@ public class Contrôleur implements Observateur {
             for (i = 0; i < difficulte; i++) {
                 tirerCarteInondation();
             }
-
+            piocherCarteTirage(aventurierCourant);
+            piocherCarteTirage(aventurierCourant);
             if (joueurs.indexOf(aventurierCourant) + 1 != joueurs.size()) {
                 aventurierCourant = joueurs.get(joueurs.indexOf(aventurierCourant) + 1);
                 actionEffectuer = 0;
@@ -396,10 +397,9 @@ public class Contrôleur implements Observateur {
                 aventurierCourant = joueurs.get(0);
                 actionEffectuer = 0;
             }
-            piocherCarteTirage(aventurierCourant);
-            piocherCarteTirage(aventurierCourant);
 
         }
+
         vueGenerale.dispose();
         vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
         vueGenerale.setObservateur(this);
@@ -538,9 +538,10 @@ public class Contrôleur implements Observateur {
 
     //quand l'aventurier a + de 9 cartes une fenetre s'affiche pour vider les crtes en trop
     private void carteADefausser(Aventurier aventurier) {
-
-        vueDefausse = new VueDefausse(aventurier.getPossede());
-        vueDefausse.setObservateur(this);
+        if (aventurier.getPossede().size() != 0) {
+            vueDefausse = new VueDefausse(aventurier.getPossede());
+            vueDefausse.setObservateur(this);
+        }
 
     }
 
@@ -620,12 +621,12 @@ public class Contrôleur implements Observateur {
 
     public void setFinJeu(boolean finJeu) {
         this.finJeu = finJeu;
-    }    
-        
-    public ArrayList<Tresor> getTresorsObtenus(){
+    }
+
+    public ArrayList<Tresor> getTresorsObtenus() {
         ArrayList<Tresor> tresorsObtenus = new ArrayList();
-        for(Aventurier a : joueurs){
-            for(Tresor tresor : a.getTresors()){
+        for (Aventurier a : joueurs) {
+            for (Tresor tresor : a.getTresors()) {
                 tresorsObtenus.add(tresor);
             }
         }

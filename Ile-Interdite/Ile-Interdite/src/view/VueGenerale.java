@@ -18,21 +18,24 @@ import model.Tuile;
 import model.aventuriers.Aventurier;
 import util.Message;
 import util.Observateur;
+import util.Utils;
+import util.Utils.Tresor;
 
 /**
  *
  * @author louesdol
  */
 public class VueGenerale extends JFrame implements Observateur{
-    private VueAventurier2 vueAventurier2;
-    private ArrayList<VueAventurier2> aventuriers;
+    private VueAventurier vueAventurier;
+    private ArrayList<VueAventurier> aventuriers;
     private VuePlateau vuePlateau;
     private VueNiveau vueNiveau;
     private VueMessage vueMessage;
     private int difficulte;
     private Observateur observateur;
+    private VueTresor vueTresor;
     
-    public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs,Aventurier a){
+    public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs,Aventurier a,ArrayList<Tresor> tresorsTrouves){
         this.setLayout(new BorderLayout());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height);
@@ -41,20 +44,24 @@ public class VueGenerale extends JFrame implements Observateur{
         vuePlateau.setObservateur(this);
         this.add(vuePlateau,BorderLayout.CENTER);
         this.difficulte=difficulte;
+        JPanel panelGauche = new JPanel(new GridLayout(2,1));
         vueNiveau=new VueNiveau(difficulte);
-        this.add(vueNiveau,BorderLayout.WEST);
+        vueTresor = new VueTresor(tresorsTrouves);
+        panelGauche.add(vueNiveau);
+        panelGauche.add(vueTresor);
+        this.add(panelGauche,BorderLayout.WEST);
         int i = joueurs.size();
         JPanel panel = new JPanel(new GridLayout(1,i));
         aventuriers = new ArrayList();
         for (Aventurier av : joueurs){
             if (av.equals(a)){
-                vueAventurier2=new VueAventurier2(av,Color.red);
+                vueAventurier=new VueAventurier(av,Color.red);
             } else {
-                vueAventurier2=new VueAventurier2(av,Color.gray);
+                vueAventurier=new VueAventurier(av,Color.gray);
             }
             
-            aventuriers.add(vueAventurier2);
-            panel.add(vueAventurier2);
+            aventuriers.add(vueAventurier);
+            panel.add(vueAventurier);
         }
         this.add(panel,BorderLayout.NORTH);
         vueMessage = new VueMessage();
@@ -90,6 +97,5 @@ public class VueGenerale extends JFrame implements Observateur{
     public void setNiveau(Integer niveau){
         vueNiveau.setNiveau(niveau);
     }
-    
     
 }
