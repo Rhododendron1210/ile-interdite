@@ -626,6 +626,7 @@ public class Contrôleur implements Observateur {
 
     public void setFinJeu(boolean finJeu) {
         this.finJeu = finJeu;
+    }
     public ArrayList<Tresor> getTresorsObtenus(){
         ArrayList<Tresor> tresorsObtenus = new ArrayList();
         for(Aventurier a : joueurs){
