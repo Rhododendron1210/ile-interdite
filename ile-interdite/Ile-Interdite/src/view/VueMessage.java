@@ -8,13 +8,14 @@ package view;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import util.Parameters;
 
 /**
  *
  * @author louesdol
  */
-public class VueMessage extends JFrame{
+public class VueMessage extends JPanel{
     private JLabel label;
     public VueMessage(){
         label= new JLabel("Départ Jeu");
@@ -22,9 +23,9 @@ public class VueMessage extends JFrame{
         this.add(label);
         this.setSize(1200,util.Parameters.HAUTEUR_VUE_AVENTURIER );
         this.setLocation(200, Parameters.TOP_AUTRES_VUES+Parameters.HAUTEUR_VUE_AVENTURIER+util.Parameters.HAUTEUR_AUTRES_VUES);
-        this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        /*this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         this.setUndecorated(Parameters.UNDECORATED);
-        this.setResizable(Parameters.RESIZABLE);
+        this.setResizable(Parameters.RESIZABLE);*/
         
         this.setVisible(true);
     }

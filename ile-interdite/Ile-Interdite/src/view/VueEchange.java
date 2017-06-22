@@ -36,12 +36,14 @@ public class VueEchange extends JFrame {
     private ButtonGroup grJoueurs;
     private ButtonGroup grCartes;
 
-    public VueEchange(ArrayList<CarteTirage> possede, ArrayList<Aventurier> joueurs) {
+    public VueEchange(ArrayList<CarteTirage> possede, ArrayList<Aventurier> joueurs,Aventurier a) {
         this.setLayout(new BorderLayout());
+        this.setSize(700,700);
         valider = new JButton("Valider");
         mainPanel = new JPanel(new GridLayout(1, 2));
         mesCartes(possede);
-        joueurs(joueurs);
+        joueurs(a,joueurs);
+        this.add(valider,BorderLayout.SOUTH);
         this.add(mainPanel, BorderLayout.CENTER);
         this.setVisible(true);
         valider.addActionListener(new ActionListener() {
@@ -82,14 +84,17 @@ public class VueEchange extends JFrame {
         mainPanel.add(panel);
     }
 
-    private void joueurs(ArrayList<Aventurier> joueurs) {
+    private void joueurs(Aventurier a,ArrayList<Aventurier> joueurs) {
         int i = joueurs.size();
         JPanel panel = new JPanel(new GridLayout(i, 1));
         grJoueurs = new ButtonGroup();
         for (Aventurier av : joueurs) {
-            JRadioButton bout = new JRadioButton(av.getNom(), true);
-            panel.add(bout);
-            grJoueurs.add(bout);
+            if(av.getNom()!=a.getNom()){
+                JRadioButton bout = new JRadioButton(av.getNom(), true);
+                panel.add(bout);
+                grJoueurs.add(bout);
+            }
+            
         }
         panel.setBorder(BorderFactory.createTitledBorder("Choisir un joueur"));
         mainPanel.add(panel);
