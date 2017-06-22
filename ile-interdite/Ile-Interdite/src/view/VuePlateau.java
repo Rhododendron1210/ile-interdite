@@ -53,8 +53,8 @@ public class VuePlateau extends JFrame {
     private void plateauCentre(Tuile[][] tuiles){
         JPanel panel = new JPanel(new GridLayout(1,3));
         deplacer=new JButton("Déplacer");
-        assecher=new JButton("assecher");
-        finir=new JButton("finir tour");
+        assecher=new JButton("Assécher");
+        finir=new JButton("Fin de tour");
         panel.add(deplacer);
         panel.add(assecher);
         panel.add(finir);
@@ -70,7 +70,7 @@ public class VuePlateau extends JFrame {
         sacSable= new JButton("Carte Sac De Sable");
         sacSable.setEnabled(false);
         panel2.add(sacSable);
-        passer= new JButton("Passer Une Carte");
+        passer= new JButton("Donner une carte");
         passer.setEnabled(true);
         panel2.add(passer);
         tresor= new JButton("Prendre le tresor");
