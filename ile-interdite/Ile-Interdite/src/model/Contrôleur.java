@@ -6,6 +6,7 @@ import Tresor.CarteMonteeDesEaux;
 import Tresor.CarteSacsDeSable;
 import Tresor.CarteTirage;
 import Tresor.CarteTresor;
+import java.awt.BorderLayout;
 import util.Observateur;
 import static java.awt.Color.black;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import model.aventuriers.Aventurier;
 import model.aventuriers.Explorateur;
@@ -60,6 +62,7 @@ public class Contrôleur implements Observateur{
     private VueInscription vueInscription;
     private int nbJoueurs;
     private int difficulte;
+    private ArrayList<VueAventurier2> aventuriers;
     private Stack<CarteTirage> piocheTirage;
     private Stack<CarteTirage> defausseTirage;
     private Stack<CarteInondation> piocheInondation;
@@ -70,6 +73,7 @@ public class Contrôleur implements Observateur{
     private ArrayList<Tresor> tresorsTrouvees;
     private VueMessage vueMessage;
     private int actionEffectuer;
+    
     
     public Contrôleur(){
         tresorsTrouvees=new ArrayList<>();
@@ -82,6 +86,7 @@ public class Contrôleur implements Observateur{
         vueInscription = new VueInscription();
         vueInscription.setObservateur(this);
         actionEffectuer=0;
+        aventuriers= new ArrayList();
         
     }
     
@@ -199,7 +204,12 @@ public class Contrôleur implements Observateur{
     }
     
     public void lancerJeu(){
-        vueAventurier2=new VueAventurier2(aventurierCourant);
+        int x=180;
+        for (Aventurier av : joueurs){
+            vueAventurier2=new VueAventurier2(av,x);
+            x=x+250;
+            aventuriers.add(vueAventurier2);
+        }
         vueMessage.setLabel("au tour du "+aventurierCourant.getNom());
         
     }
@@ -260,6 +270,7 @@ public class Contrôleur implements Observateur{
             difficulte= msg.getDifficulte();
             initialisationPartie(nbJoueurs);
             afficher();
+            
             
             lancerJeu();
         } else if (msg.getCommande() == ASSECHER) {
@@ -497,8 +508,10 @@ public class Contrôleur implements Observateur{
                 actionEffectuer=0; 
             }           
         }
-        vueAventurier2.dispose();
-        vueAventurier2= new VueAventurier2(aventurierCourant);
+        for (VueAventurier2 vue : aventuriers){
+            vue.dispose();
+        }
+        lancerJeu();
             
         
     }

@@ -25,10 +25,9 @@ import util.Parameters;
 public class VueAventurier2 extends JFrame{
     private JLabel nomAventurier;
     
-    
-    public VueAventurier2(Aventurier a){
+    public VueAventurier2(Aventurier a, int x){
         this.setSize(200,util.Parameters.HAUTEUR_VUE_AVENTURIER );
-        this.setLocation(1400, Parameters.TOP_AUTRES_VUES);
+        this.setLocation(x, Parameters.TOP_AUTRES_VUES-util.Parameters.HAUTEUR_VUE_AVENTURIER);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         this.setUndecorated(Parameters.UNDECORATED);
         this.setResizable(Parameters.RESIZABLE);
@@ -36,7 +35,9 @@ public class VueAventurier2 extends JFrame{
         nomAventurier= new JLabel(a.getNom());
         this.add(nomAventurier,BorderLayout.NORTH);
         afficherCartes(a.getPossede());
+        Border blackline = BorderFactory.createLineBorder(Color.black);
         this.setVisible(true);
+        
     }
     
     private void afficherCartes(ArrayList<CarteTirage> cartes){

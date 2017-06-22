@@ -29,14 +29,19 @@ public class VuePlateau extends JFrame {
     private JButton assecher;
     private JButton finir;
     private util.Utils.Commandes commande;
+    private JButton helico;
+    private JButton sacSable;
+    private JButton passer;
+    private JButton prendre;
+    private JButton tresor;
     
     public VuePlateau(Tuile[][] tuiles){
-        
-        this.setLocation(180, Parameters.TOP_AUTRES_VUES);
+        this.setTitle("Plateau de jeu");
+        this.setLocation(160, Parameters.TOP_AUTRES_VUES);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         plateauCentre(tuiles);
-        this.setSize(1200, util.Parameters.HAUTEUR_AUTRES_VUES);
+        this.setSize(1500, util.Parameters.HAUTEUR_AUTRES_VUES);
         //this.setUndecorated(Parameters.UNDECORATED);
         this.setResizable(Parameters.RESIZABLE);
         this.setVisible(true);
@@ -47,7 +52,6 @@ public class VuePlateau extends JFrame {
     private void plateauCentre(Tuile[][] tuiles){
         JPanel panel = new JPanel(new GridLayout(1,3));
         deplacer=new JButton("Déplacer");
-        
         assecher=new JButton("assecher");
         finir=new JButton("finir tour");
         panel.add(deplacer);
@@ -57,6 +61,26 @@ public class VuePlateau extends JFrame {
         grille = new VueGrille(tuiles);
         
         this.add(grille,BorderLayout.CENTER);
+        
+        JPanel panel2 = new JPanel(new GridLayout(5,1));
+        helico= new JButton("Carte Helicoptere");
+        helico.setEnabled(false);
+        panel2.add(helico);
+        sacSable= new JButton("Carte Sac De Sable");
+        sacSable.setEnabled(false);
+        panel2.add(sacSable);
+        passer= new JButton("Passer Une Carte");
+        passer.setEnabled(true);
+        panel2.add(passer);
+        prendre= new JButton("Prendre Une Carte");
+        prendre.setEnabled(true);
+        panel2.add(prendre);
+        tresor= new JButton("Prendre le tresor");
+        tresor.setEnabled(false);
+        panel2.add(tresor);
+        this.add(panel2,BorderLayout.EAST);
+        
+        
         
         
         deplacer.addActionListener(new ActionListener(){
@@ -137,9 +161,4 @@ public class VuePlateau extends JFrame {
         grille.creeGrille();
         this.repaint();
     }
-    
-    
-
-   
-    
 }
