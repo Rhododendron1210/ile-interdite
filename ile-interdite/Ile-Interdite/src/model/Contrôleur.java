@@ -192,12 +192,7 @@ public class Contrôleur implements Observateur{
         }
         Collections.shuffle(piocheInondation);
                 
-        piocherCarteTirage(joueurs.get(0));
-        piocherCarteTirage(joueurs.get(0));
-
-        for(i=0;i<difficulte;i++){
-            tirerCarteInondation();
-        }
+        
             
         
         
@@ -484,7 +479,13 @@ public class Contrôleur implements Observateur{
     private void changerJoueur(){
         actionEffectuer=actionEffectuer+1;
         vueMessage.setLabel("nb de coups restants :\n"+(3-actionEffectuer)+"/3");
-        if (actionEffectuer==3){            
+        if (actionEffectuer==3){
+            piocherCarteTirage(aventurierCourant);
+            piocherCarteTirage(aventurierCourant);
+            int i;
+            for(i=0;i<difficulte;i++){
+                tirerCarteInondation();
+            }
             if(joueurs.indexOf(aventurierCourant)+1!=joueurs.size()){
                aventurierCourant=joueurs.get(joueurs.indexOf(aventurierCourant)+1);
                actionEffectuer=0; 
@@ -493,15 +494,7 @@ public class Contrôleur implements Observateur{
             }else{
                 aventurierCourant=joueurs.get(0);
                 actionEffectuer=0; 
-            }
-            piocherCarteTirage(aventurierCourant);
-            piocherCarteTirage(aventurierCourant);
-            int i;
-            for(i=0;i<difficulte;i++){
-                tirerCarteInondation();
-            }
-            
-            
+            }           
         }
         vueAventurier2.dispose();
         vueAventurier2= new VueAventurier2(aventurierCourant);
