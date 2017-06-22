@@ -6,7 +6,7 @@
 package model.aventuriers;
 
 import Tresor.CarteTirage;
-import Tresor.CarteTresor;
+
 import java.awt.Color;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public abstract class Aventurier extends ObjetIdentifie{
         for (Tuile tuile: tuiles){
             int ligneT = tuile.getLigne();
             int colonneT = tuile.getColonne();
-            if (tuile.tuileSeche()){
+            if (tuile.tuileSeche() || tuile.isInondée()){
                    colTuilePossible.add(tuile);
             }
         }
@@ -136,4 +136,15 @@ public abstract class Aventurier extends ObjetIdentifie{
     public void addTresors(Tresor tresor) {
         tresors.add(tresor);
     }
+
+    public ArrayList<Tresor> getTresors() {
+        return tresors;
+    }
+
+    public void setTresors(ArrayList<Tresor> tresors) {
+        this.tresors = tresors;
+    }
+    
+    
+    
 }

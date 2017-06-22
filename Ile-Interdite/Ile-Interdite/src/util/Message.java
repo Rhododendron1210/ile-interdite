@@ -8,22 +8,41 @@ import java.io.Serializable;
  */
 public class Message implements Serializable {
     private final Utils.Commandes commande ;
-    private final Integer idAventurier ;
-    private final Integer idCarte ;
+    private final String idAventurier ;
+    private final String idCarte ;
     private final  Utils.Tresor tresor ;
     private final Integer idTuile ;
     private int nbJoueurs;
     private int difficulte;
+    private String nomCarte;
     
-    public Message(Utils.Commandes commande, Integer idAventurier, Integer idCarte,  Utils.Tresor tresor, Integer idTuile, int nbJoueurs, int difficulte) {
+    public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Utils.Tresor tresor, Integer idTuile) {
+        this.commande = commande ;
+        this.idAventurier = idAventurier ;
+        this.idCarte = idCarte ;
+        this.tresor = tresor ;
+        this.idTuile = idTuile ;
+    }
+    
+    public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Utils.Tresor tresor, Integer idTuile, int nbJoueurs, int difficulte) {
         this.commande = commande ;
         this.idAventurier = idAventurier ;
         this.idCarte = idCarte ;
         this.tresor = tresor ;
         this.idTuile = idTuile ;
         this.nbJoueurs = nbJoueurs;
-        this.difficulte = difficulte;
+        this.difficulte=difficulte;
     }
+    
+    public Message(Utils.Commandes commande, String nomCarte){
+        this.commande = commande;
+        this.nomCarte = nomCarte;
+        this.tresor = null;
+        this.idAventurier = null;
+        this.idCarte = null;
+        this.idTuile = null;
+    }
+    
 
     /**
      * @return the commande
@@ -41,7 +60,7 @@ public class Message implements Serializable {
     public Boolean hasIdAventurier() {
         return idAventurier != null ;
     }
-    public Integer getIdAventurier() {
+    public String getIdAventurier() {
         return idAventurier;
     }
 
@@ -51,7 +70,7 @@ public class Message implements Serializable {
     public Boolean hasIdCarte() {
         return idCarte != null ;
     }
-    public Integer getIdCarte() {
+    public String getIdCarte() {
         return idCarte;
     }
 
@@ -93,4 +112,18 @@ public class Message implements Serializable {
         }
         return txt ;
     }
+
+    public int getNbJoueurs() {
+        return nbJoueurs;
+    }
+
+    public int getDifficulte() {
+        return difficulte;
+    }
+
+    public String getNomCarte() {
+        return nomCarte;
+    }
+    
+    
 }

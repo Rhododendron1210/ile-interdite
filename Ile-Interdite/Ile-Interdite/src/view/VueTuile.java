@@ -2,7 +2,10 @@ package view;
  
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.RenderingHints;
 import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,44 +16,15 @@ import util.Observateur;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.INONDEE;
 
-public class VueTuile extends JButton{
+public class VueTuile extends JPanel{
     
     private Color couleur;
     private int colonne;
     private int ligne;
+    private Tuile tuile;
+    private JButton bouton;
     
-    
-    VueTuile(Tuile tuile){
-        ligne= tuile.getLigne();
-        colonne=tuile.getColonne();
-        JPanel panel = new JPanel(new GridLayout(4,1));
-        JLabel label = new JLabel(tuile.getNom());
-        this.setLayout(new BorderLayout());
-        this.add(label,BorderLayout.NORTH);
-        if (tuile.getEtatTuile()==ASSECHEE){
-            setCouleur(Color.orange);
-        } else if (tuile.getEtatTuile()==INONDEE){
-            setCouleur(Color.BLUE);
-        } else {
-            setCouleur(Color.gray);
-            this.setEnabled(false);
-        }
-        panel.setBackground(couleur);
-        this.setBackground(couleur);
-        HashMap<String,Aventurier> aventuriers = tuile.getAventurierPresent();
-        for (Aventurier ave: aventuriers.values()){
-            JPanel joueur = new JPanel();
-            if (ave!=null){
-                joueur.setBackground(ave.getCouleur());
-                
-            } else {
-                joueur.setBackground(couleur);
-            }
-            panel.add(joueur);
-        }
-        
-        this.add(panel, BorderLayout.CENTER);
-    }  
+
 
     public int getColonne() {
         return colonne;
@@ -65,13 +39,59 @@ public class VueTuile extends JButton{
     }
 
     public void setCouleur(Color couleur) {
-        
         this.couleur = couleur;
-        repaint();
-        System.out.println("couleur");
+        bouton.repaint();
     }
-
     
+    VueTuile(Tuile tuile){
+        this.tuile=tuile;
+        
+        this.setLayout(new BorderLayout());
+        bouton= new JButton(tuile.getNom());
+        if (tuile.getEtatTuile()==ASSECHEE){
+            setCouleur(Color.orange);
+        } else if (tuile.getEtatTuile()==INONDEE){
+            setCouleur(Color.BLUE);
+        } else {
+            setCouleur(Color.gray);
+            this.setEnabled(false);
+        }
+        bouton.setBackground(couleur);
+        ligne= tuile.getLigne();
+        colonne=tuile.getColonne();
+        joueurs();
+        tresor();
+        this.add(bouton,BorderLayout.CENTER);
+    }
     
+    public JButton getBouton(){
+        return bouton;
+    }
+    private void joueurs(){
+        JLabel joueur;
+        
+        HashMap<String,Aventurier> aventuriers = tuile.getAventurierPresent();
+        int i = aventuriers.size();
+        
+        JPanel panel = new JPanel(new GridLayout(i,1));
+        for (Aventurier ave: aventuriers.values()){
+            if (ave!=null){
+                joueur= new JLabel(ave.getNom());
+                panel.add(joueur);
+            }  
+        }
+        this.add(panel,BorderLayout.NORTH);
+    }
+    
+    private void tresor(){
+        JLabel tresor;
+        
+        if (tuile.getTresor()!=null){
+            tresor = new JLabel(tuile.getTresor().getLibelle());
+            this.add(tresor,BorderLayout.SOUTH);
+        }
+    }
+    
+   
     
 }

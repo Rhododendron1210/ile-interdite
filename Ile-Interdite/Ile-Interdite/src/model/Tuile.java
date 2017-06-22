@@ -117,6 +117,10 @@ public class Tuile {
         this.etatTuile = COULEE;
     }
 
+    public void setTresor(Tresor tresor) {
+        this.tresor = tresor;
+    }
+
     
 
     public HashMap<String, Aventurier> getAventurierPresent() {
