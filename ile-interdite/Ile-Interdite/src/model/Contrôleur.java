@@ -145,25 +145,25 @@ public class Contrôleur implements Observateur{
         grille.creeTuiles();
 
         initialiserJoueur(nbJoueur);
-        
+        initialiserTresor();
         //grille.getTuile(1, 3).addAventurier(a);
         CarteTirage carte ;
         
         int i;
         for (i=0 ;i<5 ;i++){
-            carte=new CarteTresor("Zephir","pas description");
+            carte=new CarteTresor("La statue du Zéphyr","pas description");
             piocheTirage.push(carte);
         }
         for (i=0 ;i<5 ;i++){
-            carte=new CarteTresor("PIERRE","pas description");
+            carte=new CarteTresor("La Pierre Sacrée","pas description");
             piocheTirage.push(carte);
         }
         for (i=0 ;i<5 ;i++){
-            carte=new CarteTresor("CRISTAL","pas description");
+            carte=new CarteTresor("Le Cristal Ardent","pas description");
             piocheTirage.push(carte);
         }
         for (i=0 ;i<5 ;i++){
-            carte=new CarteTresor("CALICE","pas description");
+            carte=new CarteTresor("Le Calice de l'Onde","pas description");
             piocheTirage.push(carte);
         }
         for (i=0 ;i<2 ;i++){
@@ -619,6 +619,27 @@ public class Contrôleur implements Observateur{
             else{tuile.setTresor(null);}
         }
         
+    }
+    
+    public void prendreTresor(){
+        Tuile tuile = aventurierCourant.getPosition();
+        if(!(tuile.getTresor()==null)){
+            int cmpt = 0;
+            Tresor tresor = tuile.getTresor();
+            for(CarteTirage carte : aventurierCourant.getPossede()){
+                if(carte.getNom() == tresor.toString()){
+                    cmpt += 1;
+                }
+            }
+            if(cmpt >= 4){
+                aventurierCourant.addTresors(tresor);            
+                for(Tuile t : this.getGrille().getTuiles()){
+                    if(t.getTresor().toString()==tresor.toString()){
+                        t.setTresor(null);
+                    }
+                }
+            } 
+        }
     }
 }
 
