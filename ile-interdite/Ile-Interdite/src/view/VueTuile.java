@@ -89,7 +89,7 @@ public class VueTuile extends JPanel{
         JLabel tresor;
         if (tuile.getTresor()!=null){
             tresor = new JLabel(tuile.getTresor().getLibelle());
-            tresor.setBackground(tuile.getTresor().getBgColor());
+            tresor.setOpaque(false);
             this.add(tresor,BorderLayout.SOUTH);
         }
     }

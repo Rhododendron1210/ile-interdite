@@ -6,7 +6,7 @@
 package model.aventuriers;
 
 import Tresor.CarteTirage;
-import Tresor.CarteTresor;
+
 import java.awt.Color;
 
 import java.util.ArrayList;

@@ -29,6 +29,7 @@ import model.aventuriers.Plongeur;
 import util.Message;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.DEFAUSSE;
 import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
 import static util.Utils.Commandes.VALIDER_JOUEURS;
@@ -38,6 +39,7 @@ import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
 import view.VueAventurier;
 import view.VueAventurier2;
+import view.VueEchange;
 import view.VueInscription;
 import view.VueMessage;
 import view.VueNiveau;
@@ -74,6 +76,7 @@ public class Contrôleur implements Observateur{
     private ArrayList<Tresor> tresorsTrouvees;
     private VueMessage vueMessage;
     private int actionEffectuer;
+    private VueEchange vueEchange;
     
     
     public Contrôleur(){
@@ -88,6 +91,7 @@ public class Contrôleur implements Observateur{
         vueInscription.setObservateur(this);
         actionEffectuer=0;
         aventuriers= new ArrayList();
+        
         
     }
     
@@ -298,10 +302,6 @@ public class Contrôleur implements Observateur{
                 }
                 Tuile tuile = grille.getTuile(ligne, colonne);
                 assechement(tuile);
-                
-                
-                //vuePlateau.update();
-                //vuePlateau.deselectionner();
                 vuePlateau.dispose();
                 vuePlateau=new VuePlateau(grille.getGrille());
                 vuePlateau.setObservateur(this);

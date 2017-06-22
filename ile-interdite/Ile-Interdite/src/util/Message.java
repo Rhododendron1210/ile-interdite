@@ -8,8 +8,8 @@ import java.io.Serializable;
  */
 public class Message implements Serializable {
     private final Utils.Commandes commande ;
-    private final Integer idAventurier ;
-    private final Integer idCarte ;
+    private final String idAventurier ;
+    private final String idCarte ;
     private final  Utils.Tresor tresor ;
     private final Integer idTuile ;
     private int nbJoueurs;
@@ -21,7 +21,7 @@ public class Message implements Serializable {
     private int nbHelico;
     private int nbSacsSable;
     
-    public Message(Utils.Commandes commande, Integer idAventurier, Integer idCarte,  Utils.Tresor tresor, Integer idTuile) {
+    public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Utils.Tresor tresor, Integer idTuile) {
         this.commande = commande ;
         this.idAventurier = idAventurier ;
         this.idCarte = idCarte ;
@@ -29,7 +29,7 @@ public class Message implements Serializable {
         this.idTuile = idTuile ;
     }
     
-    public Message(Utils.Commandes commande, Integer idAventurier, Integer idCarte,  Utils.Tresor tresor, Integer idTuile, int nbJoueurs, int difficulte) {
+    public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Utils.Tresor tresor, Integer idTuile, int nbJoueurs, int difficulte) {
         this.commande = commande ;
         this.idAventurier = idAventurier ;
         this.idCarte = idCarte ;
@@ -70,7 +70,7 @@ public class Message implements Serializable {
     public Boolean hasIdAventurier() {
         return idAventurier != null ;
     }
-    public Integer getIdAventurier() {
+    public String getIdAventurier() {
         return idAventurier;
     }
 
@@ -80,7 +80,7 @@ public class Message implements Serializable {
     public Boolean hasIdCarte() {
         return idCarte != null ;
     }
-    public Integer getIdCarte() {
+    public String getIdCarte() {
         return idCarte;
     }
 
