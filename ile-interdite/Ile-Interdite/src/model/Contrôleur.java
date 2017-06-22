@@ -101,7 +101,7 @@ public class Contrôleur implements Observateur {
         }
     }*/
     public void afficher() {
-        vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs);
+        vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
         vueGenerale.setObservateur(this);
     }
 
@@ -248,12 +248,6 @@ public class Contrôleur implements Observateur {
 
                 deplacement(aventurierCourant, tuile);
 
-                //vuePlateau.update();
-                //vuePlateau.deselectionner();
-                vueGenerale.dispose();
-                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs);
-                vueGenerale.setObservateur(this);
-
                 if (tuile.getNom() == "Heliport                ") {
                     this.gagner();
                 }
@@ -290,7 +284,7 @@ public class Contrôleur implements Observateur {
                 Tuile tuile = grille.getTuile(ligne, colonne);
                 assechement(tuile);
                 vueGenerale.dispose();
-                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs);
+                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
                 vueGenerale.setObservateur(this);
 
             }
@@ -298,37 +292,37 @@ public class Contrôleur implements Observateur {
             this.actionEffectuer = 2;
             this.changerJoueur();
             vueGenerale.dispose();
-            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs);
+            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
             vueGenerale.setObservateur(this);
         } else if (msg.getCommande() == RECUPERER_TRESOR) {
             prendreTresor();
         } else if (msg.getCommande() == DEFAUSSE) {
             carteADefausser();
             vueGenerale.dispose();
-            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs);
+            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
             vueGenerale.setObservateur(this);
         } else if (msg.getCommande() == DONNER) {
             if (msg.getIdAventurier() == null && msg.getIdCarte() == null) {
-                vueEchange = new VueEchange(aventurierCourant.getPossede(), aventurierCourant.getPosition().getAventurierPresent(),aventurierCourant);
+                vueEchange = new VueEchange(aventurierCourant.getPossede(), aventurierCourant.getPosition().getAventurierPresent(), aventurierCourant);
                 vueEchange.setObservateur(this);
             } else {
-                CarteTirage carte=new CarteMonteeDesEaux();
+                CarteTirage carte = new CarteMonteeDesEaux();
                 vueEchange.dispose();
-                
-                for (CarteTirage c:aventurierCourant.getPossede()){
-                    if (c.getNom()==msg.getIdCarte()){
-                        carte=c;
+
+                for (CarteTirage c : aventurierCourant.getPossede()) {
+                    if (c.getNom() == msg.getIdCarte()) {
+                        carte = c;
                     }
                 }
-                Aventurier av=new Pilote(null,null,null);
-                for(Aventurier a:joueurs){
-                    if (a.getNom()==msg.getIdAventurier()){
-                        av=a;
+                Aventurier av = new Pilote(null, null, null);
+                for (Aventurier a : joueurs) {
+                    if (a.getNom() == msg.getIdAventurier()) {
+                        av = a;
                     }
                 }
-                donnerCarteTirage(aventurierCourant,av,carte);
+                donnerCarteTirage(aventurierCourant, av, carte);
                 vueGenerale.dispose();
-                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs);
+                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
                 vueGenerale.setObservateur(this);
             }
 
@@ -504,7 +498,7 @@ public class Contrôleur implements Observateur {
 
     private void changerJoueur() {
         actionEffectuer = actionEffectuer + 1;
-        vueGenerale.setMessage("nb de coups restants :\n" + (3 - actionEffectuer) + "/3");
+        
         if (actionEffectuer == 3) {
             int i;
             for (i = 0; i < difficulte; i++) {
@@ -524,10 +518,11 @@ public class Contrôleur implements Observateur {
             }
             carteADefausser();
         }
-        /*for (VueAventurier2 vue : aventuriers){
-            vue.dispose();
-        }*/
-        //lancerJeu();
+        vueGenerale.dispose();
+        vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
+        vueGenerale.setObservateur(this);
+        vueGenerale.setMessage("nb de coups restants :\n" + (3 - actionEffectuer) + "/3");
+
     }
 
     public void initialiserJoueur(int nbJoueur) {
@@ -660,9 +655,9 @@ public class Contrôleur implements Observateur {
     }
 
     private void carteADefausser() {
-        if (aventurierCourant.getPossede().size()>8){               
-                    VueDefausse vueDefausse=new VueDefausse(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());                
-        }    
+        if (aventurierCourant.getPossede().size() > 8) {
+            VueDefausse vueDefausse = new VueDefausse(aventurierCourant.getPossede().size() - 8, aventurierCourant.getPossede());
+        }
     }
 
     private void donnerCarteTirage(Aventurier a, Aventurier a2, CarteTirage carte) {
@@ -678,8 +673,6 @@ public class Contrôleur implements Observateur {
         a2.addCarte(carte);
 
     }
-
-    
 
     private void gagner() {
         ArrayList<Tresor> tresors = new ArrayList();

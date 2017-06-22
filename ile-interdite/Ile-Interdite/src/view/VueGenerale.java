@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -31,7 +32,7 @@ public class VueGenerale extends JFrame implements Observateur{
     private int difficulte;
     private Observateur observateur;
     
-    public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs){
+    public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs,Aventurier a){
         this.setLayout(new BorderLayout());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height);
@@ -46,7 +47,12 @@ public class VueGenerale extends JFrame implements Observateur{
         JPanel panel = new JPanel(new GridLayout(1,i));
         aventuriers = new ArrayList();
         for (Aventurier av : joueurs){
-            vueAventurier2=new VueAventurier2(av);
+            if (av.equals(a)){
+                vueAventurier2=new VueAventurier2(av,Color.red);
+            } else {
+                vueAventurier2=new VueAventurier2(av,Color.gray);
+            }
+            
             aventuriers.add(vueAventurier2);
             panel.add(vueAventurier2);
         }
@@ -84,4 +90,6 @@ public class VueGenerale extends JFrame implements Observateur{
     public void setNiveau(Integer niveau){
         vueNiveau.setNiveau(niveau);
     }
+    
+    
 }
