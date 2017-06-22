@@ -120,5 +120,10 @@ public class Message implements Serializable {
     public int getDifficulte() {
         return difficulte;
     }
+
+    public String getNomCarte() {
+        return nomCarte;
+    }
+    
     
 }

@@ -332,6 +332,16 @@ public class Contrôleur implements Observateur {
                 vueGenerale.setObservateur(this);
             }
 
+        }else if (msg.getCommande() == DEFAUSSE){
+            boolean b=false;
+            int i=0;
+            while(b==false){
+                if(aventurierCourant.getPossede().get(i).getNom() == msg.getNomCarte()){
+                    addDefausseTirage(aventurierCourant.getPossede().get(i));
+                    aventurierCourant.getPossede().remove(aventurierCourant.getPossede().get(i));
+                }
+                i=i+1;
+            }
         }
     }
 
@@ -522,6 +532,7 @@ public class Contrôleur implements Observateur {
                 aventurierCourant = joueurs.get(0);
                 actionEffectuer = 0;
             }
+            
             carteADefausser();
         }
         /*for (VueAventurier2 vue : aventuriers){
