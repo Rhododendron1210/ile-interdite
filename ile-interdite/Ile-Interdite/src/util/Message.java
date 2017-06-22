@@ -14,12 +14,7 @@ public class Message implements Serializable {
     private final Integer idTuile ;
     private int nbJoueurs;
     private int difficulte;
-    private int nbPierre;
-    private int nbZephyr;
-    private int nbCristal;
-    private int nbCalice;
-    private int nbHelico;
-    private int nbSacsSable;
+    private String nomCarte;
     
     public Message(Utils.Commandes commande, String idAventurier, String idCarte,  Utils.Tresor tresor, Integer idTuile) {
         this.commande = commande ;
@@ -39,14 +34,9 @@ public class Message implements Serializable {
         this.difficulte=difficulte;
     }
     
-    public Message(Utils.Commandes commande, int nbPierre, int nbZephyr, int nbCristal, int nbCalice, int nbHelico, int nbSacsSable){
+    public Message(Utils.Commandes commande, String nomCarte){
         this.commande = commande;
-        this.nbPierre = nbPierre;
-        this.nbZephyr = nbZephyr;
-        this.nbCristal = nbCristal;
-        this.nbCalice = nbCalice;
-        this.nbHelico = nbHelico;
-        this.nbSacsSable = nbSacsSable;
+        this.nomCarte = nomCarte;
         this.tresor = null;
         this.idAventurier = null;
         this.idCarte = null;
@@ -130,5 +120,10 @@ public class Message implements Serializable {
     public int getDifficulte() {
         return difficulte;
     }
+
+    public String getNomCarte() {
+        return nomCarte;
+    }
+    
     
 }
