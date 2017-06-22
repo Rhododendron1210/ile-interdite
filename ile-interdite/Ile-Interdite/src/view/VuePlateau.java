@@ -189,5 +189,15 @@ public class VuePlateau extends JPanel {
         sacSable.setEnabled(b);
     }
     
+    public void setDeplacer(boolean b) {
+        deplacer.setEnabled(b);
+    }
     
+    public void setAssecher(boolean b) {
+        assecher.setEnabled(b);
+    }
+    
+    public void setFinir(boolean b) {
+        finir.setEnabled(b);
+    }    
 }

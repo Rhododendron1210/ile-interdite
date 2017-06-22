@@ -41,7 +41,6 @@ public class VueTuile extends JPanel{
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
         bouton.repaint();
-       
     }
     
     VueTuile(Tuile tuile){
@@ -79,7 +78,6 @@ public class VueTuile extends JPanel{
             if (ave!=null){
                 joueur= new JLabel(ave.getNom());
                 panel.add(joueur);
-                
             }  
         }
         this.add(panel,BorderLayout.NORTH);
@@ -89,8 +87,6 @@ public class VueTuile extends JPanel{
         JLabel tresor;
         if (tuile.getTresor()!=null){
             tresor = new JLabel(tuile.getTresor().getLibelle());
-            tresor.setBackground(tuile.getTresor().getBgColor());
-            this.add(tresor,BorderLayout.SOUTH);
         }
     }
     
