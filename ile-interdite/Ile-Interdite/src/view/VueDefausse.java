@@ -30,7 +30,7 @@ public class VueDefausse extends JFrame {
 
     private Observateur observateur;
 
-    public VueDefausse(int nbCarte, ArrayList<CarteTirage> cartes) {
+    public VueDefausse( ArrayList<CarteTirage> cartes) {
         observateur = null;
         JFrame window = new JFrame("Défausse des cartes");  //création de la fenêtre
         window.setSize(300, 300);    //changement de la taille de la fenêtre

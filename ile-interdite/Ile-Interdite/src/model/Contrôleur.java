@@ -22,6 +22,7 @@ import util.Message;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
 import static util.Utils.Commandes.DEFAUSSE;
+import static util.Utils.Commandes.DEFAUSSER;
 import static util.Utils.Commandes.DONNER;
 import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
@@ -246,6 +247,11 @@ public class Contrôleur implements Observateur {
                 vueGenerale.setObservateur(this);
             }
 
+        }else if(msg.getCommande() ==DEFAUSSER){
+            carteADefausser(aventurierCourant);
+            vueGenerale.dispose();
+            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
+            vueGenerale.setObservateur(this);
         }
     }
 
@@ -346,6 +352,7 @@ public class Contrôleur implements Observateur {
     private void piocherCarteTirage(Aventurier a) {
         //pioche une carte et la retourne
         //mélange et remet les carte dans la pioche si la pioche est vide
+        
         CarteTirage carte = piocheTirage.pop();
         if (piocheTirage.empty()) {
             while (!defausseTirage.empty()) {
@@ -358,6 +365,7 @@ public class Contrôleur implements Observateur {
         } else {
             a.addCarte(carte);
         }
+        
 
     }
 
@@ -379,9 +387,9 @@ public class Contrôleur implements Observateur {
             for (i = 0; i < difficulte; i++) {
                 tirerCarteInondation();
             }
-            //if (aventurierCourant.getPossede().size()==)
-            piocherCarteTirage(aventurierCourant);
-            piocherCarteTirage(aventurierCourant);
+            
+                
+            
 
             if (joueurs.indexOf(aventurierCourant) + 1 != joueurs.size()) {
                 aventurierCourant = joueurs.get(joueurs.indexOf(aventurierCourant) + 1);
@@ -391,8 +399,10 @@ public class Contrôleur implements Observateur {
             } else {
                 aventurierCourant = joueurs.get(0);
                 actionEffectuer = 0;
-            }           
-                carteADefausser();
+            }   
+            piocherCarteTirage(aventurierCourant);
+            piocherCarteTirage(aventurierCourant);
+               
             
         }
         vueGenerale.dispose();
@@ -531,10 +541,14 @@ public class Contrôleur implements Observateur {
         }
     }
     //quand l'aventurier a + de 9 cartes une fenetre s'affiche pour vider les crtes en trop
-    private void carteADefausser() {
+    private void carteADefausser(Aventurier aventurier) {
+       
+           vueDefausse=new VueDefausse(aventurier.getPossede());
+           vueDefausse.setObservateur(this);
+           
+           
         
-        vueDefausse=new VueDefausse(aventurierCourant.getPossede().size()-8, aventurierCourant.getPossede());
-        vueDefausse.setObservateur(this);
+        
         
     }
     //Donne une carte a un aventurier
@@ -549,6 +563,7 @@ public class Contrôleur implements Observateur {
             i = i + 1;
         }
         a2.addCarte(carte);
+        changerJoueur();
 
     }
     //Methode qui permet de voir si une partie est gagnée

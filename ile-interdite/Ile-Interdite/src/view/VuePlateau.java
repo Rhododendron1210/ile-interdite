@@ -15,6 +15,7 @@ import util.Observateur;
 import util.Parameters;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.DEFAUSSER;
 import static util.Utils.Commandes.DONNER;
 import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
@@ -35,6 +36,7 @@ public class VuePlateau extends JPanel {
     private JButton sacSable;
     private JButton passer;
     private JButton tresor;
+    private JButton def;
     
     public VuePlateau(Tuile[][] tuiles){
         this.setLayout(new BorderLayout());
@@ -69,8 +71,19 @@ public class VuePlateau extends JPanel {
         tresor= new JButton("Prendre le tresor");
         tresor.setEnabled(true);
         panel2.add(tresor);
+        def= new JButton("defausser");
+        def.setEnabled(true);
+        panel2.add(def);
         this.add(panel2,BorderLayout.EAST);
         //les action listeners
+        def.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Message m = new Message(DEFAUSSER,null,null,null,null);
+                observateur.traiterMessage(m);
+            }
+            
+        });
         
         tresor.addActionListener(new ActionListener(){
             @Override
