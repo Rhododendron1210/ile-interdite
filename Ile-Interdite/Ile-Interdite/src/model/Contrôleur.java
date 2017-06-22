@@ -157,7 +157,7 @@ public class Contrôleur implements Observateur {
                     colonne = Integer.valueOf(String.valueOf(placement.charAt(1)));
                 }
                 Tuile tuile = grille.getTuile(ligne, colonne);
-
+                
                 deplacement(aventurierCourant, tuile);
 
                 if (tuile.getNom() == "Heliport                ") {
@@ -386,7 +386,8 @@ public class Contrôleur implements Observateur {
             for (i = 0; i < difficulte; i++) {
                 tirerCarteInondation();
             }
-
+            piocherCarteTirage(aventurierCourant);
+            piocherCarteTirage(aventurierCourant);
             if (joueurs.indexOf(aventurierCourant) + 1 != joueurs.size()) {
                 aventurierCourant = joueurs.get(joueurs.indexOf(aventurierCourant) + 1);
                 actionEffectuer = 0;
@@ -396,10 +397,10 @@ public class Contrôleur implements Observateur {
                 aventurierCourant = joueurs.get(0);
                 actionEffectuer = 0;
             }
-            piocherCarteTirage(aventurierCourant);
-            piocherCarteTirage(aventurierCourant);
+            
 
         }
+        
         vueGenerale.dispose();
         vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant);
         vueGenerale.setObservateur(this);

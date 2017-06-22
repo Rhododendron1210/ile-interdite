@@ -24,8 +24,8 @@ import util.Observateur;
  * @author louesdol
  */
 public class VueGenerale extends JFrame implements Observateur{
-    private VueAventurier2 vueAventurier2;
-    private ArrayList<VueAventurier2> aventuriers;
+    private VueAventurier vueAventurier2;
+    private ArrayList<VueAventurier> aventuriers;
     private VuePlateau vuePlateau;
     private VueNiveau vueNiveau;
     private VueMessage vueMessage;
@@ -48,9 +48,9 @@ public class VueGenerale extends JFrame implements Observateur{
         aventuriers = new ArrayList();
         for (Aventurier av : joueurs){
             if (av.equals(a)){
-                vueAventurier2=new VueAventurier2(av,Color.red);
+                vueAventurier2=new VueAventurier(av,Color.red);
             } else {
-                vueAventurier2=new VueAventurier2(av,Color.gray);
+                vueAventurier2=new VueAventurier(av,Color.gray);
             }
             
             aventuriers.add(vueAventurier2);
