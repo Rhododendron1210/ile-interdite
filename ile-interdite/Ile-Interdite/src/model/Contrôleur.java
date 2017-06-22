@@ -33,6 +33,7 @@ import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
 import view.VueDefausse;
 import view.VueEchange;
+import view.VueFinDePartie;
 import view.VueGenerale;
 import view.VueInscription;
 
@@ -64,7 +65,8 @@ public class Contrôleur implements Observateur {
     private VueEchange vueEchange;
     private VueDefausse vueDefausse;
     private VueGenerale vueGenerale;
-
+    private VueFinDePartie vueFDP;
+    
     public Contrôleur() {
         tresorsTrouvees = new ArrayList<>();
         grille = new Grille();
@@ -264,7 +266,7 @@ public class Contrôleur implements Observateur {
         this.addDefausseTirage(carte);
         if (difficulte==5){
             vueGenerale.setMessage("VOUS AVEZ PERDU");                             //PERDU
-            System.out.println("Perdu Difficulté");
+            vueFDP = new VueFinDePartie("Perdu (Difficulté)");
         }else{
             Collections.shuffle(defausseInondation);
             while (!(defausseInondation.empty())) {
@@ -297,7 +299,7 @@ public class Contrôleur implements Observateur {
             ArrayList tuilesAdjacentes = g.getTuilesAdjacentes(ligne, colonne);
             if(!(t.getAventurierPresent().isEmpty())){            
                 if(tuilesAdjacentes.isEmpty()){
-                    vueGenerale.setMessage("VOUS AVEZ PERDU \nDES JOUEURS\nONT COULE ");   //PERDU
+                    vueFDP = new VueFinDePartie("VOUS AVEZ PERDU \nDES JOUEURS\nONT COULE ");   //PERDU
                     System.out.println("Perdu Joueurs Coulés");
                 }
                 else{
@@ -313,7 +315,7 @@ public class Contrôleur implements Observateur {
                 for(Tuile tuile : grille.getTuiles()){
                     if(tuile.getTresor() == tresor && tuile != t){
                         if(tuile.getEtatTuile()==COULEE){
-                            vueGenerale.setMessage("VOUS AVEZ PERDU\nVOUS NE POUVEZ PAS\nRECUPERER TOUS LES TRESORS");             //PERDU    
+                            vueFDP = new VueFinDePartie("VOUS AVEZ PERDU\nVOUS NE POUVEZ PAS\nRECUPERER TOUS LES TRESORS");             //PERDU    
                             System.out.println("Perdu Temples Coulés");
                         }
                         else{
@@ -323,7 +325,7 @@ public class Contrôleur implements Observateur {
                 }
             }
             if(t.getNom()=="Heliport                "){
-                vueGenerale.setMessage("VOUS AVEZ PERDU\nVOUS NE POURREZ\nJAMAIS QUITTER\nL'ÎLE");             //PERDU  
+                vueFDP = new VueFinDePartie("VOUS AVEZ PERDU\nVOUS NE POURREZ\nJAMAIS QUITTER\nL'ÎLE");             //PERDU  
                 System.out.println("Perdu Heliport");
             }
         }
@@ -568,7 +570,7 @@ public class Contrôleur implements Observateur {
             if(this.aventurierCourant.getTuile().getAventurierPresent().size() == nbJoueurs){
                 if(b){
                     vueGenerale.setMessage("VOUS AVEZ GAGNE");
-                    System.out.println("Gagné");
+                    vueFDP = new VueFinDePartie("Gagné");
                 }
             }
         }
