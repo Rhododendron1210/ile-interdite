@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -36,7 +37,7 @@ public class VueEchange extends JFrame {
     private ButtonGroup grJoueurs;
     private ButtonGroup grCartes;
 
-    public VueEchange(ArrayList<CarteTirage> possede, ArrayList<Aventurier> joueurs,Aventurier a) {
+    public VueEchange(ArrayList<CarteTirage> possede, HashMap<String,Aventurier> joueurs,Aventurier a) {
         this.setLayout(new BorderLayout());
         this.setSize(700,700);
         valider = new JButton("Valider");
@@ -84,11 +85,11 @@ public class VueEchange extends JFrame {
         mainPanel.add(panel);
     }
 
-    private void joueurs(Aventurier a,ArrayList<Aventurier> joueurs) {
+    private void joueurs(Aventurier a,HashMap<String,Aventurier> joueurs) {
         int i = joueurs.size();
         JPanel panel = new JPanel(new GridLayout(i, 1));
         grJoueurs = new ButtonGroup();
-        for (Aventurier av : joueurs) {
+        for (Aventurier av : joueurs.values()) {
             if(av.getNom()!=a.getNom()){
                 JRadioButton bout = new JRadioButton(av.getNom(), true);
                 panel.add(bout);
