@@ -459,6 +459,7 @@ public class Contrôleur implements Observateur {
                         Aventurier a = null;
                         for(String key : t.getAventurierPresent().keySet()){
                             a = t.getAventurierPresent().get(key);
+                            //vueGenerale.afficherTuilesPossibles((HashSet) tuilesAdjacentes);                
                         }
                         //demander au joueur de se deplacer sur une case adjacente              
                 }
@@ -726,5 +727,15 @@ public class Contrôleur implements Observateur {
                 }
             }
         }
+    }
+    
+    public ArrayList<Tresor> getTresorsObtenus(){
+        ArrayList<Tresor> tresorsObtenus = new ArrayList();
+        for(Aventurier a : joueurs){
+            for(Tresor tresor : a.getTresors()){
+                tresorsObtenus.add(tresor);
+            }
+        }
+        return tresorsObtenus;
     }
 }
