@@ -11,12 +11,10 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import model.aventuriers.Aventurier;
-import util.Parameters;
 
 /**
  *

@@ -18,7 +18,6 @@ import model.Tuile;
 import model.aventuriers.Aventurier;
 import util.Message;
 import util.Observateur;
-import util.Utils;
 import util.Utils.Tresor;
 
 /**

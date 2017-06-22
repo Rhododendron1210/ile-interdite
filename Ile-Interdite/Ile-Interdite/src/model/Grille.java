@@ -5,15 +5,11 @@
  */
 package model;
 
-import model.Tuile;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import util.Parameters;
 import static util.Utils.EtatTuile.ASSECHEE;
 import static util.Utils.EtatTuile.COULEE;
-import static util.Utils.EtatTuile.INONDEE;
 
 
 /**
