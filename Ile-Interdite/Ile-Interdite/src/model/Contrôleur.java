@@ -22,7 +22,6 @@ import util.Message;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
 import static util.Utils.Commandes.DEFAUSSE;
-import static util.Utils.Commandes.DEFAUSSER;
 import static util.Utils.Commandes.DONNER;
 import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
@@ -37,7 +36,6 @@ import view.VueEchange;
 import view.VueFinDePartie;
 import view.VueGenerale;
 import view.VueInscription;
-import view.VueMessage;
 
 
 /*
@@ -68,13 +66,13 @@ public class Contrôleur implements Observateur {
     private VueDefausse vueDefausse;
     private VueGenerale vueGenerale;
     private VueFinDePartie vueFDP;
-    
+
     public Contrôleur() {
         tresorsTrouvees = new ArrayList<>();
         grille = new Grille();
         joueurs = new ArrayList<>();
-        piocheInondation=new Stack();
-        defausseInondation=new Stack();
+        piocheInondation = new Stack();
+        defausseInondation = new Stack();
         defausseTirage = new Stack<>();
         piocheTirage = new Stack<>();
         vueInscription = new VueInscription();
@@ -85,11 +83,9 @@ public class Contrôleur implements Observateur {
 
     public void afficher() {
         //affichage de la fenetre principale
-        vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
+        vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
         vueGenerale.setObservateur(this);
     }
-
-
 
     public void initialisationPartie(int nbJoueur) {
 
@@ -141,7 +137,6 @@ public class Contrôleur implements Observateur {
 
     }
 
-   
     @Override
     public void traiterMessage(Message msg) {
         if (msg.getCommande() == BOUGER) {
@@ -201,7 +196,7 @@ public class Contrôleur implements Observateur {
                 Tuile tuile = grille.getTuile(ligne, colonne);
                 assechement(tuile);
                 vueGenerale.dispose();
-                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
+                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
                 vueGenerale.setObservateur(this);
 
             }
@@ -209,20 +204,29 @@ public class Contrôleur implements Observateur {
             this.actionEffectuer = 2;
             this.changerJoueur();
             vueGenerale.dispose();
-            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
+            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
             vueGenerale.setObservateur(this);
         } else if (msg.getCommande() == RECUPERER_TRESOR) {
             prendreTresor();
         } else if (msg.getCommande() == DEFAUSSE) {
-            boolean b=false;
-            int i=0;
-            while(b==false){
-                if(aventurierCourant.getPossede().get(i).getNom() == msg.getNomCarte()){
-                    addDefausseTirage(aventurierCourant.getPossede().get(i));
-                    aventurierCourant.getPossede().remove(aventurierCourant.getPossede().get(i));
+            if (msg.getNomCarte()== null) {
+                carteADefausser(aventurierCourant);
+            } else {
+                vueDefausse.dispose();
+                boolean b = false;
+                int i = 0;
+                while (b == false&&i<aventurierCourant.getPossede().size()) {
+                    if (aventurierCourant.getPossede().get(i).getNom() == msg.getNomCarte()) {
+                        addDefausseTirage(aventurierCourant.getPossede().get(i));
+                        aventurierCourant.removePossede(aventurierCourant.getPossede().get(i));
+                    }
+                    i = i + 1;
                 }
-                i=i+1;
             }
+            
+            vueGenerale.dispose();
+            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
+            vueGenerale.setObservateur(this);
         } else if (msg.getCommande() == DONNER) {
             if (msg.getIdAventurier() == null && msg.getIdCarte() == null) {
                 vueEchange = new VueEchange(aventurierCourant.getPossede(), aventurierCourant.getPosition().getAventurierPresent(), aventurierCourant);
@@ -244,16 +248,11 @@ public class Contrôleur implements Observateur {
                 }
                 donnerCarteTirage(aventurierCourant, av, carte);
                 vueGenerale.dispose();
-                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
+                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
                 vueGenerale.setObservateur(this);
             }
 
-        }else if(msg.getCommande() ==DEFAUSSER){
-            carteADefausser(aventurierCourant);
-            vueGenerale.dispose();
-            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
-            vueGenerale.setObservateur(this);
-        }
+        } 
     }
 
     public void deplacement(Aventurier a, Tuile tuile) {
@@ -267,14 +266,15 @@ public class Contrôleur implements Observateur {
         tuile.setAssechee();
         changerJoueur();
     }
+
     private void monteeEaux(CarteTirage carte) {
 
         difficulte = difficulte + 1;
         this.addDefausseTirage(carte);
-        if (difficulte==5){
+        if (difficulte == 5) {
             vueGenerale.setMessage("VOUS AVEZ PERDU");                             //PERDU
             vueFDP = new VueFinDePartie("Perdu (Difficulté)");
-        }else{
+        } else {
             Collections.shuffle(defausseInondation);
             while (!(defausseInondation.empty())) {
                 this.addPiocheInondation(defausseInondation.pop());
@@ -299,44 +299,41 @@ public class Contrôleur implements Observateur {
         if (etat == ASSECHEE) {
             t.setInondée();
         } else if (etat == INONDEE) {
-            t.setCoulee();            
+            t.setCoulee();
             int ligne = t.getLigne();
             int colonne = t.getColonne();
             Grille g = grille;
             ArrayList tuilesAdjacentes = g.getTuilesAdjacentes(ligne, colonne);
-            if(!(t.getAventurierPresent().isEmpty())){            
-                if(tuilesAdjacentes.isEmpty()){
+            if (!(t.getAventurierPresent().isEmpty())) {
+                if (tuilesAdjacentes.isEmpty()) {
                     vueFDP = new VueFinDePartie("VOUS AVEZ PERDU \nDES JOUEURS\nONT COULE ");   //PERDU
                     System.out.println("Perdu Joueurs Coulés");
-                }
-                else{
-                        for(Aventurier a : t.getAventurierPresent().values()){
-                            Tuile tuileProche = (Tuile) tuilesAdjacentes.get(0);
-                            this.deplacement(a, tuileProche);
-                        }
-                        //demander au joueur de se deplacer sur une case adjacente              
+                } else {
+                    for (Aventurier a : t.getAventurierPresent().values()) {
+                        Tuile tuileProche = (Tuile) tuilesAdjacentes.get(0);
+                        this.deplacement(a, tuileProche);
+                    }
+                    //demander au joueur de se deplacer sur une case adjacente              
                 }
             }
-            Tresor tresor = t.getTresor();            
-            if(tresor!=null){
-                for(Tuile tuile : grille.getTuiles()){
-                    if(tuile.getTresor() == tresor && tuile != t){
-                        if(tuile.getEtatTuile()==COULEE){
+            Tresor tresor = t.getTresor();
+            if (tresor != null) {
+                for (Tuile tuile : grille.getTuiles()) {
+                    if (tuile.getTresor() == tresor && tuile != t) {
+                        if (tuile.getEtatTuile() == COULEE) {
                             vueFDP = new VueFinDePartie("VOUS AVEZ PERDU\nVOUS NE POUVEZ PAS\nRECUPERER TOUS LES TRESORS");             //PERDU    
                             System.out.println("Perdu Temples Coulés");
-                        }
-                        else{
+                        } else {
                             //vueMessage.setLabel("Il reste une tuile pour le trésor '"+tresor.toString()+"'");
                         }
                     }
                 }
             }
-            if(t.getNom()=="Heliport                "){
+            if (t.getNom() == "Heliport                ") {
                 vueFDP = new VueFinDePartie("VOUS AVEZ PERDU\nVOUS NE POURREZ\nJAMAIS QUITTER\nL'ÎLE");             //PERDU  
                 System.out.println("Perdu Heliport");
             }
-        }
-        else{
+        } else {
             System.out.println("La tuile est déjà coulée");
         }
 
@@ -353,7 +350,7 @@ public class Contrôleur implements Observateur {
     private void piocherCarteTirage(Aventurier a) {
         //pioche une carte et la retourne
         //mélange et remet les carte dans la pioche si la pioche est vide
-        
+
         CarteTirage carte = piocheTirage.pop();
         if (piocheTirage.empty()) {
             while (!defausseTirage.empty()) {
@@ -366,7 +363,6 @@ public class Contrôleur implements Observateur {
         } else {
             a.addCarte(carte);
         }
-        
 
     }
 
@@ -375,22 +371,21 @@ public class Contrôleur implements Observateur {
         this.addTresorsTrouvees(tresor);
 
     }
+
     //
     private void addTresorsTrouvees(Tresor tresor) {
-        tresorsTrouvees.add(tresor);
+        getTresorsTrouvees().add(tresor);
     }
+
     //compte les coups du joueur et passe au joueur suivant si coups=3
     private void changerJoueur() {
         actionEffectuer = actionEffectuer + 1;
-        
+
         if (actionEffectuer == 3) {
             int i;
             for (i = 0; i < difficulte; i++) {
                 tirerCarteInondation();
             }
-            
-                
-            
 
             if (joueurs.indexOf(aventurierCourant) + 1 != joueurs.size()) {
                 aventurierCourant = joueurs.get(joueurs.indexOf(aventurierCourant) + 1);
@@ -400,18 +395,18 @@ public class Contrôleur implements Observateur {
             } else {
                 aventurierCourant = joueurs.get(0);
                 actionEffectuer = 0;
-            }   
+            }
             piocherCarteTirage(aventurierCourant);
             piocherCarteTirage(aventurierCourant);
-               
-            
+
         }
         vueGenerale.dispose();
-        vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
+        vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs, aventurierCourant, tresorsTrouvees);
         vueGenerale.setObservateur(this);
         vueGenerale.setMessage("nb de coups restants :\n" + (3 - actionEffectuer) + "/3");
 
     }
+
     //place les joueurs sur leur tuile de départ en foncton du nb de joueurs
     public void initialiserJoueur(int nbJoueur) {
         Aventurier a;
@@ -452,8 +447,7 @@ public class Contrôleur implements Observateur {
                         t.aventurierPresent.put(a.getNom(), a);
                     }
                 }
-            } 
-            else if (nm == "Ingénieur") {
+            } else if (nm == "Ingénieur") {
                 for (Tuile t : grille.getTuiles()) {
                     if (t.getNom() == "La Porte de Bronze      ") {
                         a.setPosition(t);
@@ -461,8 +455,7 @@ public class Contrôleur implements Observateur {
                         t.aventurierPresent.put(a.getNom(), a);
                     }
                 }
-            } 
-            else if (nm == "Pilote") {
+            } else if (nm == "Pilote") {
                 for (Tuile t : grille.getTuiles()) {
                     if (t.getNom() == "Heliport                ") {
                         a.setPosition(t);
@@ -470,8 +463,7 @@ public class Contrôleur implements Observateur {
                         t.aventurierPresent.put(a.getNom(), a);
                     }
                 }
-            } 
-            else if (nm == "Plongeur") {
+            } else if (nm == "Plongeur") {
                 for (Tuile t : grille.getTuiles()) {
                     if (t.getNom() == "La Porte de Fer         ") {
                         a.setPosition(t);
@@ -479,8 +471,7 @@ public class Contrôleur implements Observateur {
                         t.aventurierPresent.put(a.getNom(), a);
                     }
                 }
-            } 
-            else if (nm == "Navigateur") {
+            } else if (nm == "Navigateur") {
                 for (Tuile t : grille.getTuiles()) {
                     if (t.getNom() == "La Porte d'or           ") {
                         a.setPosition(t);
@@ -497,6 +488,7 @@ public class Contrôleur implements Observateur {
             }
         }
     }
+
     //place les trésors sur les bonnes tuiles
     public void initialiserTresor() {
         ArrayList<Tuile> tuiles = grille.getTuiles();
@@ -516,6 +508,7 @@ public class Contrôleur implements Observateur {
         }
 
     }
+
     //verifie toutes les conditions pour pouvoir recuperer un trésor
     private void prendreTresor() {
         Tuile tuile = aventurierCourant.getPosition();
@@ -528,35 +521,29 @@ public class Contrôleur implements Observateur {
                 }
             }
             if (cmpt >= 0) {
-                vueGenerale.setMessage("Vous avez obtenu le trésor "+tresor);
-                //vuePlateau
                 aventurierCourant.addTresors(tresor);
                 for (Tuile t : grille.getTuiles()) {
-                    if (t.getTresor().toString() != null){
-                        if(t.getTresor().toString() == tresor.toString()){
+                    if (t.getTresor().toString() == tresor.toString()) {
                         t.setTresor(null);
-                        System.out.println("tresor enlevé");
-                        }
                     }
                 }
             } else {
                 vueGenerale.setMessage("Pas assez de cartes pour récuperer le trésor!");
+                System.out.println("Pas assez de cartes pour récuperer le trésor!");
             }
         } else {
             vueGenerale.setMessage("Pas une carte tresor!");
         }
     }
+
     //quand l'aventurier a + de 9 cartes une fenetre s'affiche pour vider les crtes en trop
     private void carteADefausser(Aventurier aventurier) {
-       
-           vueDefausse=new VueDefausse(aventurier.getPossede());
-           vueDefausse.setObservateur(this);
-           
-           
-        
-        
-        
+
+        vueDefausse = new VueDefausse(aventurier.getPossede());
+        vueDefausse.setObservateur(this);
+
     }
+
     //Donne une carte a un aventurier
     private void donnerCarteTirage(Aventurier a, Aventurier a2, CarteTirage carte) {
         boolean b = false;
@@ -572,6 +559,7 @@ public class Contrôleur implements Observateur {
         changerJoueur();
 
     }
+
     //Methode qui permet de voir si une partie est gagnée
     private void gagner() {
         ArrayList<Tresor> tresors = new ArrayList();
@@ -586,18 +574,17 @@ public class Contrôleur implements Observateur {
                 }
             }
         }
-        
-        if(tresors.size() == 4){
-            if(this.aventurierCourant.getTuile().getAventurierPresent().size() == nbJoueurs){
-                if(b){
+
+        if (tresors.size() == 4) {
+            if (this.aventurierCourant.getTuile().getAventurierPresent().size() == nbJoueurs) {
+                if (b) {
                     vueGenerale.setMessage("VOUS AVEZ GAGNE");
                     vueFDP = new VueFinDePartie("Gagné");
                 }
             }
         }
     }
-    
-    
+
     //getters 
     public ArrayList< Aventurier> getJoueurs() {
         return joueurs;
@@ -643,5 +630,9 @@ public class Contrôleur implements Observateur {
             }
         }
         return tresorsObtenus;
+    }
+
+    public ArrayList<Tresor> getTresorsTrouvees() {
+        return tresorsTrouvees;
     }
 }

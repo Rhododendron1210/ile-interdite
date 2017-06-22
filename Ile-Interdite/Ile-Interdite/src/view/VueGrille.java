@@ -43,4 +43,15 @@ public class VueGrille extends JPanel{
     public VueTuile[][] getAffichTuile() {
         return affichTuile;
     }
+
+    public Tuile[][] getTuiles() {
+        return tuiles;
+    }
+    
+    
+    
+    
+    
+    
+   
 }

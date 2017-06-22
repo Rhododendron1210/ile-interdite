@@ -15,11 +15,14 @@ import util.Observateur;
 import util.Parameters;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
-import static util.Utils.Commandes.DEFAUSSER;
 import static util.Utils.Commandes.DONNER;
 import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
 import util.Utils.Tresor;
+import static util.Utils.Commandes.DEFAUSSE;
+import static util.Utils.Commandes.DONNER;
+import static util.Utils.Commandes.RECUPERER_TRESOR;
+import static util.Utils.Commandes.TERMINER;
 
 /**
  *
@@ -55,8 +58,7 @@ public class VuePlateau extends JPanel {
         panel.add(assecher);
         panel.add(finir);
         this.add(panel,BorderLayout.NORTH);
-        grille = new VueGrille(tuiles);
-        
+        grille = new VueGrille(tuiles); 
         this.add(grille,BorderLayout.CENTER);
         
         JPanel panel2 = new JPanel(new GridLayout(4,1));
@@ -80,7 +82,7 @@ public class VuePlateau extends JPanel {
         def.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                Message m = new Message(DEFAUSSER,null,null,null,null);
+                Message m = new Message(DEFAUSSE,null,null,null,null);
                 observateur.traiterMessage(m);
             }
             
