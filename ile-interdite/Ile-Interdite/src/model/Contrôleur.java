@@ -36,6 +36,7 @@ import static util.Utils.Commandes.TERMINER;
 import static util.Utils.Commandes.VALIDER_JOUEURS;
 import util.Utils.EtatTuile;
 import static util.Utils.EtatTuile.ASSECHEE;
+import static util.Utils.EtatTuile.COULEE;
 import static util.Utils.EtatTuile.INONDEE;
 import util.Utils.Tresor;
 import view.VueAventurier;
@@ -432,7 +433,8 @@ public class Contrôleur implements Observateur{
         difficulte=difficulte+1;
         this.addDefausseTirage(carte);
         if (difficulte==5){
-            //finDePartie();
+            vueMessage.setLabel("VOUS AVEZ PERDU");                             //PERDU
+            System.out.println("Perdu Difficulté");
         }else{
             Collections.shuffle(defausseInondation);
             while( !(defausseInondation.empty()) ){
@@ -465,7 +467,8 @@ public class Contrôleur implements Observateur{
             ArrayList tuilesAdjacentes = g.getTuilesAdjacentes(ligne, colonne);
             if(!(t.getAventurierPresent().isEmpty())){            
                 if(tuilesAdjacentes.isEmpty()){
-                    this.setFinJeu(true);
+                    vueMessage.setLabel("VOUS AVEZ PERDU \nDES JOUEURS\nONT COULE ");   //PERDU
+                    System.out.println("Perdu Joueurs Coulés");
                 }
                 else{
                         Aventurier a = null;
@@ -476,6 +479,24 @@ public class Contrôleur implements Observateur{
                 }
             }
             t.setCoulee();
+            Tresor tresor = t.getTresor();            
+            if(tresor!=null){
+                for(Tuile tuile : grille.getTuiles()){
+                    if(tuile.getTresor() == tresor && tuile != t){
+                        if(tuile.getEtatTuile()==COULEE){
+                            vueMessage.setLabel("VOUS AVEZ PERDU\nVOUS NE POUVEZ PAS\nRECUPERER TOUS LES TRESORS");             //PERDU    
+                            System.out.println("Perdu Temples Coulés");
+                        }
+                        else{
+                            vueMessage.setLabel("Il reste une tuile pour le trésor '"+tresor.toString()+"'");
+                        }
+                    }
+                }
+            }
+            if(t.getNom()=="Heliport                "){
+                vueMessage.setLabel("VOUS AVEZ PERDU\nVOUS NE POURREZ\nJAMAIS QUITTER\nL'ÎLE");             //PERDU  
+                System.out.println("Perdu Heliport");
+            }
         }
         else{
             System.out.println("La tuile est déjà coulée");
@@ -742,7 +763,7 @@ public class Contrôleur implements Observateur{
         if(tresors.size() == 4){
             if(this.aventurierCourant.getTuile().getAventurierPresent().size() == nbJoueurs){
                 if(b){
-                    //affichage pop up gagner zntoufbzfiafonaofnoifhziofjaonvoanvonvoinaoifdnmaocmoahdohMOHMOHohOHOHOozgoinzonzonfonvoinzovinaovcmnmnd
+                    vueMessage.setLabel("VOUS AVEZ GAGNE");
                 }
             }
         }
