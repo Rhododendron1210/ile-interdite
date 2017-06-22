@@ -24,7 +24,7 @@ import static util.Utils.Commandes.TERMINER;
  * @author IUT2-Dept Info
  */
 public class VuePlateau extends JPanel {
-    private VueGrille grille;
+    private VueGrille grille ;
     
     private Observateur observateur;
     private JButton deplacer;

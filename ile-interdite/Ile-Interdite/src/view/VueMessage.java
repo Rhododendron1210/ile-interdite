@@ -18,7 +18,7 @@ import util.Parameters;
 public class VueMessage extends JPanel{
     private JLabel label;
     public VueMessage(){
-        label= new JLabel("Départ Jeu");
+        label= new JLabel();
         this.setBackground(Color.CYAN);
         this.add(label);
         this.setSize(1200,util.Parameters.HAUTEUR_VUE_AVENTURIER );

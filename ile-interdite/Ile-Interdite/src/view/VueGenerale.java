@@ -24,6 +24,7 @@ import util.Observateur;
  */
 public class VueGenerale extends JFrame implements Observateur{
     private VueAventurier2 vueAventurier2;
+    private ArrayList<VueAventurier2> aventuriers;
     private VuePlateau vuePlateau;
     private VueNiveau vueNiveau;
     private VueMessage vueMessage;
@@ -43,9 +44,10 @@ public class VueGenerale extends JFrame implements Observateur{
         this.add(vueNiveau,BorderLayout.WEST);
         int i = joueurs.size();
         JPanel panel = new JPanel(new GridLayout(1,i));
-        
+        aventuriers = new ArrayList();
         for (Aventurier av : joueurs){
             vueAventurier2=new VueAventurier2(av);
+            aventuriers.add(vueAventurier2);
             panel.add(vueAventurier2);
         }
         this.add(panel,BorderLayout.NORTH);
@@ -56,7 +58,7 @@ public class VueGenerale extends JFrame implements Observateur{
         
         
     }
-
+    
     public void setObservateur(Observateur observateur) {
         this.observateur = observateur;
     }
