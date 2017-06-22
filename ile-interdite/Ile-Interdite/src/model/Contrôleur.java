@@ -74,6 +74,7 @@ public class Contrôleur implements Observateur {
     private ArrayList<Tresor> tresorsTrouvees;
     private int actionEffectuer;
     private VueEchange vueEchange;
+    private VueDefausse vueDefausse;
     private VueGenerale vueGenerale;
 
     public Contrôleur() {
@@ -221,10 +222,15 @@ public class Contrôleur implements Observateur {
         } else if (msg.getCommande() == RECUPERER_TRESOR) {
             prendreTresor();
         } else if (msg.getCommande() == DEFAUSSE) {
-            carteADefausser();
-            vueGenerale.dispose();
-            vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
-            vueGenerale.setObservateur(this);
+            boolean b=false;
+            int i=0;
+            while(b==false){
+                if(aventurierCourant.getPossede().get(i).getNom() == msg.getNomCarte()){
+                    addDefausseTirage(aventurierCourant.getPossede().get(i));
+                    aventurierCourant.getPossede().remove(aventurierCourant.getPossede().get(i));
+                }
+                i=i+1;
+            }
         } else if (msg.getCommande() == DONNER) {
             if (msg.getIdAventurier() == null && msg.getIdCarte() == null) {
                 vueEchange = new VueEchange(aventurierCourant.getPossede(), aventurierCourant.getPosition().getAventurierPresent(), aventurierCourant);
@@ -250,19 +256,6 @@ public class Contrôleur implements Observateur {
                 vueGenerale.setObservateur(this);
             }
 
-        }else if (msg.getCommande() == DEFAUSSE){
-            System.out.println("sfsdqfsdfq");
-            boolean b=false;
-            int i=0;
-            while(b==false){
-                System.out.println("sfsdqfsdfq");
-                
-                if(aventurierCourant.getPossede().get(i).getNom() == msg.getNomCarte()){
-                    addDefausseTirage(aventurierCourant.getPossede().get(i));
-                    aventurierCourant.getPossede().remove(aventurierCourant.getPossede().get(i));
-                }
-                i=i+1;
-            }
         }
     }
 
@@ -409,8 +402,9 @@ public class Contrôleur implements Observateur {
                 aventurierCourant = joueurs.get(0);
                 actionEffectuer = 0;
             }
-            
-            carteADefausser();
+            for (int x=0;x<aventurierCourant.getPossede().size()-9;i++){
+                carteADefausser();
+            }
         }
         vueGenerale.dispose();
         vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
@@ -549,8 +543,8 @@ public class Contrôleur implements Observateur {
     }
 
     private void carteADefausser() {
-        if (aventurierCourant.getPossede().size() > 8) {
-            VueDefausse vueDefausse = new VueDefausse(aventurierCourant.getPossede().size() - 8, aventurierCourant.getPossede());
+        while (aventurierCourant.getPossede().size() > 8) {
+            vueDefausse=new VueDefausse(aventurierCourant.getPossede().size() - 8, aventurierCourant.getPossede());
             vueDefausse.setObservateur(this);
         }
     }
