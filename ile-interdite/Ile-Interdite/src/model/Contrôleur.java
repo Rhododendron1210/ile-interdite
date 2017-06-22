@@ -251,10 +251,12 @@ public class Contrôleur implements Observateur {
             }
 
         }else if (msg.getCommande() == DEFAUSSE){
-            
+            System.out.println("sfsdqfsdfq");
             boolean b=false;
             int i=0;
             while(b==false){
+                System.out.println("sfsdqfsdfq");
+                
                 if(aventurierCourant.getPossede().get(i).getNom() == msg.getNomCarte()){
                     addDefausseTirage(aventurierCourant.getPossede().get(i));
                     aventurierCourant.getPossede().remove(aventurierCourant.getPossede().get(i));
@@ -549,6 +551,7 @@ public class Contrôleur implements Observateur {
     private void carteADefausser() {
         if (aventurierCourant.getPossede().size() > 8) {
             VueDefausse vueDefausse = new VueDefausse(aventurierCourant.getPossede().size() - 8, aventurierCourant.getPossede());
+            vueDefausse.setObservateur(this);
         }
     }
 
