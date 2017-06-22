@@ -72,5 +72,7 @@ public class VueDefausse extends JFrame{
                 }
             }
         }
+        
+        window.setVisible(true);
     }
 }
