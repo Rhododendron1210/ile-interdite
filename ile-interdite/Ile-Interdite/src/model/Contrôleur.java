@@ -331,11 +331,8 @@ public class Contrôleur implements Observateur {
             
             boolean b=false;
             int i=0;
-            System.out.println("encoravantboucle");
             while(b==false){
-                System.out.println("avantboucle");
                 if(aventurierCourant.getPossede().get(i).getNom() == msg.getNomCarte()){
-                    System.out.println("boucle");
                     addDefausseTirage(aventurierCourant.getPossede().get(i));
                     aventurierCourant.getPossede().remove(aventurierCourant.getPossede().get(i));
                 }
