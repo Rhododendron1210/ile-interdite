@@ -12,5 +12,7 @@ import javax.swing.JFrame;
  * @author epalley
  */
 public class VueDefausse extends JFrame{
-    
+    VueDefausse(int nbDefausse){
+        JFrame window = new JFrame("Défausse des cartes");
+    }
 }
