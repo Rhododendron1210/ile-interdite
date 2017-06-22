@@ -322,12 +322,24 @@ public class Contrôleur implements Observateur{
         }
         else if(msg.getCommande() == DEFAUSSE){
             carteADefausser();
-        } else if (msg.getCommande() ==DONNER){
+        } else if (msg.getCommande() == DONNER){
             if(msg.getIdAventurier()==null&&msg.getIdCarte()==null){
                 vueEchange= new VueEchange(aventurierCourant.getPossede(),joueurs);
             } else {
+                CarteTirage carte=new CarteMonteeDesEaux();
                 vueEchange.dispose();
-                //donnerCarteTirage(aventurierCourant,)
+                for (CarteTirage c:aventurierCourant.getPossede()){
+                    if (c.getNom()==msg.getIdCarte()){
+                        carte=c;
+                    }
+                }
+                Aventurier av=new Pilote(null,null,null);
+                for(Aventurier a:joueurs){
+                    if (a.getNom()==msg.getIdAventurier()){
+                        av=a;
+                    }
+                }
+                donnerCarteTirage(aventurierCourant,av,carte);
             }
             
             
