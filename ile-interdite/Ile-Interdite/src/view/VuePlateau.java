@@ -80,7 +80,7 @@ public class VuePlateau extends JFrame {
         panel2.add(tresor);
         this.add(panel2,BorderLayout.EAST);
         
-        
+       
         
         
         deplacer.addActionListener(new ActionListener(){

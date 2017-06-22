@@ -676,5 +676,18 @@ public class Contrôleur implements Observateur{
         a2.addCarte(carte);
         
     }
+    private void prendreCarteTirage(Aventurier a, Aventurier a2,CarteTirage carte){
+        boolean b=false;
+        int i=0;
+        while(b==false){
+            if (a2.getPossede().get(i).getNom()==carte.getNom()){
+                a2.getPossede().remove(i);
+                b=true;                       
+            }
+            i=i+1;
+        }
+        a.addCarte(carte);
+        
+    }
 }
 
