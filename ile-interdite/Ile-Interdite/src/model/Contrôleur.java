@@ -30,6 +30,7 @@ import util.Message;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
 import static util.Utils.Commandes.DEFAUSSE;
+import static util.Utils.Commandes.DONNER;
 import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
 import static util.Utils.Commandes.VALIDER_JOUEURS;
@@ -321,6 +322,15 @@ public class Contrôleur implements Observateur{
         }
         else if(msg.getCommande() == DEFAUSSE){
             carteADefausser();
+        } else if (msg.getCommande() ==DONNER){
+            if(msg.getIdAventurier()==null&&msg.getIdCarte()==null){
+                vueEchange= new VueEchange(aventurierCourant.getPossede(),joueurs);
+            } else {
+                vueEchange.dispose();
+                //donnerCarteTirage(aventurierCourant,)
+            }
+            
+            
         }
     }
     

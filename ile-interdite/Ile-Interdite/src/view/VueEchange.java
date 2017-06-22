@@ -36,14 +36,14 @@ public class VueEchange extends JFrame {
     private ButtonGroup grJoueurs;
     private ButtonGroup grCartes;
 
-    VueEchange(ArrayList<CarteTirage> possede, ArrayList<Aventurier> joueurs) {
+    public VueEchange(ArrayList<CarteTirage> possede, ArrayList<Aventurier> joueurs) {
         this.setLayout(new BorderLayout());
         valider = new JButton("Valider");
         mainPanel = new JPanel(new GridLayout(1, 2));
         mesCartes(possede);
         joueurs(joueurs);
         this.add(mainPanel, BorderLayout.CENTER);
-
+        this.setVisible(true);
         valider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
