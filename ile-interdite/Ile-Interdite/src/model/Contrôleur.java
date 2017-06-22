@@ -378,6 +378,7 @@ public class Contrôleur implements Observateur {
             for (i = 0; i < difficulte; i++) {
                 tirerCarteInondation();
             }
+            //if (aventurierCourant.getPossede().size()==)
             piocherCarteTirage(aventurierCourant);
             piocherCarteTirage(aventurierCourant);
 
@@ -389,11 +390,9 @@ public class Contrôleur implements Observateur {
             } else {
                 aventurierCourant = joueurs.get(0);
                 actionEffectuer = 0;
-            }
-            int nb=aventurierCourant.getPossede().size()-9;
-            for (int x=0;x<=nb;i++){
+            }           
                 carteADefausser();
-            }
+            
         }
         vueGenerale.dispose();
         vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs,aventurierCourant);
@@ -532,10 +531,10 @@ public class Contrôleur implements Observateur {
     }
     //quand l'aventurier a + de 9 cartes une fenetre s'affiche pour vider les crtes en trop
     private void carteADefausser() {
-        while (aventurierCourant.getPossede().size() > 8) {
-            vueDefausse=new VueDefausse(aventurierCourant.getPossede().size() - 8, aventurierCourant.getPossede());
-            vueDefausse.setObservateur(this);
-        }
+        
+        vueDefausse=new VueDefausse(aventurierCourant.getPossede().size()-8, aventurierCourant.getPossede());
+        vueDefausse.setObservateur(this);
+        
     }
     //Donne une carte a un aventurier
     private void donnerCarteTirage(Aventurier a, Aventurier a2, CarteTirage carte) {
