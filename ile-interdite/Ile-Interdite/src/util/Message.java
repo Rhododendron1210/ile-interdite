@@ -14,6 +14,13 @@ public class Message implements Serializable {
     private final Integer idTuile ;
     private int nbJoueurs;
     private int difficulte;
+    private int nbPierre;
+    private int nbZephyr;
+    private int nbCristal;
+    private int nbCalice;
+    private int nbHelico;
+    private int nbSacsSable;
+    
     public Message(Utils.Commandes commande, Integer idAventurier, Integer idCarte,  Utils.Tresor tresor, Integer idTuile) {
         this.commande = commande ;
         this.idAventurier = idAventurier ;
@@ -32,6 +39,19 @@ public class Message implements Serializable {
         this.difficulte=difficulte;
     }
     
+    public Message(Utils.Commandes commande, int nbPierre, int nbZephyr, int nbCristal, int nbCalice, int nbHelico, int nbSacsSable){
+        this.commande = commande;
+        this.nbPierre = nbPierre;
+        this.nbZephyr = nbZephyr;
+        this.nbCristal = nbCristal;
+        this.nbCalice = nbCalice;
+        this.nbHelico = nbHelico;
+        this.nbSacsSable = nbSacsSable;
+        this.tresor = null;
+        this.idAventurier = null;
+        this.idCarte = null;
+        this.idTuile = null;
+    }
     
 
     /**
