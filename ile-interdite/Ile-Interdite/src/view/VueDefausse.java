@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,38 +32,39 @@ public class VueDefausse extends JFrame{
     public VueDefausse(int nbCarte, ArrayList<CarteTirage> cartes){
         JFrame window = new JFrame("Défausse des cartes");
         window.setSize(600,300);
-        JPanel panel = new JPanel(new GridLayout(1,nbCarte));
+        JPanel panel = new JPanel(new GridLayout(1,cartes.size()));
         JScrollPane paneDeroulant = new JScrollPane(panel);
         paneDeroulant.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        while(nbCarte>10){
-            for(int i = nbCarte; i>10; i++){
-                JButton bout = new JButton();
-                for (CarteTirage c : cartes){
-                    bout.setText(c.getNom());
-                    bout.addActionListener(new ActionListener(){
-                    @Override
-                        public void actionPerformed(ActionEvent e) {
-                            Message m;
-                            if (c.getNom() == "La Pierre Sacrée" ) {
-                                m = new Message(DEFAUSSE, 1, 0, 0, 0, 0 ,0);
-                            } else if (c.getNom() == "La statue du Zéphyr") {
-                                m = new Message(DEFAUSSE, 0, 1, 0, 0, 0, 0);
-                            } else if (c.getNom() == "Le Cristal Ardent") {
-                                m = new Message(DEFAUSSE, 0, 0, 1, 0, 0, 0);
-                            } else if (c.getNom() == "Le Calice de l'Onde") {
-                                m = new Message(DEFAUSSE, 0, 0, 0, 1, 0, 0);
-                            } else if (c.getNom() == "CarteHelicoptere") {
-                                m = new Message(DEFAUSSE, 0, 0, 0, 0, 1, 0);
-                            } else if (c.getNom() == "CarteSacsDeSable") {
-                                m = new Message(DEFAUSSE, 0, 0, 0, 0, 0, 1);
-                            }
+        for (CarteTirage c : cartes){
+            JButton bout = new JButton(c.getNom());
+            bout.addActionListener(new ActionListener(){
+                @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Message m;
+                        if (c.getNom() == "La Pierre Sacrée" ) {
+                            m = new Message(DEFAUSSE, 1, 0, 0, 0, 0 ,0);
+                            window.setVisible(false);
+                        } else if (c.getNom() == "La statue du Zéphyr") {
+                            m = new Message(DEFAUSSE, 0, 1, 0, 0, 0, 0);
+                            window.setVisible(false);
+                        } else if (c.getNom() == "Le Cristal Ardent") {
+                            m = new Message(DEFAUSSE, 0, 0, 1, 0, 0, 0);
+                            window.setVisible(false);
+                        } else if (c.getNom() == "Le Calice de l'Onde") {
+                            m = new Message(DEFAUSSE, 0, 0, 0, 1, 0, 0);
+                            window.setVisible(false);
+                        } else if (c.getNom() == "CarteHelicoptere") {
+                            m = new Message(DEFAUSSE, 0, 0, 0, 0, 1, 0);
+                            window.setVisible(false);
+                        } else if (c.getNom() == "CarteSacsDeSable") {
+                            m = new Message(DEFAUSSE, 0, 0, 0, 0, 0, 1);
+                            window.setVisible(false);
                         }
-                    });
-                    panel.add(bout);
-                }
-            }
+                    }
+            });
+        panel.add(bout);   
         }
-        window.add(panel);
+        window.add(paneDeroulant);
         window.setVisible(true);
     }
 }
