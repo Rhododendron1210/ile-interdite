@@ -29,6 +29,8 @@ import model.aventuriers.Plongeur;
 import util.Message;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.DEFAUSSE;
+import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
 import static util.Utils.Commandes.VALIDER_JOUEURS;
 import util.Utils.EtatTuile;
@@ -309,14 +311,17 @@ public class Contrôleur implements Observateur{
                 vuePlateau.setObservateur(this);
 
             }
-        }
-        
-        else if(msg.getCommande() == TERMINER){
+        }else if(msg.getCommande() == TERMINER){
             this.actionEffectuer = 2;
             this.changerJoueur();
             vuePlateau.dispose();
             vuePlateau=new VuePlateau(grille.getGrille());
             vuePlateau.setObservateur(this);
+        } else if(msg.getCommande() == RECUPERER_TRESOR){
+            prendreTresor();
+        }
+        else if(msg.getCommande() == DEFAUSSE){
+            carteADefausser();
         }
     }
     
@@ -510,7 +515,7 @@ public class Contrôleur implements Observateur{
                 aventurierCourant=joueurs.get(0);
                 actionEffectuer=0; 
             }  
-            carteADefausser(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());
+            carteADefausser();
             
         }
         for (VueAventurier2 vue : aventuriers){
@@ -656,11 +661,15 @@ public class Contrôleur implements Observateur{
                         t.setTresor(null);
                     }
                 }
-            } 
+            } else {
+                vueMessage.setLabel("Pas assez de cartes pour récuperer le trésor!");
+            }
+        } else {
+                vueMessage.setLabel("Pas une carte tresor!");
         }
     }
     
-    private void carteADefausser(int i, ArrayList<CarteTirage> possede) {
+    private void carteADefausser() {
         if (aventurierCourant.getPossede().size()>8){               
                     //VueDefausse(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());                
         }    

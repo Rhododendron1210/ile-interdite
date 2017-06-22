@@ -7,13 +7,18 @@ package view;
 
 import Tresor.CarteTirage;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.html.HTMLDocument.Iterator;
+import util.Message;
+import static util.Utils.Commandes.DEFAUSSE;
 
 /**
  *
@@ -37,14 +42,35 @@ public class VueDefausse extends JFrame{
             
             for(int i = nbCarte; i>10; i++){
                 
-                JTextPane pane = new JTextPane();
-                panel.add(pane);
+                JButton bout = new JButton();
                 
-                //Iterator ite = cartes.iterator();
-                //pane.add(carte);
+                for (CarteTirage c : cartes){
+                    
+                    bout.setText(c.getNom());
+                    
+                    bout.addActionListener(new ActionListener(){
+                    @Override
+                        public void actionPerformed(ActionEvent e) {
+                            Message m;
+                            if (c.getNom() == "La Pierre Sacrée" ) {
+                                m = new Message(DEFAUSSE, 1, 0, 0, 0, 0 ,0);
+                            } else if (c.getNom() == "La statue du Zéphyr") {
+                                m = new Message(DEFAUSSE, 0, 1, 0, 0, 0, 0);
+                            } else if (c.getNom() == "Le Cristal Ardent") {
+                                m = new Message(DEFAUSSE, 0, 0, 1, 0, 0, 0);
+                            } else if (c.getNom() == "Le Calice de l'Onde") {
+                                m = new Message(DEFAUSSE, 0, 0, 0, 1, 0, 0);
+                            } else if (c.getNom() == "CarteHelicoptere") {
+                                m = new Message(DEFAUSSE, 0, 0, 0, 0, 1, 0);
+                            } else if (c.getNom() == "CarteSacsDeSable") {
+                                m = new Message(DEFAUSSE, 0, 0, 0, 0, 0, 1);
+                            }
+                        }
+                    });
+                    
+                    panel.add(bout);
+                }
             }
         }
-        
-        
     }
 }

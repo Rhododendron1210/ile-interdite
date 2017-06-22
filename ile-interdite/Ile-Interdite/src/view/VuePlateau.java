@@ -15,6 +15,7 @@ import util.Observateur;
 import util.Parameters;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
 
 /**
@@ -76,11 +77,18 @@ public class VuePlateau extends JFrame {
         prendre.setEnabled(true);
         panel2.add(prendre);
         tresor= new JButton("Prendre le tresor");
-        tresor.setEnabled(false);
+        tresor.setEnabled(true);
         panel2.add(tresor);
         this.add(panel2,BorderLayout.EAST);
         
-       
+        tresor.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Message m = new Message(RECUPERER_TRESOR,null,null,null,null);
+                observateur.traiterMessage(m);
+            }
+            
+        });
         
         
         deplacer.addActionListener(new ActionListener(){
@@ -143,7 +151,7 @@ public class VuePlateau extends JFrame {
             //this.grille.getAffichTuile()[i][j].repaint();
             this.grille.getAffichTuile()[i][j].getBouton().setEnabled(true);
             //grille.repaint();
-            System.out.println("passer");
+           
         }
         repaint();
     }
@@ -161,4 +169,26 @@ public class VuePlateau extends JFrame {
         grille.creeGrille();
         this.repaint();
     }
+
+    public void setHelico(boolean b) {
+        helico.setEnabled(b);
+    }
+
+    public void sePasser(boolean b) {
+        passer.setEnabled(b);
+    }
+
+    public void setPrendre(boolean b) {
+        prendre.setEnabled(b);
+    }
+
+    public void setTresor(boolean b) {
+        tresor.setEnabled(b);
+    }
+
+    public void setSacSable(boolean b) {
+        sacSable.setEnabled(b);
+    }
+    
+    
 }

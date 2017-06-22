@@ -24,37 +24,7 @@ public class VueTuile extends JPanel{
     private Tuile tuile;
     private JButton bouton;
     
-    /*VueTuile(Tuile tuile){
-        ligne= tuile.getLigne();
-        colonne=tuile.getColonne();
-        JPanel panel = new JPanel(new GridLayout(4,1));
-        JLabel label = new JLabel(tuile.getNom());
-        this.setLayout(new BorderLayout());
-        this.add(label,BorderLayout.NORTH);
-        if (tuile.getEtatTuile()==ASSECHEE){
-            setCouleur(Color.orange);
-        } else if (tuile.getEtatTuile()==INONDEE){
-            setCouleur(Color.BLUE);
-        } else {
-            setCouleur(Color.gray);
-            this.setEnabled(false);
-        }
-        panel.setBackground(couleur);
-        this.setBackground(couleur);
-        HashMap<String,Aventurier> aventuriers = tuile.getAventurierPresent();
-        for (Aventurier ave: aventuriers.values()){
-            JPanel joueur = new JPanel();
-            if (ave!=null){
-                joueur.setBackground(ave.getCouleur());
-                
-            } else {
-                joueur.setBackground(couleur);
-            }
-            panel.add(joueur);
-        }
-        
-        this.add(panel, BorderLayout.CENTER);
-    } */
+
 
     public int getColonne() {
         return colonne;
@@ -71,7 +41,7 @@ public class VueTuile extends JPanel{
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
         bouton.repaint();
-        System.out.println("couleur");
+       
     }
     
     VueTuile(Tuile tuile){
@@ -91,9 +61,8 @@ public class VueTuile extends JPanel{
         ligne= tuile.getLigne();
         colonne=tuile.getColonne();
         joueurs();
+        tresor();
         this.add(bouton,BorderLayout.CENTER);
-        
-        
     }
     
     public JButton getBouton(){
@@ -104,18 +73,25 @@ public class VueTuile extends JPanel{
         
         HashMap<String,Aventurier> aventuriers = tuile.getAventurierPresent();
         int i = aventuriers.size();
-        if (i!=0){
-            
-        }
+        
         JPanel panel = new JPanel(new GridLayout(i,1));
         for (Aventurier ave: aventuriers.values()){
             if (ave!=null){
                 joueur= new JLabel(ave.getNom());
                 panel.add(joueur);
-                System.out.println("set joueur");
+                
             }  
         }
         this.add(panel,BorderLayout.NORTH);
+    }
+    
+    private void tresor(){
+        JLabel tresor;
+        if (tuile.getTresor()!=null){
+            tresor = new JLabel(tuile.getTresor().getLibelle());
+            tresor.setBackground(tuile.getTresor().getBgColor());
+            this.add(tresor,BorderLayout.SOUTH);
+        }
     }
     
    
