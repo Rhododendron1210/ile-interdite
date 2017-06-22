@@ -423,17 +423,17 @@ public class Contrôleur implements Observateur {
         Aventurier a;
 
         ArrayList<Aventurier> aventuriers = new ArrayList();
-        a = new Explorateur("explorateur              ", "Explorateur", null);
+        a = new Explorateur("Explorateur              ", "Explorateur", null);
         aventuriers.add(a);
-        a = new Messager("messager                 ", "Messager", null);
+        a = new Messager("Messager                 ", "Messager", null);
         aventuriers.add(a);
-        a = new Ingenieur("ingénieur                ", "Ingénieur", null);
+        a = new Ingenieur("Ingénieur                ", "Ingénieur", null);
         aventuriers.add(a);
-        a = new Pilote("pilote                   ", "Pilote", null);
+        a = new Pilote("Pilote                   ", "Pilote", null);
         aventuriers.add(a);
-        a = new Plongeur("plongeur                 ", "Plongeur", null);
+        a = new Plongeur("Plongeur                 ", "Plongeur", null);
         aventuriers.add(a);
-        a = new Navigateur("navigateur               ", "Navigateur", null);
+        a = new Navigateur("Navigateur               ", "Navigateur", null);
 
         Collections.shuffle(aventuriers);
 
