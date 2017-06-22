@@ -28,7 +28,7 @@ public class VueDefausse extends JFrame{
     
     private int nbCarte;
     
-    VueDefausse(int nbCarte, ArrayList<CarteTirage> cartes){
+    public VueDefausse(int nbCarte, ArrayList<CarteTirage> cartes){
         
         JFrame window = new JFrame("Défausse des cartes");
         window.setSize(600,300);
