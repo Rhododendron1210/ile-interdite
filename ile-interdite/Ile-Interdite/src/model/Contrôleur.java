@@ -563,6 +563,7 @@ public class Contrôleur implements Observateur {
             i = i + 1;
         }
         a2.addCarte(carte);
+        changerJoueur();
 
     }
     //Methode qui permet de voir si une partie est gagnée
