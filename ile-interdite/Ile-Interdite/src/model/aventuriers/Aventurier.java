@@ -136,5 +136,15 @@ public abstract class Aventurier extends ObjetIdentifie{
     public void addTresors(Tresor tresor) {
         tresors.add(tresor);
     }
+
+    public ArrayList<Tresor> getTresors() {
+        return tresors;
+    }
+
+    public void setTresors(ArrayList<Tresor> tresors) {
+        this.tresors = tresors;
+    }
+    
+    
     
 }
