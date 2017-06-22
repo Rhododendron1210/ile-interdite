@@ -91,5 +91,13 @@ public class VueGenerale extends JFrame implements Observateur{
         vueNiveau.setNiveau(niveau);
     }
     
-    
+    public void setAllDisable(){
+        this.vuePlateau.sePasser(false);
+        this.vuePlateau.setTresor(false);
+        this.vuePlateau.setHelico(false);
+        this.vuePlateau.setSacSable(false);
+        this.vuePlateau.setAssecher(false);
+        this.vuePlateau.setDeplacer(false);
+        this.vuePlateau.setFinir(false);
+    }
 }

@@ -307,6 +307,7 @@ public class Contrôleur implements Observateur {
         if (etat == ASSECHEE) {
             t.setInondée();
         } else if (etat == INONDEE) {
+            t.setCoulee();            
             int ligne = t.getLigne();
             int colonne = t.getColonne();
             Grille g = grille;
@@ -317,15 +318,13 @@ public class Contrôleur implements Observateur {
                     System.out.println("Perdu Joueurs Coulés");
                 }
                 else{
-                        Aventurier a = null;
-                        for(String key : t.getAventurierPresent().keySet()){
-                            a = t.getAventurierPresent().get(key);
-                            //vueGenerale.afficherTuilesPossibles((HashSet) tuilesAdjacentes);                
+                        for(Aventurier a : t.getAventurierPresent().values()){
+                            Tuile tuileProche = (Tuile) tuilesAdjacentes.get(0);
+                            this.deplacement(a, tuileProche);
                         }
                         //demander au joueur de se deplacer sur une case adjacente              
                 }
             }
-            t.setCoulee();
             Tresor tresor = t.getTresor();            
             if(tresor!=null){
                 for(Tuile tuile : grille.getTuiles()){
@@ -626,6 +625,8 @@ public class Contrôleur implements Observateur {
 
     public void setFinJeu(boolean finJeu) {
         this.finJeu = finJeu;
+    }    
+        
     public ArrayList<Tresor> getTresorsObtenus(){
         ArrayList<Tresor> tresorsObtenus = new ArrayList();
         for(Aventurier a : joueurs){
