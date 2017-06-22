@@ -62,7 +62,7 @@ public class VueInscription extends Observable {
         JRadioButton boutNovice = new JRadioButton("Novice");
         JRadioButton boutNormal = new JRadioButton("Normal", true);
         JRadioButton boutElite = new JRadioButton("Elite");
-        JRadioButton boutLegendaire = new JRadioButton("Légendadire");
+        JRadioButton boutLegendaire = new JRadioButton("Légendaire");
 
         ButtonGroup grDifficulte = new ButtonGroup();
         grDifficulte.add(boutNovice);

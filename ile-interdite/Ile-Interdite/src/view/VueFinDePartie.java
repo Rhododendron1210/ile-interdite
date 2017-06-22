@@ -6,6 +6,9 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,11 +27,11 @@ public class VueFinDePartie extends JFrame {
     
     public VueFinDePartie(String textLabel){
         window = new JFrame();
-        panel = new JPanel();
+        panel = new JPanel(new GridLayout(2,1));
         bout = new JButton();
         label = new JLabel(textLabel);
         
-        window.setSize(350,75);
+        window.setSize(600,100);
         
         bout.setText("Quitter");
         
@@ -37,7 +40,15 @@ public class VueFinDePartie extends JFrame {
         window.add(panel);
         
         window.setAlwaysOnTop(true);
+        window.setLocationRelativeTo(null);
         
         window.setVisible(true);
+        
+        bout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 }
