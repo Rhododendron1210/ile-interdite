@@ -316,6 +316,9 @@ public class Contrôleur implements Observateur{
         } else if(msg.getCommande() == RECUPERER_TRESOR){
             prendreTresor();
         }
+        else if(msg.getCommande() == DEFAUSSE){
+            
+        }
     }
     
     public void deplacement(Aventurier a,Tuile tuile){            
