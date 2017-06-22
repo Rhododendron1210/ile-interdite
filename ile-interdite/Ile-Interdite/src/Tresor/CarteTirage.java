@@ -24,10 +24,6 @@ public abstract class CarteTirage {
         return nom;
     }
 
-    public String getTitre() {
-        return nom;
-    }
-
     public String getDescription() {
         return description;
     }
