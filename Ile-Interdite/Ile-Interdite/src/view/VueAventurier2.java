@@ -22,21 +22,18 @@ import util.Parameters;
  *
  * @author louesdol
  */
-public class VueAventurier2 extends JFrame{
+public class VueAventurier2 extends JPanel{
     private JLabel nomAventurier;
     
-    
-    public VueAventurier2(Aventurier a){
-        this.setSize(200,util.Parameters.HAUTEUR_VUE_AVENTURIER );
-        this.setLocation(1400, Parameters.TOP_AUTRES_VUES);
-        this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        this.setUndecorated(Parameters.UNDECORATED);
-        this.setResizable(Parameters.RESIZABLE);
+    public VueAventurier2(Aventurier a,Color couleur){
         this.setLayout(new BorderLayout());
         nomAventurier= new JLabel(a.getNom());
         this.add(nomAventurier,BorderLayout.NORTH);
+        this.setBackground(couleur);
         afficherCartes(a.getPossede());
+        Border blackline = BorderFactory.createLineBorder(Color.black);
         this.setVisible(true);
+        
     }
     
     private void afficherCartes(ArrayList<CarteTirage> cartes){
@@ -44,7 +41,7 @@ public class VueAventurier2 extends JFrame{
         JPanel card;
         for (CarteTirage carte : cartes){
             card=new JPanel(new BorderLayout());
-            JLabel label = new JLabel(carte.getTitre());
+            JLabel label = new JLabel(carte.getNom());
             card.add(label);
             Border blackline = BorderFactory.createLineBorder(Color.black);
             card.setBorder(blackline);
