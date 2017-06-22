@@ -315,6 +315,9 @@ public class Contrôleur implements Observateur{
             vuePlateau=new VuePlateau(grille.getGrille());
             vuePlateau.setObservateur(this);
         }
+        else if(msg.getCommande() == DEFAUSSE){
+            
+        }
     }
     
     public void deplacement(Aventurier a,Tuile tuile){            
