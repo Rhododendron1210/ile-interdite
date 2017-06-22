@@ -29,25 +29,16 @@ public class VueDefausse extends JFrame{
     private int nbCarte;
     
     public VueDefausse(int nbCarte, ArrayList<CarteTirage> cartes){
-        
         JFrame window = new JFrame("Défausse des cartes");
         window.setSize(600,300);
-        
         JPanel panel = new JPanel(new GridLayout(1,nbCarte));
-        
         JScrollPane paneDeroulant = new JScrollPane(panel);
         paneDeroulant.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        
         while(nbCarte>10){
-            
             for(int i = nbCarte; i>10; i++){
-                
                 JButton bout = new JButton();
-                
                 for (CarteTirage c : cartes){
-                    
                     bout.setText(c.getNom());
-                    
                     bout.addActionListener(new ActionListener(){
                     @Override
                         public void actionPerformed(ActionEvent e) {
@@ -67,12 +58,11 @@ public class VueDefausse extends JFrame{
                             }
                         }
                     });
-                    
                     panel.add(bout);
                 }
             }
         }
-        
+        window.add(panel);
         window.setVisible(true);
     }
 }
