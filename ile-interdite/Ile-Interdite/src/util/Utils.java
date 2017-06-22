@@ -89,6 +89,11 @@ public class Utils {
             return this.pathPicture ;
         }
 
+        public String getLibelle() {
+            return libelle;
+        }
+       
+
         public static Tresor getFromName(String name) {
             if (name.equals(PIERRE.name())) return PIERRE ;
             if (name.equals(ZEPHYR.name())) return ZEPHYR ;

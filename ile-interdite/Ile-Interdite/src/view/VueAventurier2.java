@@ -45,7 +45,7 @@ public class VueAventurier2 extends JFrame{
         JPanel card;
         for (CarteTirage carte : cartes){
             card=new JPanel(new BorderLayout());
-            JLabel label = new JLabel(carte.getTitre());
+            JLabel label = new JLabel(carte.getNom());
             card.add(label);
             Border blackline = BorderFactory.createLineBorder(Color.black);
             card.setBorder(blackline);
