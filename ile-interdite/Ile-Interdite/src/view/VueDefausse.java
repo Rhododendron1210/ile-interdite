@@ -31,8 +31,8 @@ public class VueDefausse extends JFrame{
     
     public VueDefausse(int nbCarte, ArrayList<CarteTirage> cartes){
         JFrame window = new JFrame("Défausse des cartes");
-        window.setSize(600,300);
-        JPanel panel = new JPanel(new GridLayout(1,cartes.size()));
+        window.setSize(300,300);
+        JPanel panel = new JPanel(new GridLayout(cartes.size(),cartes.size()));
         JScrollPane paneDeroulant = new JScrollPane(panel);
         paneDeroulant.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         for (CarteTirage c : cartes){
@@ -42,22 +42,22 @@ public class VueDefausse extends JFrame{
                     public void actionPerformed(ActionEvent e) {
                         Message m;
                         if (c.getNom() == "La Pierre Sacrée" ) {
-                            m = new Message(DEFAUSSE, 1, 0, 0, 0, 0 ,0);
+                            m = new Message(DEFAUSSE,"La Pierre Sacrée");
                             window.setVisible(false);
                         } else if (c.getNom() == "La statue du Zéphyr") {
-                            m = new Message(DEFAUSSE, 0, 1, 0, 0, 0, 0);
+                            m = new Message(DEFAUSSE, "La statue du Zéphyr");
                             window.setVisible(false);
                         } else if (c.getNom() == "Le Cristal Ardent") {
-                            m = new Message(DEFAUSSE, 0, 0, 1, 0, 0, 0);
+                            m = new Message(DEFAUSSE, "Le Cristal Ardent");
                             window.setVisible(false);
                         } else if (c.getNom() == "Le Calice de l'Onde") {
-                            m = new Message(DEFAUSSE, 0, 0, 0, 1, 0, 0);
+                            m = new Message(DEFAUSSE, "Le Calice de l'Onde");
                             window.setVisible(false);
                         } else if (c.getNom() == "CarteHelicoptere") {
-                            m = new Message(DEFAUSSE, 0, 0, 0, 0, 1, 0);
+                            m = new Message(DEFAUSSE, "CarteHelicoptere");
                             window.setVisible(false);
                         } else if (c.getNom() == "CarteSacsDeSable") {
-                            m = new Message(DEFAUSSE, 0, 0, 0, 0, 0, 1);
+                            m = new Message(DEFAUSSE,"CarteSacsDeSable");
                             window.setVisible(false);
                         }
                     }
