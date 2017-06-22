@@ -33,7 +33,7 @@ public class Explorateur extends Aventurier{
         
         HashSet<Tuile> tuiles = grille.getTuilesAdjacentesDiagonale(ligne, colonne);
         for (Tuile tuile: tuiles){
-            if (tuile.tuileSeche()){
+            if (tuile.tuileSeche() || tuile.isInondée()){
                 liste.add(tuile);
             }
         }
