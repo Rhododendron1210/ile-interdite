@@ -600,15 +600,25 @@ public class Contrôleur implements Observateur{
         }        
     }
     
-/*    public void initialiserTresor(){
+    public void initialiserTresor(){
         ArrayList<Tuile> tuiles = this.getGrille().getTuiles();
         for(Tuile tuile : tuiles){
             String nomT = tuile.getNom();
             if(nomT == "La Caverne des Ombres   " || nomT == "La Caverne du Brasier   "){
                 tuile.setTresor(Tresor.CRISTAL);
             }
-            else if()
+            else if(nomT == "Le Jardin des Hurlements" || nomT == "Le Jardin des Murmures  "){
+                tuile.setTresor(Tresor.ZEPHYR);
+            }
+            else if(nomT == "Le Temple de la Lune    " || nomT == "Le Temple du Soleil     "){
+                tuile.setTresor(Tresor.PIERRE);
+            }
+            else if(nomT == "Le Palais des Marées    " || nomT == "Le Palais de Corail     "){
+                tuile.setTresor(Tresor.CALICE);
+            }
+            else{tuile.setTresor(null);}
         }
-    }*/
+        
+    }
 }
 
