@@ -30,6 +30,9 @@ public class Pilote extends Aventurier{
         
         HashSet<Tuile> liste = new HashSet<>();
         liste= grille.getTuilesAssechee();
+        for(Tuile tuile : grille.getTuilesInondée()){
+            liste.add(tuile);
+        }
         super.setColTuilePossible(liste);
         return liste;
     }

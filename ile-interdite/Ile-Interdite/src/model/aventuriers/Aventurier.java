@@ -78,7 +78,7 @@ public abstract class Aventurier extends ObjetIdentifie{
         for (Tuile tuile: tuiles){
             int ligneT = tuile.getLigne();
             int colonneT = tuile.getColonne();
-            if (tuile.tuileSeche()){
+            if (tuile.tuileSeche() || tuile.isInondée()){
                    colTuilePossible.add(tuile);
             }
         }
