@@ -403,10 +403,10 @@ public class Contrôleur implements Observateur{
     }
     
     public void tirerCarteInondation(){
-        Stack pioche = this.getPiocheInondation();
-        if(pioche.isEmpty()){
-            Collections.shuffle(pioche);                                        //On mélange la defausse
-            while(!(pioche.isEmpty())){
+        Stack defausse = this.getDefausseInondation();
+        if(this.getPiocheInondation().isEmpty()){
+            Collections.shuffle(defausse);                                      //On mélange la defausse
+            while(!(defausse.isEmpty())){
                 this.getPiocheInondation().push(getDefausseInondation().pop()); //On deplace la defausse dans la pioche
             }
         }
@@ -599,6 +599,15 @@ public class Contrôleur implements Observateur{
         }        
     }
     
-
+/*    public void initialiserTresor(){
+        ArrayList<Tuile> tuiles = this.getGrille().getTuiles();
+        for(Tuile tuile : tuiles){
+            String nomT = tuile.getNom();
+            if(nomT == "La Caverne des Ombres   " || nomT == "La Caverne du Brasier   "){
+                tuile.setTresor(Tresor.CRISTAL);
+            }
+            else if()
+        }
+    }*/
 }
 
