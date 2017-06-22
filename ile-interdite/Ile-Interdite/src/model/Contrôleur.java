@@ -283,14 +283,13 @@ public class Contrôleur implements Observateur{
             this.getPiocheInondation().push(cI);
         }
         Collections.shuffle(piocheInondation);
-        
-        
-            piocherCarteTirage(joueurs.get(0));
-            piocherCarteTirage(joueurs.get(0));
-            
-            for(i=0;i<difficulte;i++){
-                tirerCarteInondation();
-            }
+                
+        piocherCarteTirage(joueurs.get(0));
+        piocherCarteTirage(joueurs.get(0));
+
+        for(i=0;i<difficulte;i++){
+            tirerCarteInondation();
+        }
             
         
         
@@ -491,45 +490,53 @@ public class Contrôleur implements Observateur{
         if (difficulte==5){
             //finDePartie();
         }else{
-        Collections.shuffle(defausseInondation);
-        while( !(defausseInondation.empty()) ){
-            this.addPiocheInondation(defausseInondation.pop());
-        }
-       
+            Collections.shuffle(defausseInondation);
+            while( !(defausseInondation.empty()) ){
+                this.addPiocheInondation(defausseInondation.pop());
+            }
         }
         vueNiveau.setNiveau(difficulte);
         
     }
     
     public void tirerCarteInondation(){
-        CarteInondation cI = this.getPiocheInondation().pop();
-        Tuile t = cI.getTuile();
-        this.getDefausseInondation().push(cI);
-        EtatTuile etat = t.getEtatTuile();
-        if(etat == ASSECHEE){
-            t.setInondée();
-        }
-        else if(etat == INONDEE){
-            int ligne = t.getLigne();
-            int colonne = t.getColonne();
-            Grille g = this.getGrille();
-            ArrayList tuilesAdjacentes = g.getTuilesAdjacentes(ligne, colonne);
-            if(!(t.getAventurierPresent().isEmpty())){            
-                if(tuilesAdjacentes.isEmpty()){
-                    this.setFinJeu(true);
-                }
-                else{
-                        Aventurier a = null;
-                        for(String key : t.getAventurierPresent().keySet()){
-                            a = t.getAventurierPresent().get(key);
-                        }
-                        //this.deplacement(a);                
-                }
+        Stack defausse = this.getDefausseInondation();
+        if(defausse.isEmpty()){
+            Collections.shuffle(defausse);                                      //On mélange la defausse
+            while(!(defausse.isEmpty())){
+                this.getPiocheInondation().push(getDefausseInondation().pop()); //On deplace la defausse dans la pioche
             }
-            t.setCoulee();
         }
         else{
-            System.out.println("La tuile est déjà coulée");
+            CarteInondation cI = this.getPiocheInondation().pop();
+            Tuile t = cI.getTuile();
+            this.getDefausseInondation().push(cI);
+            EtatTuile etat = t.getEtatTuile();
+            if(etat == ASSECHEE){
+                t.setInondée();
+            }
+            else if(etat == INONDEE){
+                int ligne = t.getLigne();
+                int colonne = t.getColonne();
+                Grille g = this.getGrille();
+                ArrayList tuilesAdjacentes = g.getTuilesAdjacentes(ligne, colonne);
+                if(!(t.getAventurierPresent().isEmpty())){            
+                    if(tuilesAdjacentes.isEmpty()){
+                        this.setFinJeu(true);
+                    }
+                    else{
+                            Aventurier a = null;
+                            for(String key : t.getAventurierPresent().keySet()){
+                                a = t.getAventurierPresent().get(key);
+                            }
+                            //demander au joueur de se deplacer sur une case adjacente              
+                    }
+                }
+                t.setCoulee();
+            }
+            else{
+                System.out.println("La tuile est déjà coulée");
+            }
         }
     }
 
