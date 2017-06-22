@@ -402,7 +402,8 @@ public class Contrôleur implements Observateur {
                 aventurierCourant = joueurs.get(0);
                 actionEffectuer = 0;
             }
-            for (int x=0;x<aventurierCourant.getPossede().size()-9;i++){
+            int nb=aventurierCourant.getPossede().size()-9;
+            for (int x=0;x<=nb;i++){
                 carteADefausser();
             }
         }
