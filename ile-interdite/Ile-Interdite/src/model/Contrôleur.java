@@ -150,25 +150,25 @@ public class Contrôleur implements Observateur{
         grille.creeTuiles();
 
         initialiserJoueur(nbJoueur);
-        
+        initialiserTresor();
         //grille.getTuile(1, 3).addAventurier(a);
         CarteTirage carte ;
         
         int i;
         for (i=0 ;i<5 ;i++){
-            carte=new CarteTresor("Zephir","pas description");
+            carte=new CarteTresor("La statue du Zéphyr","pas description");
             piocheTirage.push(carte);
         }
         for (i=0 ;i<5 ;i++){
-            carte=new CarteTresor("PIERRE","pas description");
+            carte=new CarteTresor("La Pierre Sacrée","pas description");
             piocheTirage.push(carte);
         }
         for (i=0 ;i<5 ;i++){
-            carte=new CarteTresor("CRISTAL","pas description");
+            carte=new CarteTresor("Le Cristal Ardent","pas description");
             piocheTirage.push(carte);
         }
         for (i=0 ;i<5 ;i++){
-            carte=new CarteTresor("CALICE","pas description");
+            carte=new CarteTresor("Le Calice de l'Onde","pas description");
             piocheTirage.push(carte);
         }
         for (i=0 ;i<2 ;i++){
@@ -414,10 +414,10 @@ public class Contrôleur implements Observateur{
     }
     
     public void tirerCarteInondation(){
-        Stack pioche = this.getPiocheInondation();
-        if(pioche.isEmpty()){
-            Collections.shuffle(pioche);                                        //On mélange la defausse
-            while(!(pioche.isEmpty())){
+        Stack defausse = this.getDefausseInondation();
+        if(this.getPiocheInondation().isEmpty()){
+            Collections.shuffle(defausse);                                      //On mélange la defausse
+            while(!(defausse.isEmpty())){
                 this.getPiocheInondation().push(getDefausseInondation().pop()); //On deplace la defausse dans la pioche
             }
         }
@@ -506,7 +506,9 @@ public class Contrôleur implements Observateur{
             }else{
                 aventurierCourant=joueurs.get(0);
                 actionEffectuer=0; 
-            }           
+            }  
+            carteADefausser(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());
+            
         }
         for (VueAventurier2 vue : aventuriers){
             vue.dispose();
@@ -613,6 +615,52 @@ public class Contrôleur implements Observateur{
         }        
     }
     
-
+    public void initialiserTresor(){
+        ArrayList<Tuile> tuiles = this.getGrille().getTuiles();
+        for(Tuile tuile : tuiles){
+            String nomT = tuile.getNom();
+            if(nomT == "La Caverne des Ombres   " || nomT == "La Caverne du Brasier   "){
+                tuile.setTresor(Tresor.CRISTAL);
+            }
+            else if(nomT == "Le Jardin des Hurlements" || nomT == "Le Jardin des Murmures  "){
+                tuile.setTresor(Tresor.ZEPHYR);
+            }
+            else if(nomT == "Le Temple de la Lune    " || nomT == "Le Temple du Soleil     "){
+                tuile.setTresor(Tresor.PIERRE);
+            }
+            else if(nomT == "Le Palais des Marées    " || nomT == "Le Palais de Corail     "){
+                tuile.setTresor(Tresor.CALICE);
+            }
+            else{tuile.setTresor(null);}
+        }
+        
+    }
+    
+    public void prendreTresor(){
+        Tuile tuile = aventurierCourant.getPosition();
+        if(!(tuile.getTresor()==null)){
+            int cmpt = 0;
+            Tresor tresor = tuile.getTresor();
+            for(CarteTirage carte : aventurierCourant.getPossede()){
+                if(carte.getNom() == tresor.toString()){
+                    cmpt += 1;
+                }
+            }
+            if(cmpt >= 4){
+                aventurierCourant.addTresors(tresor);            
+                for(Tuile t : this.getGrille().getTuiles()){
+                    if(t.getTresor().toString()==tresor.toString()){
+                        t.setTresor(null);
+                    }
+                }
+            } 
+        }
+    }
+    
+    private void carteADefausser(int i, ArrayList<CarteTirage> possede) {
+        if (aventurierCourant.getPossede().size()>8){               
+                    //VueDefausse(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());                
+        }    
+    }
 }
 

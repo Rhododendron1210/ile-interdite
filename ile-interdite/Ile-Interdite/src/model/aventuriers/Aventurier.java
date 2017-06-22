@@ -136,4 +136,5 @@ public abstract class Aventurier extends ObjetIdentifie{
     public void addTresors(Tresor tresor) {
         tresors.add(tresor);
     }
+    
 }
