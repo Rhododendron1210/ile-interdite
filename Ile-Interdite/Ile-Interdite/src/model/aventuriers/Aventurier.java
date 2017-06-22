@@ -101,6 +101,10 @@ public abstract class Aventurier extends ObjetIdentifie{
                 colTuilePossible.add(tuile);
             }
         }
+        if (!t.tuileSeche()){
+            colTuilePossible.add(t);
+        }
+        
         return colTuilePossible;
     }
     
