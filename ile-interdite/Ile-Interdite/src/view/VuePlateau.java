@@ -24,7 +24,7 @@ import static util.Utils.Commandes.TERMINER;
  * @author IUT2-Dept Info
  */
 public class VuePlateau extends JPanel {
-    private VueGrille grille;
+    private VueGrille grille ;
     
     private Observateur observateur;
     private JButton deplacer;
@@ -37,15 +37,8 @@ public class VuePlateau extends JPanel {
     private JButton tresor;
     
     public VuePlateau(Tuile[][] tuiles){
-        //this.setTitle("Plateau de jeu");
-        //this.setLocation(160, Parameters.TOP_AUTRES_VUES);
-        //this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         plateauCentre(tuiles);
-        //this.setSize(1500, util.Parameters.HAUTEUR_AUTRES_VUES);
-        //this.setUndecorated(Parameters.UNDECORATED);
-        //this.setResizable(Parameters.RESIZABLE);
-        //this.setVisible(true);
         
     }
     
@@ -155,10 +148,7 @@ public class VuePlateau extends JPanel {
         for(Tuile tuile: tuiles){
             int i = tuile.getLigne();
             int j = tuile.getColonne();
-            //this.grille.getAffichTuile()[i][j].setCouleur(Color.RED);
-            //this.grille.getAffichTuile()[i][j].repaint();
             this.grille.getAffichTuile()[i][j].getBouton().setEnabled(true);
-            //grille.repaint();
            
         }
         repaint();
@@ -173,7 +163,6 @@ public class VuePlateau extends JPanel {
         assecher.setEnabled(true);
         finir.setEnabled(true);
         deplacer.setEnabled(true);
-        //deplacer.setBackground(Color.white);
         grille.creeGrille();
         this.repaint();
     }

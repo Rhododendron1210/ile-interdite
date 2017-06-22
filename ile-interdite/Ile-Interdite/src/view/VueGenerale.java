@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -24,13 +25,14 @@ import util.Observateur;
  */
 public class VueGenerale extends JFrame implements Observateur{
     private VueAventurier2 vueAventurier2;
+    private ArrayList<VueAventurier2> aventuriers;
     private VuePlateau vuePlateau;
     private VueNiveau vueNiveau;
     private VueMessage vueMessage;
     private int difficulte;
     private Observateur observateur;
     
-    public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs){
+    public VueGenerale(int difficulte,Tuile [][] tuiles,ArrayList<Aventurier> joueurs,Aventurier a){
         this.setLayout(new BorderLayout());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height);
@@ -43,9 +45,15 @@ public class VueGenerale extends JFrame implements Observateur{
         this.add(vueNiveau,BorderLayout.WEST);
         int i = joueurs.size();
         JPanel panel = new JPanel(new GridLayout(1,i));
-        
+        aventuriers = new ArrayList();
         for (Aventurier av : joueurs){
-            vueAventurier2=new VueAventurier2(av);
+            if (av.equals(a)){
+                vueAventurier2=new VueAventurier2(av,Color.red);
+            } else {
+                vueAventurier2=new VueAventurier2(av,Color.gray);
+            }
+            
+            aventuriers.add(vueAventurier2);
             panel.add(vueAventurier2);
         }
         this.add(panel,BorderLayout.NORTH);
@@ -56,7 +64,7 @@ public class VueGenerale extends JFrame implements Observateur{
         
         
     }
-
+    
     public void setObservateur(Observateur observateur) {
         this.observateur = observateur;
     }
@@ -82,4 +90,6 @@ public class VueGenerale extends JFrame implements Observateur{
     public void setNiveau(Integer niveau){
         vueNiveau.setNiveau(niveau);
     }
+    
+    
 }

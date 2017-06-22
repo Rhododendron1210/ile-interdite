@@ -25,15 +25,11 @@ import util.Parameters;
 public class VueAventurier2 extends JPanel{
     private JLabel nomAventurier;
     
-    public VueAventurier2(Aventurier a){
-        //this.setSize(200,util.Parameters.HAUTEUR_VUE_AVENTURIER );
-        //this.setLocation(x, Parameters.TOP_AUTRES_VUES-util.Parameters.HAUTEUR_VUE_AVENTURIER);
-        //this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        //this.setUndecorated(Parameters.UNDECORATED);
-        //this.setResizable(Parameters.RESIZABLE);
+    public VueAventurier2(Aventurier a,Color couleur){
         this.setLayout(new BorderLayout());
         nomAventurier= new JLabel(a.getNom());
         this.add(nomAventurier,BorderLayout.NORTH);
+        this.setBackground(couleur);
         afficherCartes(a.getPossede());
         Border blackline = BorderFactory.createLineBorder(Color.black);
         this.setVisible(true);
