@@ -306,11 +306,12 @@ public class Contrôleur implements Observateur {
             carteADefausser();
         } else if (msg.getCommande() == DONNER) {
             if (msg.getIdAventurier() == null && msg.getIdCarte() == null) {
-                vueEchange = new VueEchange(aventurierCourant.getPossede(), joueurs,aventurierCourant);
+                vueEchange = new VueEchange(aventurierCourant.getPossede(), aventurierCourant.getPosition().getAventurierPresent(),aventurierCourant);
                 vueEchange.setObservateur(this);
             } else {
                 CarteTirage carte=new CarteMonteeDesEaux();
                 vueEchange.dispose();
+                
                 for (CarteTirage c:aventurierCourant.getPossede()){
                     if (c.getNom()==msg.getIdCarte()){
                         carte=c;
@@ -323,6 +324,9 @@ public class Contrôleur implements Observateur {
                     }
                 }
                 donnerCarteTirage(aventurierCourant,av,carte);
+                vueGenerale.dispose();
+                vueGenerale = new VueGenerale(difficulte, grille.getGrille(), joueurs);
+                vueGenerale.setObservateur(this);
             }
 
         }
@@ -678,19 +682,7 @@ public class Contrôleur implements Observateur {
 
     }
 
-    private void prendreCarteTirage(Aventurier a, Aventurier a2, CarteTirage carte) {
-        boolean b = false;
-        int i = 0;
-        while (b == false) {
-            if (a2.getPossede().get(i).getNom() == carte.getNom()) {
-                a2.getPossede().remove(i);
-                b = true;
-            }
-            i = i + 1;
-        }
-        a.addCarte(carte);
-
-    }
+    
 
     private void gagner() {
         ArrayList<Tresor> tresors = new ArrayList();
