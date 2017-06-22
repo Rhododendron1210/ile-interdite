@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import util.Message;
+import util.Observateur;
 import static util.Utils.Commandes.DEFAUSSE;
 
 /**
@@ -28,7 +29,7 @@ import static util.Utils.Commandes.DEFAUSSE;
 public class VueDefausse extends JFrame{
     
     public VueDefausse(int nbCarte, ArrayList<CarteTirage> cartes){
-      
+        Observateur observateur = null;
         JFrame window = new JFrame("Défausse des cartes");  //création de la fenêtre
         window.setSize(300,300);    //changement de la taille de la fenêtre
         JPanel panel = new JPanel(new GridLayout(cartes.size(),cartes.size())); //création d'un panel principal
@@ -43,21 +44,27 @@ public class VueDefausse extends JFrame{
                         if (c.getNom() == "La Pierre Sacrée" ) {    //si le nom correspond
                             m = new Message(DEFAUSSE,"La Pierre Sacrée");   //envoie un message
                             window.setVisible(false);   //ferme la fenêtre
+                            observateur.traiterMessage(m);
                         } else if (c.getNom() == "La statue du Zéphyr") {   //si le nom correspond
                             m = new Message(DEFAUSSE, "La statue du Zéphyr");  //envoie un message
                             window.setVisible(false);   //ferme la fenêtre
+                            observateur.traiterMessage(m);
                         } else if (c.getNom() == "Le Cristal Ardent") { //si le nom correspond
                             m = new Message(DEFAUSSE, "Le Cristal Ardent");  //envoie un message
                             window.setVisible(false);   //ferme la fenêtre
+                            observateur.traiterMessage(m);
                         } else if (c.getNom() == "Le Calice de l'Onde") {  //si le nom correspond 
                             m = new Message(DEFAUSSE, "Le Calice de l'Onde");  //envoie un message
                             window.setVisible(false);   //ferme la fenêtre
+                            observateur.traiterMessage(m);
                         } else if (c.getNom() == "CarteHelicoptere") {  //si le nom correspond
                             m = new Message(DEFAUSSE, "CarteHelicoptere");  //envoie un message
                             window.setVisible(false);   //ferme la fenêtre
+                            observateur.traiterMessage(m);
                         } else if (c.getNom() == "CarteSacsDeSable") {  //si le nom correspond
                             m = new Message(DEFAUSSE,"CarteSacsDeSable");  //envoie un message
                             window.setVisible(false);   //ferme la fenêtre
+                            observateur.traiterMessage(m);
                         }
                     }
             });
