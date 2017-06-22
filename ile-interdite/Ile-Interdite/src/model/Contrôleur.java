@@ -268,6 +268,9 @@ public class Contrôleur implements Observateur{
                 vuePlateau=new VuePlateau(grille.getGrille());
                 vuePlateau.setObservateur(this);
                 
+                if(tuile.getNom() == "Heliport                "){
+                    this.gagner();
+                }
             }
         } else if(msg.getCommande()==VALIDER_JOUEURS) {
             vueInscription.getWindow().dispose();
@@ -640,7 +643,7 @@ public class Contrôleur implements Observateur{
         
     }
     
-    public void prendreTresor(){
+    private void prendreTresor(){
         Tuile tuile = aventurierCourant.getPosition();
         if(!(tuile.getTresor()==null)){
             int cmpt = 0;
@@ -697,5 +700,28 @@ public class Contrôleur implements Observateur{
         a.addCarte(carte);
         
     }
+    
+    private void gagner(){
+        ArrayList<Tresor> tresors = new ArrayList();
+        boolean b = false;
+        for(Aventurier a : this.aventurierCourant.getTuile().getAventurierPresent().values()){
+            for(Tresor t : a.getTresors()){
+                tresors.add(t);
+            }
+            for(CarteTirage c : a.getPossede()){
+                if(c.getNom()=="CarteHelicoptere"){
+                    b = true;
+                }
+            }
+        }
+        
+        if(tresors.size() == 4){
+            if(this.aventurierCourant.getTuile().getAventurierPresent().size() == nbJoueurs){
+                if(b){
+                    //affichage pop up gagner zntoufbzfiafonaofnoifhziofjaonvoanvonvoinaoifdnmaocmoahdohMOHMOHohOHOHOozgoinzonzonfonvoinzovinaovcmnmnd
+                }
+            }
+        }
+    }    
 }
 
