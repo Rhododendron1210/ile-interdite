@@ -318,7 +318,7 @@ public class Contrôleur implements Observateur{
             prendreTresor();
         }
         else if(msg.getCommande() == DEFAUSSE){
-            
+            carteADefausser();
         }
     }
     
@@ -512,7 +512,7 @@ public class Contrôleur implements Observateur{
                 aventurierCourant=joueurs.get(0);
                 actionEffectuer=0; 
             }  
-            carteADefausser(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());
+            carteADefausser();
             
         }
         for (VueAventurier2 vue : aventuriers){
@@ -666,7 +666,7 @@ public class Contrôleur implements Observateur{
         }
     }
     
-    private void carteADefausser(int i, ArrayList<CarteTirage> possede) {
+    private void carteADefausser() {
         if (aventurierCourant.getPossede().size()>8){               
                     //VueDefausse(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());                
         }    
