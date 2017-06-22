@@ -677,7 +677,7 @@ public class Contrôleur implements Observateur{
         while(b==false){
             if (a.getPossede().get(i).getNom()==carte.getNom()){
                 a.getPossede().remove(i);
-                b=true;                       
+                b=true;          
             }
             i=i+1;
         }

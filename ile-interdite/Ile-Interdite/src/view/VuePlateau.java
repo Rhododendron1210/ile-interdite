@@ -15,6 +15,7 @@ import util.Observateur;
 import util.Parameters;
 import static util.Utils.Commandes.ASSECHER;
 import static util.Utils.Commandes.BOUGER;
+import static util.Utils.Commandes.DONNER;
 import static util.Utils.Commandes.RECUPERER_TRESOR;
 import static util.Utils.Commandes.TERMINER;
 
@@ -33,7 +34,6 @@ public class VuePlateau extends JFrame {
     private JButton helico;
     private JButton sacSable;
     private JButton passer;
-    private JButton prendre;
     private JButton tresor;
     
     public VuePlateau(Tuile[][] tuiles){
@@ -63,7 +63,7 @@ public class VuePlateau extends JFrame {
         
         this.add(grille,BorderLayout.CENTER);
         
-        JPanel panel2 = new JPanel(new GridLayout(5,1));
+        JPanel panel2 = new JPanel(new GridLayout(4,1));
         helico= new JButton("Carte Helicoptere");
         helico.setEnabled(false);
         panel2.add(helico);
@@ -73,9 +73,6 @@ public class VuePlateau extends JFrame {
         passer= new JButton("Passer Une Carte");
         passer.setEnabled(true);
         panel2.add(passer);
-        prendre= new JButton("Prendre Une Carte");
-        prendre.setEnabled(true);
-        panel2.add(prendre);
         tresor= new JButton("Prendre le tresor");
         tresor.setEnabled(true);
         panel2.add(tresor);
@@ -125,6 +122,17 @@ public class VuePlateau extends JFrame {
                 observateur.traiterMessage(m);
             }
         });
+        
+        passer.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Message m = new Message(DONNER,null,null,null,null);
+                observateur.traiterMessage(m);
+            }
+            
+        });
+        
+        
         
         for (VueTuile[] vues : grille.getAffichTuile()){
             for (VueTuile vue: vues){
@@ -178,10 +186,7 @@ public class VuePlateau extends JFrame {
         passer.setEnabled(b);
     }
 
-    public void setPrendre(boolean b) {
-        prendre.setEnabled(b);
-    }
-
+   
     public void setTresor(boolean b) {
         tresor.setEnabled(b);
     }
