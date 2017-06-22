@@ -662,5 +662,19 @@ public class Contrôleur implements Observateur{
                     //VueDefausse(aventurierCourant.getPossede().size()-8,aventurierCourant.getPossede());                
         }    
     }
+    
+    private void donnerCarteTirage(Aventurier a, Aventurier a2,CarteTirage carte){
+        boolean b=false;
+        int i=0;
+        while(b==false){
+            if (a.getPossede().get(i).getNom()==carte.getNom()){
+                a.getPossede().remove(i);
+                b=true;                       
+            }
+            i=i+1;
+        }
+        a2.addCarte(carte);
+        
+    }
 }
 
